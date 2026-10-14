@@ -8,10 +8,19 @@ import {
   NotoSansTamil_500Medium,
   NotoSansTamil_600SemiBold,
 } from '@expo-google-fonts/noto-sans-tamil';
-import '@/i18n';
+import { i18n } from '@/i18n';
 import { store } from '@/stores';
+import { useAppSelector } from '@/stores/hooks';
 
 SplashScreen.preventAutoHideAsync();
+
+function LanguageSync() {
+  const language = useAppSelector((state) => state.settings.language);
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
+  return null;
+}
 
 export function RootProviders({ children }: { children: ReactNode }) {
   const [loaded, error] = useFonts({
@@ -28,5 +37,10 @@ export function RootProviders({ children }: { children: ReactNode }) {
   }, [ready]);
 
   if (!ready) return null;
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      <LanguageSync />
+      {children}
+    </Provider>
+  );
 }

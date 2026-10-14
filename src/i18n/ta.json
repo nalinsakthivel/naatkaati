@@ -1,9 +1,23 @@
 {
-  "tabs": { "today": "இன்று", "calendar": "நாட்காட்டி", "settings": "அமைப்புகள்" },
+  "tabs": {
+    "today": "இன்று",
+    "calendar": "நாட்காட்டி",
+    "settings": "அமைப்புகள்"
+  },
   "screens": {
     "today": "இன்று",
     "calendar": "நாட்காட்டி",
     "settings": "அமைப்புகள்",
     "dayDetail": "நாள் விவரம்"
+  },
+  "settings": {
+    "appearance": "தோற்றம்",
+    "appearanceSystem": "சாதன அமைப்பு",
+    "appearanceLight": "ஒளி",
+    "appearanceDark": "இருள்",
+    "language": "மொழி",
+    "display": "காட்சி",
+    "tamilNumerals": "தமிழ் எண்கள்",
+    "tamilNumeralsHint": "தமிழ் தேதியில் மட்டும் ௧ ௨ ௩ எண்களைப் பயன்படுத்தும்"
   }
 }

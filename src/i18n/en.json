@@ -1,9 +1,23 @@
 {
-  "tabs": { "today": "Today", "calendar": "Calendar", "settings": "Settings" },
+  "tabs": {
+    "today": "Today",
+    "calendar": "Calendar",
+    "settings": "Settings"
+  },
   "screens": {
     "today": "Today",
     "calendar": "Calendar",
     "settings": "Settings",
     "dayDetail": "Day detail"
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "appearanceSystem": "System",
+    "appearanceLight": "Light",
+    "appearanceDark": "Dark",
+    "language": "Language",
+    "display": "Display",
+    "tamilNumerals": "Tamil numerals",
+    "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only"
   }
 }
