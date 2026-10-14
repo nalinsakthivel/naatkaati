@@ -2,7 +2,6 @@ name: data
 on:
   pull_request:
   push:
-    branches: [main, dev]
 jobs:
   data:
     runs-on: ubuntu-latest
