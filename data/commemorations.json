@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "commemorations": [
+    {
+      "id": "periyar-birth",
+      "month": 9,
+      "day": 17,
+      "kind": "birth",
+      "name_ta": "தந்தை பெரியார் பிறந்தநாள்",
+      "name_en": "Thanthai Periyar's Birth Anniversary",
+      "description_ta": "சமூகச் சீர்திருத்தவாதி ஈ.வெ. இராமசாமி (1879–1973) பிறந்த நாள். 2021-ல் தமிழ்நாடு அரசு இந்நாளைச் சமூக நீதி நாளாக அறிவித்தது.",
+      "description_en": "Birth anniversary of social reformer E.V. Ramasamy (1879–1973). Declared Social Justice Day by the Tamil Nadu government in 2021.",
+      "designations": [
+        {
+          "name_ta": "சமூக நீதி நாள்",
+          "name_en": "Social Justice Day",
+          "declared": "2021-09-06",
+          "source_url": "https://www.deccanherald.com/india/tamil-nadu-will-celebrate-periyars-birth-anniversary-as-social-justice-day-says-cm-stalin-1027584.html"
+        }
+      ],
+      "source": "Deccan Herald (PTI), 06-09-2021",
+      "source_url": "https://www.deccanherald.com/india/tamil-nadu-will-celebrate-periyars-birth-anniversary-as-social-justice-day-says-cm-stalin-1027584.html"
+    },
+    {
+      "id": "periyar-death",
+      "month": 12,
+      "day": 24,
+      "kind": "death",
+      "name_ta": "தந்தை பெரியார் நினைவு நாள்",
+      "name_en": "Thanthai Periyar's Death Anniversary",
+      "description_ta": "சமூகச் சீர்திருத்தவாதி ஈ.வெ. இராமசாமி மறைந்த நாள் (1973).",
+      "description_en": "Death anniversary of social reformer E.V. Ramasamy (1973).",
+      "source": "Deccan Herald (PTI), 06-09-2021 (dates 17-09-1879 to 24-12-1973)",
+      "source_url": "https://www.deccanherald.com/india/tamil-nadu-will-celebrate-periyars-birth-anniversary-as-social-justice-day-says-cm-stalin-1027584.html"
+    },
+    {
+      "id": "ambedkar-birth",
+      "month": 4,
+      "day": 14,
+      "kind": "birth",
+      "name_ta": "டாக்டர் அம்பேத்கர் பிறந்தநாள்",
+      "name_en": "Dr. B.R. Ambedkar's Birth Anniversary",
+      "description_ta": "இந்திய அரசியலமைப்பு வரைவுக் குழுத் தலைவர் டாக்டர் பி.ஆர். அம்பேத்கர் பிறந்த நாள். தமிழ்நாடு அரசு இந்நாளைச் சமத்துவ நாளாக அறிவித்துள்ளது.",
+      "description_en": "Birth anniversary of Dr. B.R. Ambedkar, chair of the Constitution's drafting committee. Declared Day of Equality by the Tamil Nadu government.",
+      "designations": [
+        {
+          "name_ta": "சமத்துவ நாள்",
+          "name_en": "Day of Equality",
+          "source_url": "https://www.deccanherald.com/india/tamil-nadu-to-observe-ambedkar-s-birthday-as-day-of-equality-1100448.html"
+        }
+      ],
+      "source": "Deccan Herald",
+      "source_url": "https://www.deccanherald.com/india/tamil-nadu-to-observe-ambedkar-s-birthday-as-day-of-equality-1100448.html"
+    },
+    {
+      "id": "tamil-nadu-day-jul18",
+      "month": 7,
+      "day": 18,
+      "kind": "event",
+      "year": 1967,
+      "name_ta": "தமிழ்நாடு நாள்",
+      "name_en": "Tamil Nadu Day",
+      "description_ta": "1967 ஜூலை 18 அன்று சென்னை மாநிலத்தைத் தமிழ்நாடு எனப் பெயர் மாற்றும் தீர்மானம் சட்டமன்றத்தில் நிறைவேற்றப்பட்ட நாள்.",
+      "description_en": "On 18 July 1967 the Assembly passed the resolution to rename Madras State as Tamil Nadu.",
+      "source": "The News Minute, 18-07-2026",
+      "source_url": "https://thenewsminute.com/tamil-nadu/tamil-nadu-to-celebrate-formation-day-twice-on-july-18-and-nov-1-cm-vijay"
+    },
+    {
+      "id": "madras-state-formation-nov1",
+      "month": 11,
+      "day": 1,
+      "kind": "event",
+      "year": 1956,
+      "name_ta": "மாநில உருவாக்க நாள்",
+      "name_en": "State Formation Day",
+      "description_ta": "1956 நவம்பர் 1 அன்று மொழிவழி மாநில மறுசீரமைப்பில் சென்னை மாநிலம் இன்றைய எல்லைகளுடன் உருவான நாள்.",
+      "description_en": "On 1 November 1956 Madras State took its present boundaries in the linguistic reorganisation of states.",
+      "designations": [
+        {
+          "name_ta": "தமிழ்நாடு நாள் (இரண்டாவது கொண்டாட்டம்)",
+          "name_en": "Tamil Nadu Day (second observance)",
+          "declared": "2026-07-18",
+          "source_url": "https://thenewsminute.com/tamil-nadu/tamil-nadu-to-celebrate-formation-day-twice-on-july-18-and-nov-1-cm-vijay"
+        }
+      ],
+      "source": "The News Minute, 18-07-2026",
+      "source_url": "https://thenewsminute.com/tamil-nadu/tamil-nadu-to-celebrate-formation-day-twice-on-july-18-and-nov-1-cm-vijay"
+    },
+    {
+      "id": "tamil-language-martyrs-day",
+      "month": 1,
+      "day": 25,
+      "kind": "event",
+      "name_ta": "தமிழ் மொழித் தியாகிகள் நாள்",
+      "name_en": "Tamil Language Martyrs' Day",
+      "description_ta": "தமிழ் மொழி உரிமைக்கான போராட்டங்களில் உயிர் நீத்தவர்களை நினைவுகூரும் நாள். 2025 முதல் அரசு நிகழ்வாகக் கடைப்பிடிக்கப்படுகிறது.",
+      "description_en": "Remembers those who lost their lives in the struggles for Tamil language rights. Observed officially from 2025.",
+      "source": "Usthadian Academy (current affairs), 2025",
+      "source_url": "https://www.usthadian.com/tamil-mozhi-thiyagigal-naal-marks-new-martyrs-day-in-tamil-nadu/"
+    }
+  ]
+}

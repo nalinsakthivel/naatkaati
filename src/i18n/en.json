@@ -1,0 +1,9 @@
+{
+  "tabs": { "today": "Today", "calendar": "Calendar", "settings": "Settings" },
+  "screens": {
+    "today": "Today",
+    "calendar": "Calendar",
+    "settings": "Settings",
+    "dayDetail": "Day detail"
+  }
+}

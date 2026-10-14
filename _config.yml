@@ -1,0 +1,14 @@
+# GitHub Pages (Jekyll) config: publishes the project docs, e.g.
+# https://nalinsakthivel.github.io/naatkaati/PRIVACY  (privacy policy for the Play Store listing)
+title: Naatkaati · நாட்காட்டி
+description: An open-source, offline-first Tamil calendar. No astrology, no ads, no tracking.
+theme: jekyll-theme-primer
+permalink: pretty
+exclude:
+  - data/
+  - tools/
+  - src/
+  - github-issues/
+  - CLAUDE.md
+  - '*.zip'
+  - '*.py'

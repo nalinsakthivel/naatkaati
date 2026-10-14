@@ -1,0 +1,16 @@
+{
+ "description": "Official Tamil dates printed in the header of the weekly Tamil Nadu Government Gazette (Part I) and in TN government holiday orders. Each entry pins the start of a Tamil month: start = date - (day - 1). Extend with fetch_gazette.py.",
+ "fixtures": [
+  {"date": "2016-12-21", "month_en": "Margazhi", "day": 6, "year_name_en": "Thunmugi", "thiruvalluvar_year": 2047, "source": "TN Gazette No. 50, Part I, 21-12-2016", "url": "https://stationeryprinting.tn.gov.in/gazette/2016/50_I.pdf"},
+  {"date": "2018-04-11", "month_en": "Panguni", "day": 28, "year_name_en": "Hevilambi", "thiruvalluvar_year": 2049, "source": "TN Gazette No. 15, Part I, 11-04-2018", "url": "https://stationeryprinting.tn.gov.in/gazette/2018/15_I.pdf"},
+  {"date": "2018-05-02", "month_en": "Chithirai", "day": 19, "year_name_en": "Vilambi", "thiruvalluvar_year": 2049, "source": "TN Gazette No. 18, Part I, 02-05-2018", "url": "https://stationeryprinting.tn.gov.in/gazette/2018/18_I.pdf"},
+  {"date": "2022-03-02", "month_en": "Maasi", "day": 18, "year_name_en": "Pilava", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 9, Part I, 02-03-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/9_I.pdf"},
+  {"date": "2022-03-23", "month_en": "Panguni", "day": 9, "year_name_en": "Pilava", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 12, Part I, 23-03-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/12_I.pdf"},
+  {"date": "2022-08-17", "month_en": "Aavani", "day": 1, "year_name_en": "Subakiruthu", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 33, Part I, 17-08-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/33_I.pdf"},
+  {"date": "2022-08-31", "month_en": "Aavani", "day": 15, "year_name_en": "Subakiruthu", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 35, Part I, 31-08-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/35_I.pdf"},
+  {"date": "2022-09-07", "month_en": "Aavani", "day": 22, "year_name_en": "Subakiruthu", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 36, Part I, 07-09-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/36_I.pdf"},
+  {"date": "2022-09-28", "month_en": "Purattasi", "day": 11, "year_name_en": "Subakiruthu", "thiruvalluvar_year": 2053, "source": "TN Gazette No. 39, Part I, 28-09-2022", "url": "https://stationeryprinting.tn.gov.in/gazette/2022/39_I.pdf"},
+  {"date": "2026-01-15", "month_en": "Thai", "day": 1, "source": "TN G.O.(Ms.) No. 708 of 11-11-2025: Pongal (Thai 1) public holiday", "url": "https://www.sakshipost.com/news/education/tamil-nadu-public-holiday-calendar-2026-released-24-holidays-declared-474238"},
+  {"date": "2026-04-14", "month_en": "Chithirai", "day": 1, "source": "TN G.O.(Ms.) No. 708 of 11-11-2025: Tamil New Year's Day public holiday", "url": "https://www.sakshipost.com/news/education/tamil-nadu-public-holiday-calendar-2026-released-24-holidays-declared-474238"}
+ ]
+}

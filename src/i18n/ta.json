@@ -1,0 +1,9 @@
+{
+  "tabs": { "today": "இன்று", "calendar": "நாட்காட்டி", "settings": "அமைப்புகள்" },
+  "screens": {
+    "today": "இன்று",
+    "calendar": "நாட்காட்டி",
+    "settings": "அமைப்புகள்",
+    "dayDetail": "நாள் விவரம்"
+  }
+}

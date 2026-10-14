@@ -1,0 +1,15 @@
+Data in this folder (data/) is licensed under the Creative Commons
+Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0):
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Attribution: "Naatkaati (நாட்காட்டி) open data, https://github.com/nalinsakthivel/naatkaati"
+
+Included third-party material:
+- City data includes material from GeoNames (https://www.geonames.org/), licensed under CC BY 4.0.
+- The Thirukkural text and the 1886 English translation by G.U. Pope, W.H. Drew, J. Lazarus and
+  F.W. Ellis are in the public domain; the electronic text was prepared by Project Madurai
+  (https://www.projectmadurai.org/).
+- Government holiday dates and Gazette dates are facts published by the Government of Tamil Nadu
+  and the Government of India; source references are kept with each entry.
+
+Source code outside this folder is licensed separately under GPL-3.0-or-later (see /LICENSE).

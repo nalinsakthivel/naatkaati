@@ -1,0 +1,552 @@
+{
+  "year": 2026,
+  "version": 1,
+  "notes": [
+    "Sundays and 2nd/4th Saturdays are bank holidays by RBI rule; computed in-app, not stored.",
+    "All state government offices are closed on all Saturdays and Sundays in 2026 per G.O. 708; computed in-app.",
+    "Moon-sighting holidays (Ramzan, Bakrid, Muharram, Milad-un-Nabi) can shift; corrections come via later G.O.s."
+  ],
+  "holidays": [
+    {
+      "id": "tn-2026-new-year-s-day",
+      "date": "2026-01-01",
+      "name_ta": "ஆங்கிலப் புத்தாண்டு",
+      "name_en": "New Year's Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "national",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-pongal",
+      "date": "2026-01-15",
+      "name_ta": "பொங்கல்",
+      "name_en": "Pongal",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "cultural",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-pongal",
+      "date": "2026-01-15",
+      "name_ta": "பொங்கல்",
+      "name_en": "Pongal",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "cultural",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-thiruvalluvar-day",
+      "date": "2026-01-16",
+      "name_ta": "திருவள்ளுவர் தினம்",
+      "name_en": "Thiruvalluvar Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "cultural",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-uzhavar-thirunal",
+      "date": "2026-01-17",
+      "name_ta": "உழவர் திருநாள்",
+      "name_en": "Uzhavar Thirunal",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "cultural",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-republic-day",
+      "date": "2026-01-26",
+      "name_ta": "குடியரசு தினம்",
+      "name_en": "Republic Day",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "national",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-republic-day",
+      "date": "2026-01-26",
+      "name_ta": "குடியரசு தினம்",
+      "name_en": "Republic Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "national",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-thai-poosam",
+      "date": "2026-02-01",
+      "name_ta": "தைப்பூசம்",
+      "name_en": "Thai Poosam",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-telugu-new-year-s-day",
+      "date": "2026-03-19",
+      "name_ta": "தெலுங்கு வருடப் பிறப்பு",
+      "name_en": "Telugu New Year's Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "cultural",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-id-ul-fitr-ramzan",
+      "date": "2026-03-21",
+      "name_ta": "ரம்ஜான்",
+      "name_en": "Id-ul-Fitr (Ramzan)",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-ramzan",
+      "date": "2026-03-21",
+      "name_ta": "ரம்ஜான்",
+      "name_en": "Ramzan",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-mahavir-jayanti",
+      "date": "2026-03-31",
+      "name_ta": "மகாவீரர் ஜெயந்தி",
+      "name_en": "Mahavir Jayanti",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-mahaveer-jayanthi",
+      "date": "2026-03-31",
+      "name_ta": "மகாவீரர் ஜெயந்தி",
+      "name_en": "Mahaveer Jayanthi",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-bank-annual-closing",
+      "date": "2026-04-01",
+      "name_ta": "வங்கிகளின் ஆண்டுக் கணக்கு முடிவு நாள்",
+      "name_en": "Annual Closing of Bank Accounts",
+      "applies_to": [
+        "banks"
+      ],
+      "category": "other",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820",
+      "note": "Banks only; state government offices stay open."
+    },
+    {
+      "id": "cg-chennai-2026-good-friday",
+      "date": "2026-04-03",
+      "name_ta": "புனித வெள்ளி",
+      "name_en": "Good Friday",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-good-friday",
+      "date": "2026-04-03",
+      "name_ta": "புனித வெள்ளி",
+      "name_en": "Good Friday",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-2026-ambedkar-birthday",
+      "date": "2026-04-14",
+      "name_ta": "டாக்டர் பி.ஆர். அம்பேத்கர் பிறந்தநாள்",
+      "name_en": "Birthday of Dr. B.R. Ambedkar",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "national",
+      "source": "DoPT order dated 09-04-2026 declaring holiday on 14-04-2026",
+      "source_url": "https://www.staffnews.in/2026/04/declaration-of-holiday-on-14th-april-2026.html"
+    },
+    {
+      "id": "tn-2026-tamil-new-year-s-day--dr-b-r-ambedkar-s-",
+      "date": "2026-04-14",
+      "name_ta": "தமிழ்ப் புத்தாண்டு / டாக்டர் பி.ஆர். அம்பேத்கர் பிறந்தநாள்",
+      "name_en": "Tamil New Year's Day / Dr. B.R. Ambedkar's Birthday",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "cultural",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-assembly-election",
+      "date": "2026-04-23",
+      "name_ta": "சட்டமன்றத் தேர்தல் பொது விடுமுறை",
+      "name_en": "Assembly Election Public Holiday",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "other",
+      "source": "TN G.O. Ms. No. 239 (General Assembly election public holiday, 23-04-2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-declaration-of-general-assembly-election-public-holiday-on-23rd-apr-2026-in-tamil-nadu-9011"
+    },
+    {
+      "id": "cg-chennai-2026-buddha-purnima",
+      "date": "2026-05-01",
+      "name_ta": "புத்த பூர்ணிமா",
+      "name_en": "Buddha Purnima",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-may-day",
+      "date": "2026-05-01",
+      "name_ta": "மே தினம்",
+      "name_en": "May Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "national",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-id-ul-zuha-bakrid",
+      "date": "2026-05-28",
+      "name_ta": "பக்ரீத்",
+      "name_en": "Id-ul-Zuha (Bakrid)",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-bakrid",
+      "date": "2026-05-28",
+      "name_ta": "பக்ரீத்",
+      "name_en": "Bakrid",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-muharram",
+      "date": "2026-06-26",
+      "name_ta": "மொகரம்",
+      "name_en": "Muharram",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-muharram",
+      "date": "2026-06-26",
+      "name_ta": "மொகரம்",
+      "name_en": "Muharram",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-independence-day",
+      "date": "2026-08-15",
+      "name_ta": "சுதந்திர தினம்",
+      "name_en": "Independence Day",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "national",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-independence-day",
+      "date": "2026-08-15",
+      "name_ta": "சுதந்திர தினம்",
+      "name_en": "Independence Day",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "national",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-id-e-milad",
+      "date": "2026-08-26",
+      "name_ta": "மிலாது நபி",
+      "name_en": "Id-e-Milad",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-milad-un-nabi",
+      "date": "2026-08-26",
+      "name_ta": "மிலாது நபி",
+      "name_en": "Milad-un-Nabi",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "tn-2026-krishna-jayanthi",
+      "date": "2026-09-04",
+      "name_ta": "கிருஷ்ண ஜெயந்தி",
+      "name_en": "Krishna Jayanthi",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-ganesh-chaturthi--vinayaka-chaturthi",
+      "date": "2026-09-14",
+      "name_ta": "விநாயகர் சதுர்த்தி",
+      "name_en": "Ganesh Chaturthi / Vinayaka Chaturthi",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-vinayagar-chathurthi",
+      "date": "2026-09-14",
+      "name_ta": "விநாயகர் சதுர்த்தி",
+      "name_en": "Vinayagar Chathurthi",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-mahatma-gandhi-s-birthday",
+      "date": "2026-10-02",
+      "name_ta": "காந்தி ஜெயந்தி",
+      "name_en": "Mahatma Gandhi's Birthday",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "national",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-gandhi-jayanthi",
+      "date": "2026-10-02",
+      "name_ta": "காந்தி ஜெயந்தி",
+      "name_en": "Gandhi Jayanthi",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "national",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-additional-holiday-for-dussehra",
+      "date": "2026-10-19",
+      "name_ta": "தசரா கூடுதல் விடுமுறை",
+      "name_en": "Additional holiday for Dussehra",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-ayudha-poojai",
+      "date": "2026-10-19",
+      "name_ta": "ஆயுத பூஜை",
+      "name_en": "Ayudha Poojai",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-dussehra-vijaya-dashami",
+      "date": "2026-10-20",
+      "name_ta": "விஜயதசமி",
+      "name_en": "Dussehra (Vijaya Dashami)",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-vijayadasami",
+      "date": "2026-10-20",
+      "name_ta": "விஜயதசமி",
+      "name_en": "Vijayadasami",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-diwali-deepavali",
+      "date": "2026-11-08",
+      "name_ta": "தீபாவளி",
+      "name_en": "Diwali (Deepavali)",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-deepavali",
+      "date": "2026-11-08",
+      "name_ta": "தீபாவளி",
+      "name_en": "Deepavali",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    },
+    {
+      "id": "cg-chennai-2026-guru-nanak-s-birthday",
+      "date": "2026-11-24",
+      "name_ta": "குரு நானக் பிறந்தநாள்",
+      "name_en": "Guru Nanak's Birthday",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "cg-chennai-2026-christmas-day",
+      "date": "2026-12-25",
+      "name_ta": "கிறிஸ்துமஸ்",
+      "name_en": "Christmas Day",
+      "applies_to": [
+        "central_govt"
+      ],
+      "category": "religious_holiday",
+      "source": "CGEWCC Chennai order dated 05-12-2025 (Central Govt offices in Chennai, 2026), based on DoPT O.M. F.No.12/2/2023-JCA dated 03-07-2025",
+      "source_url": "https://www.staffnews.in/2025/12/list-of-holidays-2026-cgewcc-chennai.html"
+    },
+    {
+      "id": "tn-2026-christmas",
+      "date": "2026-12-25",
+      "name_ta": "கிறிஸ்துமஸ்",
+      "name_en": "Christmas",
+      "applies_to": [
+        "state_govt",
+        "banks"
+      ],
+      "category": "religious_holiday",
+      "source": "TN G.O.(Ms.) No. 708, Public Department, dated 11-11-2025 (Negotiable Instruments Act holidays for 2026)",
+      "source_url": "https://simpliance.in/India/LEI/govt_notification/Tamil-Nadu/notification-regarding-list-of-holidays-for-the-year-2026-7820"
+    }
+  ]
+}

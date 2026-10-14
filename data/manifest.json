@@ -1,0 +1,37 @@
+{
+ "schema_version": 1,
+ "datasets": [
+  {
+   "name": "commemorations",
+   "url": "commemorations.json",
+   "version": 1,
+   "sha256": "0b50047a8eb3a66fcf01d42cd437045cf95ebc83c9d78cb1ed5b9306efab8c03",
+   "bytes": 6421,
+   "min_app_version": "1.0.0"
+  },
+  {
+   "name": "holidays-2026",
+   "url": "holidays/2026.json",
+   "version": 1,
+   "sha256": "f62796255c46563ec96fa23e0f64d0d41998fb78a1ed50867234c0223785dfe9",
+   "bytes": 23790,
+   "min_app_version": "1.0.0"
+  },
+  {
+   "name": "tamil-months",
+   "url": "tamil-months.json",
+   "version": 1,
+   "sha256": "e5c7bb609a2b57ba3a1a5922298d588a52754aecb8eacf80b6c199538e1f3cf2",
+   "bytes": 549068,
+   "min_app_version": "1.0.0"
+  },
+  {
+   "name": "thirukkural",
+   "url": "thirukkural.json",
+   "version": 1,
+   "sha256": "5d90094f28ac33df467119f6d27256604ec12383fdeb9520aa7558afc3c624a7",
+   "bytes": 1212431,
+   "min_app_version": "1.0.0"
+  }
+ ]
+}
