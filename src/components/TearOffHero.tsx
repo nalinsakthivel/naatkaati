@@ -1,7 +1,7 @@
 import { HeroDate } from '@/components/HeroDate';
 import type { ColorTokens } from '@/themes/Colors';
 import { Motion } from '@/themes/Theme';
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { AccessibilityInfo, Animated, StyleSheet, View } from 'react-native';
 
 type HeroProps = Omit<Parameters<typeof HeroDate>[0], 'colors' | 'children'>;
@@ -10,25 +10,23 @@ interface TearOffHeroProps {
   dateKey: string;
   hero: HeroProps;
   colors: ColorTokens;
-  children?: ReactNode;
 }
 
 interface Snapshot {
   key: string;
   hero: HeroProps;
-  children?: ReactNode;
 }
 
 const TEAR_DISTANCE = 420;
 const TEAR_ANGLE = '-9deg';
 const SETTLE_OFFSET = -28;
 
-export function TearOffHero({ dateKey, hero, colors, children }: TearOffHeroProps) {
+export function TearOffHero({ dateKey, hero, colors }: TearOffHeroProps) {
   const [tearing, setTearing] = useState<Snapshot | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const progress = useRef(new Animated.Value(0)).current;
   const settle = useRef(new Animated.Value(1)).current;
-  const last = useRef<Snapshot>({ key: dateKey, hero, children });
+  const last = useRef<Snapshot>({ key: dateKey, hero });
 
   useEffect(() => {
     AccessibilityInfo.isReduceMotionEnabled().then(setReduceMotion);
@@ -57,8 +55,8 @@ export function TearOffHero({ dateKey, hero, colors, children }: TearOffHeroProp
         }).start();
       }
     }
-    last.current = { key: dateKey, hero, children };
-  }, [dateKey, hero, children, reduceMotion, progress, settle]);
+    last.current = { key: dateKey, hero };
+  }, [dateKey, hero, reduceMotion, progress, settle]);
 
   return (
     <View>
@@ -75,9 +73,7 @@ export function TearOffHero({ dateKey, hero, colors, children }: TearOffHeroProp
           ],
         }}
       >
-        <HeroDate {...hero} colors={colors}>
-          {children}
-        </HeroDate>
+        <HeroDate {...hero} colors={colors} />
       </Animated.View>
       {tearing ? (
         <Animated.View
@@ -103,9 +99,7 @@ export function TearOffHero({ dateKey, hero, colors, children }: TearOffHeroProp
             },
           ]}
         >
-          <HeroDate {...tearing.hero} colors={colors}>
-            {tearing.children}
-          </HeroDate>
+          <HeroDate {...tearing.hero} colors={colors} />
         </Animated.View>
       ) : null}
     </View>

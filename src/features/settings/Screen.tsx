@@ -1,74 +1,108 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { ChoiceSheet } from '@/components/native/ChoiceSheet';
-import { SettingsChoiceRow } from '@/components/native/SettingsChoiceRow';
-import { SettingsHost } from '@/components/native/SettingsHost';
-import { SettingsLinkRow } from '@/components/native/SettingsLinkRow';
-import { SettingsSection } from '@/components/native/SettingsSection';
-import { SettingsSwitchRow } from '@/components/native/SettingsSwitchRow';
-import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { ScreenHeader } from '@/components/ScreenHeader';
+import { SettingGroup, SettingRow } from '@/components/SettingRow';
+import { Layout, Spacing, Typography } from '@/themes/Theme';
 import { useSettingsScreen } from './useScreen';
 
 export function SettingsScreen() {
   const s = useSettingsScreen();
+  const { colors } = s;
   return (
     <ScrollView
-      style={{ backgroundColor: s.colors.background }}
-      contentContainerStyle={styles.content}
+      style={{ backgroundColor: colors.background }}
+      contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
     >
-      <Text style={[Typography.title, styles.title, { color: s.colors.text }]}>{s.title}</Text>
-      <View style={[styles.sheet, { backgroundColor: s.colors.surface }]}>
-        <SettingsHost>
-          <SettingsSection title={s.labels.display}>
-            <SettingsChoiceRow
-              label={s.labels.appearance}
-              valueLabel={s.appearanceValueLabel}
-              onPress={s.openPicker('appearance')}
-            />
-            <SettingsChoiceRow
-              label={s.labels.language}
-              valueLabel={s.languageValueLabel}
-              onPress={s.openPicker('language')}
-            />
-            <SettingsSwitchRow
-              label={s.labels.tamilNumerals}
-              value={s.tamilNumerals}
-              onChange={s.onTamilNumeralsChange}
-            />
-          </SettingsSection>
-          <SettingsSection title={s.labels.holidays}>
-            {s.categoryRows.map((row) => (
-              <SettingsSwitchRow
-                key={row.category}
-                label={row.label}
-                value={row.enabled}
-                onChange={(enabled) => s.onCategoryChange(row.category, enabled)}
-              />
-            ))}
-            <SettingsChoiceRow
-              label={s.labels.newYear}
-              valueLabel={s.newYearValueLabel}
-              onPress={s.openPicker('newYear')}
-            />
-          </SettingsSection>
-          <SettingsSection title={s.labels.data}>
-            <SettingsSwitchRow
-              label={s.labels.wifiOnly}
-              value={s.dataSaver}
-              onChange={s.onDataSaverChange}
-            />
-            <SettingsLinkRow
-              label={s.labels.updateNow}
-              trailing={s.syncStatusLabel}
-              tone="action"
-              onPress={s.onUpdateNow}
-            />
-          </SettingsSection>
-          <SettingsSection title={s.labels.aboutSection}>
-            <SettingsLinkRow label={s.labels.about} onPress={s.onOpenAbout} />
-          </SettingsSection>
-        </SettingsHost>
-      </View>
-      <Text style={[Typography.caption, styles.version, { color: s.colors.textMuted }]}>
+      <ScreenHeader kicker={s.kicker} title={s.title} colors={colors} />
+
+      <SettingGroup title={s.labels.displayGroup} colors={colors}>
+        <SettingRow
+          icon="globe"
+          title={s.labels.language}
+          subtitle={s.languageValueLabel}
+          onPress={s.openPicker('language')}
+          colors={colors}
+        />
+        <SettingRow
+          icon="moon"
+          title={s.labels.appearance}
+          subtitle={s.appearanceValueLabel}
+          onPress={s.openPicker('appearance')}
+          divided
+          colors={colors}
+        />
+        <SettingRow
+          icon="hash"
+          title={s.labels.tamilNumerals}
+          subtitle={s.labels.tamilNumeralsHint}
+          value={s.tamilNumerals}
+          onValueChange={s.onTamilNumeralsChange}
+          divided
+          colors={colors}
+        />
+      </SettingGroup>
+
+      <SettingGroup title={s.labels.holidays} colors={colors}>
+        {s.categoryRows.map((row, index) => (
+          <SettingRow
+            key={row.category}
+            icon="check-square"
+            title={row.label}
+            value={row.enabled}
+            onValueChange={(enabled) => s.onCategoryChange(row.category, enabled)}
+            divided={index > 0}
+            colors={colors}
+          />
+        ))}
+        <SettingRow
+          icon="calendar"
+          title={s.labels.newYear}
+          subtitle={s.newYearValueLabel}
+          onPress={s.openPicker('newYear')}
+          divided
+          colors={colors}
+        />
+      </SettingGroup>
+
+      <SettingGroup title={s.labels.widgets} colors={colors}>
+        <SettingRow
+          icon="grid"
+          title={s.labels.widgets}
+          subtitle={s.labels.widgetsHint}
+          onPress={s.onOpenWidgets}
+          colors={colors}
+        />
+      </SettingGroup>
+
+      <SettingGroup title={s.labels.data} colors={colors}>
+        <SettingRow
+          icon="wifi"
+          title={s.labels.wifiOnly}
+          value={s.dataSaver}
+          onValueChange={s.onDataSaverChange}
+          colors={colors}
+        />
+        <SettingRow
+          icon="download"
+          title={s.labels.updateNow}
+          trailingText={s.syncStatusLabel}
+          onPress={s.onUpdateNow}
+          divided
+          colors={colors}
+        />
+      </SettingGroup>
+
+      <SettingGroup title={s.labels.aboutSection} colors={colors}>
+        <SettingRow
+          icon="info"
+          title={s.labels.about}
+          subtitle={s.versionLabel}
+          onPress={s.onOpenAbout}
+          colors={colors}
+        />
+      </SettingGroup>
+
+      <Text style={[Typography.caption, styles.version, { color: colors.textMuted }]}>
         {s.versionLabel}
       </Text>
 
@@ -103,13 +137,11 @@ export function SettingsScreen() {
 const styles = StyleSheet.create({
   content: {
     paddingHorizontal: Layout.screenPaddingH,
-    paddingBottom: Spacing.xxxl,
+    paddingBottom: Layout.dockClearance,
     gap: Spacing.lg,
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
   },
-  title: { paddingHorizontal: Spacing.xs },
-  sheet: { borderRadius: Radius.card, overflow: 'hidden' },
   version: { textAlign: 'center' },
 });

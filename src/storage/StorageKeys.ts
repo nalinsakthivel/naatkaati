@@ -7,6 +7,8 @@ export const StorageKeys = {
   reminders: 'reminders.keys',
   onboardingDone: 'settings.onboardingDone',
   dataSaver: 'settings.dataSaver',
+  widgetVariant: 'widget.variant',
+  widgetFavorites: 'widget.favorites',
   lastSyncAt: 'sync.lastSyncAt',
   datasetIndex: 'datasets.index',
 } as const;

@@ -1,7 +1,12 @@
+import { StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { Radius, Spacing, Typography } from '@/themes/Theme';
-import type { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+export interface HeroChip {
+  id: string;
+  label: string;
+  tone: 'holiday' | 'commemoration';
+}
 
 interface HeroDateProps {
   day: string;
@@ -9,17 +14,15 @@ interface HeroDateProps {
   monthName: string;
   yearLabel: string;
   gregorianLabel: string;
+  /** Sunday or holiday: the numeral is printed in the holiday colour, as on a paper calendar. */
   isRedLetter: boolean;
+  chips: readonly HeroChip[];
   colors: ColorTokens;
-  children?: ReactNode;
 }
 
-const SUN = 200;
-const SUN_OFFSET = -SUN / 3;
-const SUN_OPACITY = 0.16;
-const RULE_WIDTH = Spacing.xxl + Spacing.sm;
-const RULE_HEIGHT = Spacing.xs;
+const DATE_SPACING = 1.5;
 
+/** The date as the page's centrepiece: English line, the big Tamil numeral, Tamil month and year. */
 export function HeroDate({
   day,
   weekdayLabel,
@@ -27,53 +30,66 @@ export function HeroDate({
   yearLabel,
   gregorianLabel,
   isRedLetter,
+  chips,
   colors,
-  children,
 }: HeroDateProps) {
-  const numeralColor = isRedLetter ? colors.heroHoliday : colors.onHero;
+  const numeralColor = isRedLetter ? colors.holiday : colors.primary;
   return (
-    <View style={[styles.panel, { backgroundColor: colors.hero }]}>
-      <View
-        importantForAccessibility="no-hide-descendants"
-        style={[styles.sun, { backgroundColor: colors.heroAccent, opacity: SUN_OPACITY }]}
-      />
-      <View style={styles.top}>
-        <Text style={[Typography.heroCaption, { color: colors.onHero }]}>{monthName}</Text>
-        <View style={[styles.pill, { backgroundColor: colors.heroSoft }]}>
-          <Text style={[Typography.caption, { color: colors.onHero }]}>{yearLabel}</Text>
+    <View
+      style={styles.hero}
+      accessible
+      accessibilityLabel={`${day} ${monthName}, ${weekdayLabel}, ${yearLabel}, ${gregorianLabel}`}
+    >
+      <Text style={[Typography.caption, styles.english, { color: colors.textMuted }]}>
+        {`${weekdayLabel} · ${gregorianLabel}`}
+      </Text>
+      <Text style={[Typography.heroDate, { color: numeralColor }]}>{day}</Text>
+      <Text style={[Typography.heroCaption, styles.caption, { color: colors.text }]}>
+        {`${monthName} · ${yearLabel}`}
+      </Text>
+      {chips.length > 0 ? (
+        <View style={styles.chips}>
+          {chips.map((chip) => {
+            const holiday = chip.tone === 'holiday';
+            return (
+              <View
+                key={chip.id}
+                style={[
+                  styles.chip,
+                  { backgroundColor: holiday ? colors.holidaySoft : colors.commemorationSoft },
+                ]}
+              >
+                <Text
+                  style={[
+                    Typography.caption,
+                    { color: holiday ? colors.holiday : colors.commemoration },
+                  ]}
+                >
+                  {chip.label}
+                </Text>
+              </View>
+            );
+          })}
         </View>
-      </View>
-      <View
-        style={styles.body}
-        accessible
-        accessibilityLabel={`${day} ${monthName}, ${weekdayLabel}, ${yearLabel}, ${gregorianLabel}`}
-      >
-        <Text style={[Typography.heroDate, { color: numeralColor }]}>{day}</Text>
-        <Text style={[Typography.title, { color: numeralColor }]}>{weekdayLabel}</Text>
-        <View style={[styles.rule, { backgroundColor: colors.heroAccent }]} />
-        <Text style={[Typography.body, { color: colors.onHeroMuted }]}>{gregorianLabel}</Text>
-      </View>
-      {children}
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  panel: { borderRadius: Radius.hero, overflow: 'hidden', padding: Spacing.xl, gap: Spacing.lg },
-  sun: {
-    position: 'absolute',
-    top: SUN_OFFSET,
-    right: SUN_OFFSET,
-    width: SUN,
-    height: SUN,
-    borderRadius: SUN / 2,
+  hero: { alignItems: 'center', paddingVertical: Spacing.xl, gap: Spacing.xs },
+  english: { letterSpacing: DATE_SPACING, textTransform: 'uppercase' },
+  caption: { textAlign: 'center' },
+  chips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: Spacing.sm,
+    marginTop: Spacing.md,
   },
-  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  pill: {
+  chip: {
     borderRadius: Radius.chip,
     paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xxs,
+    paddingVertical: Spacing.xs,
   },
-  body: { gap: Spacing.xs },
-  rule: { width: RULE_WIDTH, height: RULE_HEIGHT, borderRadius: RULE_HEIGHT / 2 },
 });

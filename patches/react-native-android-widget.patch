@@ -1,0 +1,133 @@
+diff --git a/android/src/main/java/com/reactnativeandroidwidget/RNWidget.java b/android/src/main/java/com/reactnativeandroidwidget/RNWidget.java
+index 5650d1e4b9abaa30a2e1ab2a5fddefc9057d4e25..5cdd4d78d92a939fe825144c7739f8660f965e78 100644
+--- a/android/src/main/java/com/reactnativeandroidwidget/RNWidget.java
++++ b/android/src/main/java/com/reactnativeandroidwidget/RNWidget.java
+@@ -115,6 +115,7 @@ public class RNWidget {
+             addClickableAreas(widgetId, remoteWidgetView, widgetWithViews);
+         }
+         addCollectionViews(widgetId, remoteWidgetView, widgetWithViews);
++        addClockViews(widgetId, remoteWidgetView, widgetWithViews);
+ 
+         AppWidgetManager.getInstance(appContext)
+             .updateAppWidget(widgetId, remoteWidgetView);
+@@ -152,6 +153,47 @@ public class RNWidget {
+     }
+ 
+     @RequiresApi(Build.VERSION_CODES.N)
++    private void collectClockPlaceholders(View view, List<android.widget.TextView> into) {
++        if (view instanceof android.widget.TextView
++            && view.getTag() instanceof com.reactnativeandroidwidget.builder.widget.TextWidget.ClockTag) {
++            into.add((android.widget.TextView) view);
++        }
++        if (view instanceof ViewGroup) {
++            ViewGroup group = (ViewGroup) view;
++            for (int i = 0; i < group.getChildCount(); i++) {
++                collectClockPlaceholders(group.getChildAt(i), into);
++            }
++        }
++    }
++
++    /** A live clock cannot be part of the bitmap, so it is a real TextClock laid over its placeholder. */
++    private void addClockViews(int widgetId, RemoteViews remoteWidgetView, WidgetWithViews widgetWithViews) {
++        remoteWidgetView.removeAllViews(R.id.rn_widget_clock_container);
++        ViewGroup rootView = (ViewGroup) widgetWithViews.getRootView();
++        List<android.widget.TextView> placeholders = new java.util.ArrayList<>();
++        collectClockPlaceholders(rootView, placeholders);
++        for (android.widget.TextView placeholder : placeholders) {
++            Rect bounds = new Rect();
++            placeholder.getDrawingRect(bounds);
++            rootView.offsetDescendantRectToMyCoords(placeholder, bounds);
++            RemoteViews clock = new RemoteViews(appContext.getPackageName(), R.layout.rn_widget_clock);
++            clock.setViewPadding(
++                R.id.rn_widget_clock_positioner,
++                bounds.left,
++                bounds.top,
++                RNWidgetUtil.dpToPx(appContext, RNWidgetUtil.getWidgetWidth(appContext, widgetId)) - bounds.right,
++                0
++            );
++            clock.setTextViewTextSize(R.id.rn_widget_clock_text, TypedValue.COMPLEX_UNIT_PX, placeholder.getTextSize());
++            clock.setTextColor(
++                R.id.rn_widget_clock_text,
++                ((com.reactnativeandroidwidget.builder.widget.TextWidget.ClockTag) placeholder.getTag()).color
++            );
++            clock.setInt(R.id.rn_widget_clock_text, "setGravity", placeholder.getGravity());
++            remoteWidgetView.addView(R.id.rn_widget_clock_container, clock);
++        }
++    }
++
+     private void addClickableAreas(int widgetId, RemoteViews remoteWidgetView, WidgetWithViews widgetWithViews) {
+         remoteWidgetView.removeAllViews(R.id.rn_widget_clickable_container);
+         ViewGroup rootView = (ViewGroup) widgetWithViews.getRootView();
+diff --git a/android/src/main/java/com/reactnativeandroidwidget/builder/widget/TextWidget.java b/android/src/main/java/com/reactnativeandroidwidget/builder/widget/TextWidget.java
+index 1f9aa00b75518a93bf20ad8922cc3473c3396007..8533c03f6cb2e17b21f3bde2ded325e307804f22 100644
+--- a/android/src/main/java/com/reactnativeandroidwidget/builder/widget/TextWidget.java
++++ b/android/src/main/java/com/reactnativeandroidwidget/builder/widget/TextWidget.java
+@@ -18,6 +18,18 @@ import com.facebook.react.bridge.ReadableMap;
+ import com.reactnativeandroidwidget.builder.widget.utils.ResourceUtils;
+ 
+ public class TextWidget extends BaseWidget<TextView> {
++    /** A text of exactly this value is drawn as an invisible "12:00 PM" and replaced by a live TextClock. */
++    public static final String CLOCK_MARKER = "@clock";
++
++    /** Remembers the colour of a clock placeholder, whose own text is drawn transparent. */
++    public static class ClockTag {
++        public final int color;
++
++        ClockTag(int color) {
++            this.color = color;
++        }
++    }
++
+     public TextWidget(ReactApplicationContext context, ReadableMap props) {
+         super(context, props);
+     }
+@@ -51,6 +63,13 @@ public class TextWidget extends BaseWidget<TextView> {
+             }
+         }
+ 
++        if (CLOCK_MARKER.equals(getString("text", ""))) {
++            int color = view.getCurrentTextColor();
++            view.setText("12:00 PM");
++            view.setTextColor(Color.TRANSPARENT);
++            view.setTag(new ClockTag(color));
++        }
++
+         setFont();
+         setShadow();
+ 
+diff --git a/android/src/main/res/layout/rn_widget.xml b/android/src/main/res/layout/rn_widget.xml
+index 870d18b36ff15ed69ab14632e6bee54f3a9e2920..31d0cbf8e0f515a5469819bcefe78f901079790d 100644
+--- a/android/src/main/res/layout/rn_widget.xml
++++ b/android/src/main/res/layout/rn_widget.xml
+@@ -19,6 +19,11 @@
+         android:scaleType="matrix"
+         android:visibility="gone" />
+ 
++    <FrameLayout
++        android:id="@+id/rn_widget_clock_container"
++        android:layout_width="match_parent"
++        android:layout_height="match_parent" />
++
+     <FrameLayout
+         android:id="@+id/rn_widget_clickable_container"
+         android:layout_width="match_parent"
+diff --git a/android/src/main/res/layout/rn_widget_clock.xml b/android/src/main/res/layout/rn_widget_clock.xml
+new file mode 100644
+index 0000000000000000000000000000000000000000..6230e3c073295164477152f408c79ca2510ecb5d
+--- /dev/null
++++ b/android/src/main/res/layout/rn_widget_clock.xml
+@@ -0,0 +1,14 @@
++<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/rn_widget_clock_positioner"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <TextClock
++        android:id="@+id/rn_widget_clock_text"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:format12Hour="h:mm a"
++        android:format24Hour="h:mm a"
++        android:textStyle="bold"
++        android:includeFontPadding="true" />
++</FrameLayout>

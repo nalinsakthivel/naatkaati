@@ -1,8 +1,6 @@
 import { getTodayIso, shiftIsoDate } from '@/calendar/today';
 import { AppConstants } from '@/constants/AppConstants';
-import { RouteEnum } from '@/enums/RouteEnum';
 import { useDayView } from '@/features/dayDetail/useDayView';
-import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppState } from 'react-native';
@@ -12,7 +10,6 @@ import { useUpcoming } from './useUpcoming';
 
 export function useTodayScreen() {
   const { t } = useTranslation();
-  const router = useRouter();
   const insets = useSafeAreaInsets();
   const [now, setNow] = useState(() => new Date());
   const [offset, setOffset] = useState(0);
@@ -35,13 +32,12 @@ export function useTodayScreen() {
     timeBanner,
     upcoming,
     topInset: insets.top,
+    kicker: t('splash.name'),
+    title: t('tabs.today'),
     locationLabel: t('today.location'),
+    offline: { title: t('today.offlineTitle'), body: t('today.offlineBody') },
     isToday: offset === 0,
     jumpLabel: t('today.jumpToToday'),
-    calendarLabel: t('tabs.calendar'),
-    settingsLabel: t('tabs.settings'),
-    onOpenCalendar: () => router.push({ pathname: RouteEnum.Calendar }),
-    onOpenSettings: () => router.push({ pathname: RouteEnum.Settings }),
     onNextDay: () => setOffset((current) => current + 1),
     onPreviousDay: () => setOffset((current) => current - 1),
     onJumpToToday: () => setOffset(0),

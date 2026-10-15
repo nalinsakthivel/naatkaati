@@ -14,7 +14,7 @@ type KuralProps = Parameters<typeof KuralCard>[0];
 
 interface DayBodyProps {
   dateKey: string;
-  hero: Omit<HeroProps, 'colors' | 'children'> | null;
+  hero: Omit<HeroProps, 'colors'> | null;
   outOfRangeLabel: string;
   gregorianOnly: string;
   sunrise: SkyItem;
@@ -53,15 +53,13 @@ interface DayBodyProps {
 
 export function DayBody(props: DayBodyProps) {
   const { colors } = props;
-  const sky = (
-    <SkyRow sunrise={props.sunrise} sunset={props.sunset} moon={props.moon} colors={colors} />
-  );
   return (
     <View style={styles.stack}>
       {props.hero ? (
-        <TearOffHero dateKey={props.dateKey} hero={props.hero} colors={colors}>
-          {sky}
-        </TearOffHero>
+        <>
+          <TearOffHero dateKey={props.dateKey} hero={props.hero} colors={colors} />
+          <SkyRow sunrise={props.sunrise} sunset={props.sunset} moon={props.moon} colors={colors} />
+        </>
       ) : (
         <View style={styles.fallback}>
           <Text style={[Typography.heading, { color: colors.text }]}>{props.gregorianOnly}</Text>
@@ -149,7 +147,7 @@ export function DayBody(props: DayBodyProps) {
 }
 
 const styles = StyleSheet.create({
-  stack: { gap: Spacing.lg },
+  stack: { gap: Spacing.md },
   block: { gap: Spacing.sm },
   item: { gap: Spacing.xs },
   notice: { borderRadius: Radius.banner, padding: Spacing.lg, gap: Spacing.sm },

@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { addDays, addMonths, format, parseISO } from 'date-fns';
 import { enIN } from 'date-fns/locale/en-IN';
 import { ta } from 'date-fns/locale/ta';
 import { useTranslation } from 'react-i18next';
-import { filterHolidaysByCategory } from '@/calendar/holidays';
+import { filterHolidaysByCategory, mergeSameDayHolidays } from '@/calendar/holidays';
 import { buildMonthGrid } from '@/calendar/monthGrid';
 import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import { toTamilNumerals } from '@/calendar/numerals';
@@ -23,6 +24,7 @@ export function useCalendarScreen() {
   const { t } = useTranslation();
   const colors = useAppColors();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const timeBanner = useTimeBanner();
   const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
     (state) => state.settings,
@@ -41,7 +43,7 @@ export function useCalendarScreen() {
     tamilNumerals && isTamil ? toTamilNumerals(value) : String(value);
 
   const holidays = useMemo(
-    () => filterHolidaysByCategory(data.holidays, holidayCategories),
+    () => filterHolidaysByCategory(mergeSameDayHolidays(data.holidays), holidayCategories),
     [data, holidayCategories],
   );
   const weeks = useMemo(
@@ -137,6 +139,11 @@ export function useCalendarScreen() {
 
   return {
     colors,
+    topInset: insets.top,
+    kicker: t('splash.name'),
+    screenTitle: t('tabs.calendar'),
+    legend: { holiday: t('calendar.holiday'), commemoration: t('calendar.commemoration') },
+    swipeHint: t('calendar.swipeHint'),
     timeBanner,
     title: format(visible, 'MMMM yyyy', { locale }),
     subtitle:

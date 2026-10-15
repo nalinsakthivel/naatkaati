@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Icon } from '@/components/Icon';
 import type { ColorTokens } from '@/themes/Colors';
 import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 
@@ -6,6 +7,9 @@ export interface UpcomingRow {
   id: string;
   kindLabel: string;
   name: string;
+  /** Date tile: day number and short month */
+  dayLabel: string;
+  monthLabel: string;
   /** e.g. "In 5 days" */
   whenLabel: string;
   tone: 'holiday' | 'commemoration';
@@ -17,8 +21,6 @@ interface UpcomingListProps {
   rows: readonly UpcomingRow[];
   colors: ColorTokens;
 }
-
-const MARKER = Spacing.md;
 
 /** The next holiday and the next commemoration, each opening that day. */
 export function UpcomingList({ title, rows, colors }: UpcomingListProps) {
@@ -39,22 +41,16 @@ export function UpcomingList({ title, rows, colors }: UpcomingListProps) {
             style={[styles.row, { backgroundColor: colors.surface }]}
           >
             <View style={[styles.badge, { backgroundColor: soft }]}>
-              {/* Round = holiday, square = commemoration, as in the month grid */}
-              <View
-                style={[
-                  styles.marker,
-                  { backgroundColor: accent },
-                  isHoliday && styles.markerRound,
-                ]}
-              />
+              <Text style={[Typography.heading, { color: accent }]}>{row.dayLabel}</Text>
+              <Text style={[Typography.caption, { color: accent }]}>{row.monthLabel}</Text>
             </View>
             <View style={styles.text}>
-              <Text style={[Typography.caption, { color: accent }]}>{row.kindLabel}</Text>
+              <Text style={[Typography.caption, { color: accent }]}>
+                {`${row.kindLabel} · ${row.whenLabel}`}
+              </Text>
               <Text style={[Typography.bodyStrong, { color: colors.text }]}>{row.name}</Text>
             </View>
-            <View style={[styles.when, { backgroundColor: colors.background }]}>
-              <Text style={[Typography.caption, { color: colors.text }]}>{row.whenLabel}</Text>
-            </View>
+            <Icon name="chevron-right" size={Spacing.xl - Spacing.xs} color={colors.textMuted} />
           </Pressable>
         );
       })}
@@ -74,17 +70,10 @@ const styles = StyleSheet.create({
   },
   badge: {
     width: Layout.minTouchTarget,
-    height: Layout.minTouchTarget,
+    minHeight: Layout.minTouchTarget + Spacing.sm,
     borderRadius: Radius.banner,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  marker: { width: MARKER, height: MARKER },
-  markerRound: { borderRadius: MARKER / 2 },
   text: { flex: 1 },
-  when: {
-    borderRadius: Radius.chip,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xs,
-  },
 });

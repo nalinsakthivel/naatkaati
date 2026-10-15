@@ -2,7 +2,8 @@
   "tabs": {
     "today": "Today",
     "calendar": "Calendar",
-    "settings": "Settings"
+    "settings": "Settings",
+    "holidays": "Holidays"
   },
   "screens": {
     "today": "Today",
@@ -27,7 +28,10 @@
     "newYearThai": "Thai 1",
     "newYearChithirai": "Chithirai 1",
     "about": "About",
-    "aboutSection": "App"
+    "aboutSection": "App",
+    "widgets": "Home-screen widgets",
+    "widgetsHint": "Pick a layout and share it",
+    "groupGeneral": "General"
   },
   "today": {
     "yearLabel": "Thiruvalluvar year {{year}}",
@@ -66,7 +70,9 @@
       "inDays": "In {{count}} days",
       "tomorrow": "Tomorrow"
     },
-    "jumpToToday": "Go to today"
+    "jumpToToday": "Go to today",
+    "offlineTitle": "No internet? No problem.",
+    "offlineBody": "Dates and saved information work offline too."
   },
   "calendar": {
     "prevMonth": "Previous month",
@@ -80,7 +86,8 @@
     "commemoration": "Commemoration",
     "jump": "Jump to month",
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "swipeHint": "Swipe left or right to change months"
   },
   "day": {
     "onThisDay": "On this day",
@@ -141,7 +148,10 @@
     "next": "Next",
     "skip": "Skip",
     "done": "Done",
-    "step": "Step {{current}} of {{total}}"
+    "step": "Step {{current}} of {{total}}",
+    "languageEyebrow": "First, your language",
+    "appearanceEyebrow": "Your look",
+    "privacy": "Your choices stay on this device."
   },
   "data": {
     "section": "Data",
@@ -151,5 +161,60 @@
     "syncing": "Updating…",
     "ok": "Up to date",
     "failed": "Could not update"
+  },
+  "splash": {
+    "name": "நாட்காட்டி",
+    "nameLatin": "NAATKAATI",
+    "tagline": "நம் நாட்கள். நம் மொழியில்.",
+    "taglineEn": "Our days, in our language.",
+    "offline": "Works without internet",
+    "skip": "Continue"
+  },
+  "holidays": {
+    "subtitle": "Upcoming holidays · Tamil Nadu",
+    "all": "All",
+    "empty": "No upcoming holidays",
+    "noteTitle": "Holiday data is on your device",
+    "noteBody": "You can view it without internet."
+  },
+  "widgets": {
+    "title": "Widget studio",
+    "dayNote": "Today's note",
+    "introTitle": "Your home screen. Your calendar.",
+    "introBody": "Pick a layout you like and share it with friends.",
+    "all": "All layouts ({{count}})",
+    "favorites": "Favourites ({{count}})",
+    "choose": "Use this",
+    "chosen": "In use",
+    "favorite": "Add to favourites",
+    "share": "Share",
+    "emptyTitle": "No favourites yet",
+    "emptyBody": "Tap the heart to save layouts here.",
+    "emptyAction": "See all layouts",
+    "note": "Your choices are saved on this device.",
+    "howTo": "To add: long-press the home screen, open Widgets, and choose “Naatkaati”.",
+    "shareMessage": "Take a look at the “{{name}}” ({{size}}) widget layout in Naatkaati.",
+    "variant": {
+      "classic": {
+        "name": "Classic",
+        "size": "4 × 2",
+        "description": "Date, day note and kural"
+      },
+      "minimal": {
+        "name": "Minimal",
+        "size": "2 × 2",
+        "description": "Just today's date"
+      },
+      "kural": {
+        "name": "Kural",
+        "size": "4 × 2",
+        "description": "A Thirukkural every day"
+      },
+      "culture": {
+        "name": "Day note",
+        "size": "4 × 2",
+        "description": "Holiday or cultural day, with sunrise and sunset"
+      }
+    }
   }
 }

@@ -22,6 +22,7 @@ export interface ColorTokens {
   background: string;
   surface: string;
   surfaceRaised: string;
+  surfaceMuted: string; // chips, tiles and tracks on a surface
   border: string;
 
   // Text
@@ -45,13 +46,15 @@ export interface ColorTokens {
   commemorationSoft: string;
   otherMonthText: string; // dates outside the visible month
 
-  // Hero panel (the big date on Today / Day detail)
-  hero: string; // panel fill
-  onHero: string; // primary text on the panel
-  onHeroMuted: string; // secondary text on the panel
-  heroAccent: string; // sun disc and rule on the panel
-  heroHoliday: string; // numeral on Sundays and holidays, readable on the panel
-  heroSoft: string; // translucent chip fill on the panel
+  // Indigo surfaces: the kural card and the splash
+  hero: string; // fill
+  onHero: string; // primary text
+  onHeroMuted: string; // secondary text
+  heroAccent: string; // green accent line, readable on indigo
+  heroSoft: string; // translucent fill and dividers
+  splash: string; // splash screen fill
+  splashTile: string; // logo tile on the splash
+  splashInk: string; // logo strokes on the splash
 
   // Feedback
   warning: string; // e.g. auto-time banner
@@ -67,6 +70,7 @@ export const LightColors: ColorTokens = {
   background: '#FAFAF7', // Kolam
   surface: '#FFFFFF',
   surfaceRaised: '#FFFFFF',
+  surfaceMuted: '#F3F3EF',
   border: '#E4E3DC',
 
   text: '#1C1D24', // Mai
@@ -90,9 +94,11 @@ export const LightColors: ColorTokens = {
   hero: '#24306B', // Iravu
   onHero: '#FFFFFF',
   onHeroMuted: '#C9D0F0',
-  heroAccent: '#F2B705', // Manjal
-  heroHoliday: '#FF9B8C',
-  heroSoft: 'rgba(255, 255, 255, 0.14)',
+  heroAccent: '#7FCB9B',
+  heroSoft: 'rgba(255, 255, 255, 0.18)',
+  splash: '#24306B',
+  splashTile: '#FAFAF7',
+  splashInk: '#24306B',
 
   warning: '#7A5200',
   warningSoft: '#FDF3D4',
@@ -106,6 +112,7 @@ export const DarkColors: ColorTokens = {
   background: '#0F1430', // night sky, indigo-tinted (not neutral black)
   surface: '#18204A',
   surfaceRaised: '#202A5A',
+  surfaceMuted: '#20264A',
   border: '#2C3768',
 
   text: '#EEF0F7',
@@ -129,9 +136,11 @@ export const DarkColors: ColorTokens = {
   hero: '#202A5A',
   onHero: '#EEF0F7',
   onHeroMuted: '#A3A9C2',
-  heroAccent: '#F2B705',
-  heroHoliday: '#FF8A7A',
-  heroSoft: 'rgba(255, 255, 255, 0.1)',
+  heroAccent: '#7FCB9B',
+  heroSoft: 'rgba(255, 255, 255, 0.14)',
+  splash: '#0F1430',
+  splashTile: '#202956',
+  splashInk: '#FAFAF7',
 
   warning: '#F2B705',
   warningSoft: '#3A3320',

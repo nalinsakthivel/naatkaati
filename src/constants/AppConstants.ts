@@ -2,6 +2,8 @@ import type { GeoLocation } from '@/calendar/astronomy';
 
 export const AppConstants = {
   defaultLanguage: 'ta',
+  /** How long the brand splash shows before onboarding or Today. */
+  splashMs: 1800,
   fallbackLanguage: 'en',
   /** Local hour at which day-level reminders fire. */
   reminderHour: 7,

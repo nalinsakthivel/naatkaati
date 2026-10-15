@@ -1,5 +1,10 @@
 import type { AppliesTo } from '@/calendar/holidays';
 import type { NewYearLabel } from '@/calendar/tamilNewYear';
+import {
+  DEFAULT_WIDGET_VARIANT,
+  toggleWidgetFavorite,
+  type WidgetVariant,
+} from '@/calendar/widgetVariants';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export type Appearance = 'system' | 'light' | 'dark';
@@ -15,6 +20,8 @@ export interface SettingsState {
   newYearLabel: NewYearLabel;
   onboardingDone: boolean;
   dataSaver: boolean;
+  widgetVariant: WidgetVariant;
+  widgetFavorites: WidgetVariant[];
 }
 
 export const initialSettingsState: SettingsState = {
@@ -25,6 +32,8 @@ export const initialSettingsState: SettingsState = {
   newYearLabel: 'thai',
   onboardingDone: false,
   dataSaver: false,
+  widgetVariant: DEFAULT_WIDGET_VARIANT,
+  widgetFavorites: [DEFAULT_WIDGET_VARIANT],
 };
 
 export function isAppearance(value: string | undefined): value is Appearance {
@@ -71,6 +80,12 @@ const settingsSlice = createSlice({
     setOnboardingDone(state, action: PayloadAction<boolean>) {
       state.onboardingDone = action.payload;
     },
+    setWidgetVariant(state, action: PayloadAction<WidgetVariant>) {
+      state.widgetVariant = action.payload;
+    },
+    toggleFavoriteWidget(state, action: PayloadAction<WidgetVariant>) {
+      state.widgetFavorites = toggleWidgetFavorite(state.widgetFavorites, action.payload);
+    },
     setNewYearLabel(state, action: PayloadAction<NewYearLabel>) {
       state.newYearLabel = action.payload;
     },
@@ -85,5 +100,7 @@ export const {
   setNewYearLabel,
   setOnboardingDone,
   setDataSaver,
+  setWidgetVariant,
+  toggleFavoriteWidget,
 } = settingsSlice.actions;
 export const settingsReducer = settingsSlice.reducer;

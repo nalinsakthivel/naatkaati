@@ -5,6 +5,8 @@ import { BottomSheet, Column, Host, ListItem, Text } from '@expo/ui';
 export interface ChoiceOption<T extends string> {
   label: string;
   value: T;
+  /** Optional second line, e.g. the language's name in the other language */
+  detail?: string;
 }
 
 interface ChoiceSheetProps<T extends string> {

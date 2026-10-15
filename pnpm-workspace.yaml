@@ -13,3 +13,5 @@ minimumReleaseAgeExclude:
   - expo-linking@57.0.13
   - expo-notifications@57.0.23
   - expo-router@57.0.27
+patchedDependencies:
+  react-native-android-widget: patches/react-native-android-widget.patch

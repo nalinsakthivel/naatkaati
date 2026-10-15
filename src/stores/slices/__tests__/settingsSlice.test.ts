@@ -10,6 +10,8 @@ import {
   setTamilNumerals,
   setAppearance,
   settingsReducer,
+  setWidgetVariant,
+  toggleFavoriteWidget,
 } from '../settingsSlice';
 
 describe('settingsSlice', () => {
@@ -84,5 +86,22 @@ describe('settingsSlice onboarding', () => {
     expect(settingsReducer(initialSettingsState, setOnboardingDone(true)).onboardingDone).toBe(
       true,
     );
+  });
+});
+
+describe('settingsSlice widgets', () => {
+  it('defaults to the classic widget with classic as the only favourite', () => {
+    expect(initialSettingsState.widgetVariant).toBe('classic');
+    expect(initialSettingsState.widgetFavorites).toEqual(['classic']);
+  });
+
+  it('selects a widget and toggles favourites', () => {
+    const selected = settingsReducer(initialSettingsState, setWidgetVariant('kural'));
+    expect(selected.widgetVariant).toBe('kural');
+    const favored = settingsReducer(selected, toggleFavoriteWidget('kural'));
+    expect(favored.widgetFavorites).toEqual(['classic', 'kural']);
+    expect(settingsReducer(favored, toggleFavoriteWidget('classic')).widgetFavorites).toEqual([
+      'kural',
+    ]);
   });
 });

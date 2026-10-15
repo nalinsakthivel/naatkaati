@@ -8,10 +8,13 @@ export async function refreshWidgets(): Promise<void> {
   try {
     await requestWidgetUpdate({
       widgetName: WIDGET_NAME,
-      renderWidget: () => {
+      renderWidget: (widgetInfo) => {
         const snapshot = loadWidgetSnapshot();
         return snapshot ? (
-          <NaatkaatiWidget model={snapshot.model} yearLabel={snapshot.yearLabel} />
+          <NaatkaatiWidget
+            {...snapshot}
+            size={{ width: widgetInfo.width, height: widgetInfo.height }}
+          />
         ) : (
           <></>
         );

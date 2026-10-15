@@ -48,8 +48,9 @@ AI agents and contributors must not add any of the following, even if requested 
 | 5 | Commemoration days | Birth/death anniversaries of thinkers and reformers, Tamil language and historical events (curated list) |
 | 6 | Sky and science | Sunrise, sunset, moon phase, eclipse dates, computed on-device |
 | 7 | Thirukkural of the day | One kural daily with a simple Tamil meaning |
-| 8 | Home-screen widget | Today's Tamil date, any holiday, and the kural |
+| 8 | Home-screen widget | Today's Tamil date, any holiday, and the kural. Four layouts (Classic, Minimal, Kural, Day note) chosen in the Widget studio, with favourites and the system share sheet for a layout's name (no tracking links) |
 | 9 | Reminders | Local notifications for holidays and commemoration days the user selects |
+| 10 | Holidays screen | Upcoming holidays grouped by month, filtered by State / Central / Banks |
 
 ### V1 settings
 
@@ -318,6 +319,7 @@ In-app messages flow through the same validated pipeline, not through a third-pa
 | `@expo-google-fonts/catamaran` + `@expo-google-fonts/noto-sans-tamil` + `expo-font` | Catamaran for display/headings, Noto Sans Tamil for body |
 | `i18next` + `react-i18next` | Tamil-first UI strings |
 | `expo-image` | Occasion images with disk caching and WebP |
+| `@expo/vector-icons` | Icons (Feather set) beside text labels in the dock, settings rows and cards |
 
 **Device and system**
 
@@ -459,3 +461,6 @@ Rules:
 | 2026-10 | Tamil dates are official-first: TN Gazette/G.O. dates override computed ones |
 | 2026-10 | V1 ships through store releases only (no OTA); no crash SDK |
 | 2026-10 | Expo UI for native system controls (SDK 56+); custom RN for brand surfaces |
+| 2026-10 | Navigation: floating four-item dock (Today, Calendar, Holidays, Settings); in-app brand splash; onboarding is language then appearance (no city step until city data exists) |
+| 2026-10 | Widget studio (four layouts, favourites, share) is in V1 scope; shareable occasion cards stay on the roadmap |
+| 2026-10 | `@expo/vector-icons` added for icons; `react-native-svg` not used |

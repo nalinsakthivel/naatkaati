@@ -31,8 +31,8 @@ export function useOnboardingScreen() {
   };
 
   const languageOptions: ChoiceOption<Language>[] = [
-    { value: 'ta', label: 'தமிழ்' },
-    { value: 'en', label: 'English' },
+    { value: 'ta', label: 'தமிழ்', detail: 'Tamil' },
+    { value: 'en', label: 'English', detail: 'ஆங்கிலம்' },
   ];
   const appearanceOptions: ChoiceOption<Appearance>[] = [
     { value: 'system', label: t('settings.appearanceSystem') },
@@ -46,6 +46,11 @@ export function useOnboardingScreen() {
     bottomInset: insets.bottom,
     step,
     stepLabel: t('onboarding.step', { current: step + 1, total: STEP_COUNT }),
+    stepNumber: step,
+    stepCount: STEP_COUNT,
+    kicker: t('splash.name'),
+    eyebrow: step === 0 ? t('onboarding.languageEyebrow') : t('onboarding.appearanceEyebrow'),
+    privacy: t('onboarding.privacy'),
     title: step === 0 ? t('onboarding.languageTitle') : t('onboarding.appearanceTitle'),
     hint: step === 0 ? t('onboarding.languageHint') : t('onboarding.appearanceHint'),
     languageOptions,

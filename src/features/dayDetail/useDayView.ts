@@ -1,6 +1,6 @@
 import { getEclipsesInYear, getMoonInfo, getSunTimes } from '@/calendar/astronomy';
 import { commemorationsOn } from '@/calendar/commemorations';
-import { filterHolidaysByCategory, holidaysOn } from '@/calendar/holidays';
+import { filterHolidaysByCategory, holidaysOn, mergeSameDayHolidays } from '@/calendar/holidays';
 import { kuralOfTheDay } from '@/calendar/kural';
 import { toTamilNumerals } from '@/calendar/numerals';
 import { commemorationReminderKey, holidayReminderKey } from '@/calendar/reminders';
@@ -73,30 +73,31 @@ export function useDayView(isoDate: string, moonAt?: Date) {
 
   const holidays = [
     ...newYear,
-    ...filterHolidaysByCategory(holidaysOn(data.holidays, isoDate), holidayCategories).map(
-      (holiday) => ({
-        id: holiday.id,
-        name: isTamil ? holiday.name_ta : holiday.name_en,
-        categoryLabel: t(`today.holidayCategory.${holiday.category}`),
-        appliesTo: holiday.applies_to.map((a) => t(`day.appliesTo.${a}`)).join(', '),
-        reminderOn: reminders.isOn(holidayReminderKey(holiday.id)),
-        onToggleReminder: (enabled: boolean) =>
-          reminders.toggle(
-            {
-              spec: {
-                key: holidayReminderKey(holiday.id),
-                kind: 'once',
-                year: date.getFullYear(),
-                month: date.getMonth() + 1,
-                day: date.getDate(),
-              },
-              title: isTamil ? holiday.name_ta : holiday.name_en,
-              body: t(`today.holidayCategory.${holiday.category}`),
+    ...filterHolidaysByCategory(
+      mergeSameDayHolidays(holidaysOn(data.holidays, isoDate)),
+      holidayCategories,
+    ).map((holiday) => ({
+      id: holiday.id,
+      name: isTamil ? holiday.name_ta : holiday.name_en,
+      categoryLabel: t(`today.holidayCategory.${holiday.category}`),
+      appliesTo: holiday.applies_to.map((a) => t(`day.appliesTo.${a}`)).join(', '),
+      reminderOn: reminders.isOn(holidayReminderKey(holiday.id)),
+      onToggleReminder: (enabled: boolean) =>
+        reminders.toggle(
+          {
+            spec: {
+              key: holidayReminderKey(holiday.id),
+              kind: 'once',
+              year: date.getFullYear(),
+              month: date.getMonth() + 1,
+              day: date.getDate(),
             },
-            enabled,
-          ),
-      }),
-    ),
+            title: isTamil ? holiday.name_ta : holiday.name_en,
+            body: t(`today.holidayCategory.${holiday.category}`),
+          },
+          enabled,
+        ),
+    })),
   ].filter((holiday, index, all) => all.findIndex((h) => h.name === holiday.name) === index);
 
   const commemorations = commemorationsOn(data.commemorations, isoDate).map((item) => ({
@@ -187,6 +188,14 @@ export function useDayView(isoDate: string, moonAt?: Date) {
           weekdayLabel: format(date, 'EEEE', { locale }),
           gregorianLabel: format(date, 'd MMMM yyyy', { locale }),
           isRedLetter: getDay(date) === 0 || holidays.length > 0,
+          chips: [
+            ...holidays.map((h) => ({ id: h.id, label: h.name, tone: 'holiday' as const })),
+            ...commemorations.map((c) => ({
+              id: c.id,
+              label: c.name,
+              tone: 'commemoration' as const,
+            })),
+          ],
         }
       : null,
     outOfRangeLabel: t('day.outOfRange'),

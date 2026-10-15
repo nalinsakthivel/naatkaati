@@ -1,4 +1,4 @@
-import { filterHolidaysByCategory, holidaysOn } from '../holidays';
+import { filterHolidaysByCategory, holidaysOn, mergeSameDayHolidays } from '../holidays';
 
 const list = [
   { date: '2026-01-15', id: 'a' },
@@ -29,5 +29,40 @@ describe('filterHolidaysByCategory', () => {
 
   it('returns nothing when no category is enabled', () => {
     expect(filterHolidaysByCategory(items, [])).toEqual([]);
+  });
+});
+
+describe('mergeSameDayHolidays', () => {
+  const central = {
+    id: 'cg-diwali',
+    date: '2026-11-08',
+    name_ta: 'தீபாவளி',
+    applies_to: ['central_govt'] as const,
+  };
+  const state = {
+    id: 'tn-deepavali',
+    date: '2026-11-08',
+    name_ta: 'தீபாவளி',
+    applies_to: ['state_govt', 'banks'] as const,
+  };
+
+  it('merges the same holiday listed by the central and state lists into one record', () => {
+    const merged = mergeSameDayHolidays([central, state]);
+    expect(merged).toHaveLength(1);
+    expect(merged[0].id).toBe('cg-diwali');
+    expect(merged[0].applies_to).toEqual(['state_govt', 'central_govt', 'banks']);
+  });
+
+  it('keeps different holidays on the same date apart', () => {
+    const other = { ...state, id: 'tn-other', name_ta: 'ஆயுத பூஜை' };
+    expect(mergeSameDayHolidays([central, other]).map((h) => h.id)).toEqual([
+      'cg-diwali',
+      'tn-other',
+    ]);
+  });
+
+  it('keeps the same name on different dates apart', () => {
+    const later = { ...state, id: 'later', date: '2027-10-29' };
+    expect(mergeSameDayHolidays([central, later])).toHaveLength(2);
   });
 });

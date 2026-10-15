@@ -16,6 +16,7 @@ import {
 } from '@/stores/slices/settingsSlice';
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -31,6 +32,7 @@ export function useSettingsScreen() {
   const { t } = useTranslation();
   const colors = useAppColors();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const dispatch = useAppDispatch();
   const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, dataSaver } =
     useAppSelector((state) => state.settings);
@@ -61,6 +63,8 @@ export function useSettingsScreen() {
     options.find((option) => option.value === value)?.label ?? '';
 
   return {
+    topInset: insets.top,
+    kicker: t('splash.name'),
     title: t('screens.settings'),
     versionLabel: t('about.version', { version: Constants.expoConfig?.version ?? '' }),
     appearanceValueLabel: labelOf(appearanceOptions, appearance),
@@ -82,6 +86,10 @@ export function useSettingsScreen() {
       updateNow: t('data.updateNow'),
       aboutSection: t('settings.aboutSection'),
       about: t('settings.about'),
+      widgets: t('settings.widgets'),
+      widgetsHint: t('settings.widgetsHint'),
+      tamilNumeralsHint: t('settings.tamilNumeralsHint'),
+      displayGroup: t('settings.groupGeneral'),
     },
     appearance,
     language,
@@ -103,6 +111,7 @@ export function useSettingsScreen() {
     onNewYearChange: (value: NewYearLabel) => dispatch(setNewYearLabel(value)),
     onCategoryChange: (category: AppliesTo, enabled: boolean) =>
       dispatch(setHolidayCategory({ category, enabled })),
+    onOpenWidgets: () => router.push({ pathname: RouteEnum.Widgets }),
     onOpenAbout: () => router.push({ pathname: RouteEnum.About }),
   };
 }

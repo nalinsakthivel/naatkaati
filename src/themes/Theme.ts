@@ -28,24 +28,24 @@ export const Typography = {
   /** The Tamil date numeral on the Today screen — the hero of the app */
   heroDate: {
     fontFamily: FontFamily.displayBold,
-    fontSize: 120,
-    lineHeight: 128,
+    fontSize: 104,
+    lineHeight: 112,
     letterSpacing: -2,
   },
   /** Tamil month + year under the hero date, e.g. "ஐப்பசி 28, திருவள்ளுவர் ஆண்டு 2057" */
-  heroCaption: { fontFamily: FontFamily.displaySemiBold, fontSize: 20, lineHeight: 30 },
-  title: { fontFamily: FontFamily.displayBold, fontSize: 24, lineHeight: 36 },
-  heading: { fontFamily: FontFamily.displaySemiBold, fontSize: 18, lineHeight: 28 },
+  heroCaption: { fontFamily: FontFamily.displaySemiBold, fontSize: 17, lineHeight: 26 },
+  title: { fontFamily: FontFamily.displayBold, fontSize: 22, lineHeight: 33 },
+  heading: { fontFamily: FontFamily.displaySemiBold, fontSize: 15, lineHeight: 23 },
   /** Thirukkural couplet text */
-  kural: { fontFamily: FontFamily.bodySemiBold, fontSize: 18, lineHeight: 30 },
-  body: { fontFamily: FontFamily.bodyRegular, fontSize: 16, lineHeight: 26 },
-  bodyStrong: { fontFamily: FontFamily.bodyMedium, fontSize: 16, lineHeight: 26 },
-  caption: { fontFamily: FontFamily.bodyRegular, fontSize: 13, lineHeight: 20 },
+  kural: { fontFamily: FontFamily.bodySemiBold, fontSize: 15, lineHeight: 23 },
+  body: { fontFamily: FontFamily.bodyRegular, fontSize: 13, lineHeight: 20 },
+  bodyStrong: { fontFamily: FontFamily.bodyMedium, fontSize: 13, lineHeight: 20 },
+  caption: { fontFamily: FontFamily.bodyRegular, fontSize: 11, lineHeight: 17 },
   /** Month grid: English (Gregorian) day number */
   gridDay: { fontFamily: FontFamily.displaySemiBold, fontSize: 18, lineHeight: 24 },
   /** Month grid: small Tamil date under the English number */
   gridTamilDay: { fontFamily: FontFamily.bodyRegular, fontSize: 11, lineHeight: 16 },
-  button: { fontFamily: FontFamily.bodySemiBold, fontSize: 16, lineHeight: 24 },
+  button: { fontFamily: FontFamily.bodySemiBold, fontSize: 13, lineHeight: 20 },
 } satisfies Record<string, TypeToken>;
 
 /** 4-point spacing scale */
@@ -81,6 +81,9 @@ export const Layout = {
   screenPaddingH: Spacing.lg,
   minTouchTarget: 48, // Android accessibility minimum
   monthGridColumns: 7,
+  dockHeight: 68,
+  dockMargin: Spacing.lg,
+  dockClearance: Spacing.xl, // breathing room above the dock, which sits in the layout flow
   maxContentWidth: 640, // tablets / foldables
 } as const;
 

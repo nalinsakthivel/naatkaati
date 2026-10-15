@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { isWidgetVariant, parseWidgetFavorites } from '@/calendar/widgetVariants';
 import { LocalStore } from '@/storage/LocalStore';
 import { StorageKeys } from '@/storage/StorageKeys';
 import { dataApi } from '@/services/dataApi';
@@ -19,6 +20,7 @@ function loadSettings(): SettingsState {
   const language = LocalStore.getString(StorageKeys.language);
   const tamilNumerals = LocalStore.getString(StorageKeys.tamilNumerals);
   const newYearLabel = LocalStore.getString(StorageKeys.newYearLabel);
+  const widgetVariant = LocalStore.getString(StorageKeys.widgetVariant);
   return {
     appearance: isAppearance(appearance) ? appearance : initialSettingsState.appearance,
     language: isLanguage(language) ? language : initialSettingsState.language,
@@ -28,6 +30,10 @@ function loadSettings(): SettingsState {
     newYearLabel: isNewYearLabel(newYearLabel) ? newYearLabel : initialSettingsState.newYearLabel,
     onboardingDone: LocalStore.getString(StorageKeys.onboardingDone) === 'true',
     dataSaver: LocalStore.getString(StorageKeys.dataSaver) === 'true',
+    widgetVariant: isWidgetVariant(widgetVariant)
+      ? widgetVariant
+      : initialSettingsState.widgetVariant,
+    widgetFavorites: parseWidgetFavorites(LocalStore.getString(StorageKeys.widgetFavorites)),
   };
 }
 
@@ -54,6 +60,8 @@ store.subscribe(() => {
     newYearLabel,
     onboardingDone,
     dataSaver,
+    widgetVariant,
+    widgetFavorites,
   } = store.getState().settings;
   LocalStore.setString(StorageKeys.appearance, appearance);
   LocalStore.setString(StorageKeys.language, language);
@@ -62,6 +70,8 @@ store.subscribe(() => {
   LocalStore.setString(StorageKeys.newYearLabel, newYearLabel);
   LocalStore.setString(StorageKeys.onboardingDone, String(onboardingDone));
   LocalStore.setString(StorageKeys.dataSaver, String(dataSaver));
+  LocalStore.setString(StorageKeys.widgetVariant, widgetVariant);
+  LocalStore.setString(StorageKeys.widgetFavorites, widgetFavorites.join(','));
   LocalStore.setString(StorageKeys.reminders, store.getState().reminders.keys.join(','));
 });
 
