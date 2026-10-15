@@ -1,4 +1,5 @@
 import { addDays, format, getDay, getDaysInMonth } from 'date-fns';
+import { commemorationsOn, type CommemorationLike } from './commemorations';
 import { getTamilDate } from './tamilDate';
 import type { TamilMonthRecord } from '@/schemas/tamilMonths';
 
@@ -9,7 +10,16 @@ export interface HolidayLike {
   name_en: string;
 }
 
-export interface GridCell<H extends HolidayLike> {
+export interface CommemorationEntry extends CommemorationLike {
+  id: string;
+  name_ta: string;
+  name_en: string;
+}
+
+export interface GridCell<
+  H extends HolidayLike,
+  C extends CommemorationEntry = CommemorationEntry,
+> {
   iso: string;
   /** Gregorian day of month */
   day: number;
@@ -20,6 +30,7 @@ export interface GridCell<H extends HolidayLike> {
   /** First day of a Tamil month */
   isTamilMonthStart: boolean;
   holidays: H[];
+  commemorations: C[];
 }
 
 const toIso = (date: Date) => format(date, 'yyyy-MM-dd');
@@ -28,20 +39,21 @@ const toIso = (date: Date) => format(date, 'yyyy-MM-dd');
  * Weeks (Sunday first) covering a Gregorian month, including the leading and trailing days
  * of neighbouring months. `month` is 1-12. Only as many weeks as the month needs.
  */
-export function buildMonthGrid<H extends HolidayLike>(
+export function buildMonthGrid<H extends HolidayLike, C extends CommemorationEntry>(
   year: number,
   month: number,
   months: readonly TamilMonthRecord[],
   holidays: readonly H[],
-): GridCell<H>[][] {
+  commemorations: readonly C[],
+): GridCell<H, C>[][] {
   const first = new Date(year, month - 1, 1);
   const leading = getDay(first);
   const weekCount = Math.ceil((leading + getDaysInMonth(first)) / 7);
   const gridStart = addDays(first, -leading);
 
-  const weeks: GridCell<H>[][] = [];
+  const weeks: GridCell<H, C>[][] = [];
   for (let w = 0; w < weekCount; w++) {
-    const week: GridCell<H>[] = [];
+    const week: GridCell<H, C>[] = [];
     for (let d = 0; d < 7; d++) {
       const date = addDays(gridStart, w * 7 + d);
       const iso = toIso(date);
@@ -56,6 +68,7 @@ export function buildMonthGrid<H extends HolidayLike>(
           : null,
         isTamilMonthStart: tamil?.day === 1,
         holidays: holidays.filter((holiday) => holiday.date === iso),
+        commemorations: commemorationsOn(commemorations, iso),
       });
     }
     weeks.push(week);

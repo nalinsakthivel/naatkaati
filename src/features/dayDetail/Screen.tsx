@@ -1,17 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Spacing, Typography } from '@/themes/Theme';
+import { ScrollView, StyleSheet, Text } from 'react-native';
+import { DayBody } from '@/components/DayBody';
+import { Layout, Spacing, Typography } from '@/themes/Theme';
 import { useDayDetailScreen } from './useScreen';
 
 export function DayDetailScreen() {
-  const { date, title, colors } = useDayDetailScreen();
+  const { invalidDateLabel, ...day } = useDayDetailScreen();
   return (
-    <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <Text style={[Typography.title, { color: colors.text }]}>{title}</Text>
-      <Text style={[Typography.body, { color: colors.textMuted }]}>{date}</Text>
-    </View>
+    <ScrollView
+      style={{ backgroundColor: day.colors.background }}
+      contentContainerStyle={styles.content}
+    >
+      {invalidDateLabel ? (
+        <Text style={[Typography.body, { color: day.colors.holiday }]}>{invalidDateLabel}</Text>
+      ) : null}
+      <DayBody {...day} />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: Spacing.lg },
+  content: {
+    padding: Layout.screenPaddingH,
+    paddingBottom: Spacing.xxxl,
+    gap: Spacing.lg,
+    maxWidth: Layout.maxContentWidth,
+    width: '100%',
+    alignSelf: 'center',
+  },
 });

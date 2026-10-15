@@ -46,6 +46,22 @@ export function CalendarScreen() {
           ))
         )}
       </View>
+      {s.monthCommemorations.length > 0 ? (
+        <View style={styles.holidays}>
+          <Text style={[Typography.heading, { color: s.colors.text }]}>
+            {s.commemorationsTitle}
+          </Text>
+          {s.monthCommemorations.map((item) => (
+            <HolidayTicket
+              key={item.id}
+              dateLabel={item.dateLabel}
+              name={item.name}
+              tone="commemoration"
+              colors={s.colors}
+            />
+          ))}
+        </View>
+      ) : null}
     </ScrollView>
   );
 }

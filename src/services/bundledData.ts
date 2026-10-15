@@ -1,4 +1,4 @@
-import { commemorationsFileSchema } from '@/schemas/commemorations';
+import { commemorationsFileSchema, type Commemoration } from '@/schemas/commemorations';
 import { holidaysFileSchema, type Holiday } from '@/schemas/holidays';
 import { tamilMonthsFileSchema, type TamilMonthRecord } from '@/schemas/tamilMonths';
 import { thirukkuralFileSchema, type Adhikaram, type Kural } from '@/schemas/thirukkural';
@@ -12,7 +12,7 @@ export interface BundledData {
   holidays: Holiday[];
   kurals: Kural[];
   adhikarams: Adhikaram[];
-  commemorationCount: number;
+  commemorations: Commemoration[];
 }
 
 let cache: BundledData | null = null;
@@ -26,7 +26,7 @@ export function getBundledData(): BundledData {
     holidays: holidaysFileSchema.parse(holidays2026Raw).holidays,
     kurals: thirukkural.kurals,
     adhikarams: thirukkural.adhikarams,
-    commemorationCount: commemorationsFileSchema.parse(commemorationsRaw).commemorations.length,
+    commemorations: commemorationsFileSchema.parse(commemorationsRaw).commemorations,
   };
   return cache;
 }

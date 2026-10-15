@@ -37,7 +37,7 @@ export function useCalendarScreen() {
     tamilNumerals && isTamil ? toTamilNumerals(value) : String(value);
 
   const weeks = useMemo(
-    () => buildMonthGrid(year, month, data.months, data.holidays),
+    () => buildMonthGrid(year, month, data.months, data.holidays, data.commemorations),
     [year, month, data],
   );
 
@@ -58,6 +58,9 @@ export function useCalendarScreen() {
           : '',
         cell.iso === todayIso ? t('calendar.today') : '',
         ...holidayNames.map((name) => `${t('calendar.holiday')}: ${name}`),
+        ...cell.commemorations.map(
+          (c) => `${t('calendar.commemoration')}: ${isTamil ? c.name_ta : c.name_en}`,
+        ),
       ];
       return {
         key: cell.iso,
@@ -68,6 +71,7 @@ export function useCalendarScreen() {
         isSunday: cell.weekday === 0,
         isTamilMonthStart: cell.isTamilMonthStart,
         isHoliday: cell.holidays.length > 0,
+        hasCommemoration: cell.commemorations.length > 0,
         accessibilityLabel: spoken.filter(Boolean).join(', '),
         onPress: () =>
           router.push({ pathname: RouteEnum.DayDetailPattern, params: { date: cell.iso } }),
@@ -94,6 +98,17 @@ export function useCalendarScreen() {
     .filter(
       (item, index, all) =>
         all.findIndex((o) => o.name === item.name && o.dateLabel === item.dateLabel) === index,
+    );
+
+  const monthCommemorations = weeks
+    .flat()
+    .filter((cell) => cell.inMonth)
+    .flatMap((cell) =>
+      cell.commemorations.map((item) => ({
+        id: `${item.id}-${cell.iso}`,
+        dateLabel: format(parseISO(cell.iso), 'd MMM', { locale }),
+        name: isTamil ? item.name_ta : item.name_en,
+      })),
     );
 
   const shiftMonth = (delta: number) =>
@@ -124,5 +139,7 @@ export function useCalendarScreen() {
     holidaysTitle: t('calendar.holidaysTitle'),
     noHolidaysLabel: t('calendar.noHolidays'),
     monthHolidays,
+    commemorationsTitle: t('calendar.commemorationsTitle'),
+    monthCommemorations,
   };
 }

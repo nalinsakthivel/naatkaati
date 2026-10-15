@@ -58,6 +58,33 @@
     "noHolidays": "இந்த மாதம் விடுமுறைகள் இல்லை",
     "today": "இன்று",
     "holiday": "விடுமுறை",
-    "tamilMonths": "{{first}} – {{second}}"
+    "tamilMonths": "{{first}} – {{second}}",
+    "commemorationsTitle": "இந்த மாதத்தின் நினைவு நாட்கள்",
+    "commemoration": "நினைவு நாள்"
+  },
+  "day": {
+    "onThisDay": "இந்த நாளில்",
+    "appliesTo": {
+      "state_govt": "தமிழ்நாடு அரசு",
+      "central_govt": "மத்திய அரசு",
+      "banks": "வங்கிகள்"
+    },
+    "commemorationKind": {
+      "birth": "பிறந்தநாள்",
+      "death": "நினைவு நாள்",
+      "event": "வரலாற்று நிகழ்வு"
+    },
+    "eclipse": {
+      "label": "{{kind}} {{type}}",
+      "solar": "சூரிய கிரகணம்",
+      "lunar": "சந்திர கிரகணம்",
+      "total": "முழு",
+      "partial": "பகுதி",
+      "annular": "வளைய",
+      "penumbral": "நிழல்",
+      "note": "பூமியில் ஏதேனும் ஓரிடத்தில் தெரியும்"
+    },
+    "invalidDate": "தேதி சரியில்லை",
+    "outOfRange": "இந்தத் தேதிக்கு தமிழ் நாட்காட்டி தரவு இல்லை"
   }
 }

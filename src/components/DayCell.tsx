@@ -11,6 +11,7 @@ export interface DayCellProps {
   isSunday: boolean;
   isTamilMonthStart: boolean;
   isHoliday: boolean;
+  hasCommemoration: boolean;
   accessibilityLabel: string;
   onPress: () => void;
   colors: ColorTokens;
@@ -24,6 +25,7 @@ export function DayCell({
   isSunday,
   isTamilMonthStart,
   isHoliday,
+  hasCommemoration,
   accessibilityLabel,
   onPress,
   colors,
@@ -67,14 +69,22 @@ export function DayCell({
       >
         {tamilLabel}
       </Text>
-      {/* Shape marker so holidays are never shown by colour alone */}
-      <View
-        style={[
-          styles.marker,
-          isHoliday &&
-            inMonth && { backgroundColor: isToday ? colors.textOnToday : colors.holiday },
-        ]}
-      />
+      {/* Shape markers (dot = holiday, square = commemoration) so meaning never relies on colour alone */}
+      <View style={styles.markers}>
+        {isHoliday && inMonth ? (
+          <View
+            style={[styles.dot, { backgroundColor: isToday ? colors.textOnToday : colors.holiday }]}
+          />
+        ) : null}
+        {hasCommemoration && inMonth ? (
+          <View
+            style={[
+              styles.square,
+              { backgroundColor: isToday ? colors.textOnToday : colors.commemoration },
+            ]}
+          />
+        ) : null}
+      </View>
     </Pressable>
   );
 }
@@ -90,5 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: Radius.cell,
     paddingHorizontal: Spacing.xxs,
   },
-  marker: { width: MARKER_SIZE, height: MARKER_SIZE, borderRadius: MARKER_SIZE / 2 },
+  markers: { flexDirection: 'row', gap: Spacing.xxs, height: MARKER_SIZE },
+  dot: { width: MARKER_SIZE, height: MARKER_SIZE, borderRadius: MARKER_SIZE / 2 },
+  square: { width: MARKER_SIZE, height: MARKER_SIZE },
 });

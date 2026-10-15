@@ -58,6 +58,33 @@
     "noHolidays": "No holidays this month",
     "today": "Today",
     "holiday": "Holiday",
-    "tamilMonths": "{{first}} – {{second}}"
+    "tamilMonths": "{{first}} – {{second}}",
+    "commemorationsTitle": "Commemorations this month",
+    "commemoration": "Commemoration"
+  },
+  "day": {
+    "onThisDay": "On this day",
+    "appliesTo": {
+      "state_govt": "Tamil Nadu government",
+      "central_govt": "Central government",
+      "banks": "Banks"
+    },
+    "commemorationKind": {
+      "birth": "Birth anniversary",
+      "death": "Death anniversary",
+      "event": "Historical event"
+    },
+    "eclipse": {
+      "label": "{{kind}} {{type}}",
+      "solar": "solar eclipse",
+      "lunar": "lunar eclipse",
+      "total": "Total",
+      "partial": "Partial",
+      "annular": "Annular",
+      "penumbral": "Penumbral",
+      "note": "Visible somewhere on Earth"
+    },
+    "invalidDate": "This date is not valid",
+    "outOfRange": "No Tamil calendar data for this date"
   }
 }
