@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getTodayIso } from '@/calendar/today';
 import { AppConstants } from '@/constants/AppConstants';
 import { useDayView } from '@/features/dayDetail/useDayView';
+import { useTimeBanner } from './useTimeBanner';
 
 export function useTodayScreen() {
   const { t } = useTranslation();
@@ -21,6 +22,7 @@ export function useTodayScreen() {
 
   const todayIso = getTodayIso(now, AppConstants.defaultLocation.timeZone);
   const view = useDayView(todayIso, now);
+  const timeBanner = useTimeBanner();
 
-  return { ...view, topInset: insets.top, locationLabel: t('today.location') };
+  return { ...view, timeBanner, topInset: insets.top, locationLabel: t('today.location') };
 }

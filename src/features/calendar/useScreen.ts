@@ -14,6 +14,7 @@ import type { MonthGridCell } from '@/components/MonthGrid';
 import { AppConstants } from '@/constants/AppConstants';
 import { RouteEnum } from '@/enums/RouteEnum';
 import { getBundledData } from '@/services/bundledData';
+import { useTimeBanner } from '@/features/today/useTimeBanner';
 import { useAppColors, useAppSelector } from '@/stores/hooks';
 
 const FIRST_SUNDAY = '2023-01-01';
@@ -25,6 +26,7 @@ export function useCalendarScreen() {
   const colors = useAppColors();
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const timeBanner = useTimeBanner();
   const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
     (state) => state.settings,
   );
@@ -129,6 +131,7 @@ export function useCalendarScreen() {
 
   return {
     colors,
+    timeBanner,
     topInset: insets.top,
     title: format(visible, 'MMMM yyyy', { locale }),
     subtitle:

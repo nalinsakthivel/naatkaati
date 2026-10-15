@@ -116,5 +116,10 @@
     "denied": "Notifications are turned off. Allow them in system settings to get reminders.",
     "openSettings": "Open settings",
     "past": "This date has passed"
+  },
+  "timeBanner": {
+    "autoTimeOff": "Automatic date and time is turned off. The dates shown may be wrong.",
+    "timezoneDiffers": "Your device is in a different timezone. The date shown is for {{place}}.",
+    "openSettings": "Open date settings"
   }
 }

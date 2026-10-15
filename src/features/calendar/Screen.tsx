@@ -1,5 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { HolidayTicket } from '@/components/HolidayTicket';
+import { TimeBanner } from '@/components/TimeBanner';
 import { MonthGrid } from '@/components/MonthGrid';
 import { MonthHeader } from '@/components/MonthHeader';
 import { SheetBand } from '@/components/SheetBand';
@@ -13,6 +14,7 @@ export function CalendarScreen() {
       style={{ backgroundColor: s.colors.background }}
       contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
     >
+      {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
       <View
         style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
       >
