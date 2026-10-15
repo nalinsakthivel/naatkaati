@@ -46,6 +46,7 @@ const config: ExpoConfig = {
       },
     ],
     'expo-localization',
+    'expo-notifications',
     'expo-background-task',
   ],
   experiments: {

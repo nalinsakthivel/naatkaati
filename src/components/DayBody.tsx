@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CommemorationCard } from '@/components/CommemorationCard';
 import { HeroDate } from '@/components/HeroDate';
 import { HolidayChip } from '@/components/HolidayChip';
 import { KuralCard } from '@/components/KuralCard';
+import { ReminderSwitch } from '@/components/native/ReminderSwitch';
 import { SkyRow, type MoonItem, type SkyItem } from '@/components/SkyRow';
 import type { ColorTokens } from '@/themes/Colors';
-import { Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 
 type HeroProps = Parameters<typeof HeroDate>[0];
 type KuralProps = Parameters<typeof KuralCard>[0];
@@ -17,19 +18,34 @@ interface DayBodyProps {
   sunrise: SkyItem;
   sunset: SkyItem;
   moon: MoonItem;
-  holidays: readonly { id: string; name: string; categoryLabel: string; appliesTo: string }[];
+  holidays: readonly {
+    id: string;
+    name: string;
+    categoryLabel: string;
+    appliesTo: string;
+    reminderOn: boolean;
+    onToggleReminder?: (enabled: boolean) => void;
+  }[];
   commemorations: readonly {
     id: string;
     name: string;
     kindLabel: string;
     description: string;
     designations: readonly string[];
+    reminderOn: boolean;
+    onToggleReminder: (enabled: boolean) => void;
   }[];
   commemorationsTitle: string;
   eclipses: readonly { id: string; label: string }[];
   eclipseNote: string;
   kural: Omit<KuralProps, 'colors' | 'onReport'> | null;
   onReportKural: () => void;
+  reminderUi: {
+    switchLabel: string;
+    message: string | null;
+    openSettingsLabel: string | null;
+    onOpenSettings: () => void;
+  };
   colors: ColorTokens;
 }
 
@@ -56,13 +72,21 @@ export function DayBody(props: DayBodyProps) {
       {props.holidays.length > 0 ? (
         <View style={styles.block}>
           {props.holidays.map((holiday) => (
-            <HolidayChip
-              key={holiday.id}
-              name={holiday.name}
-              categoryLabel={holiday.categoryLabel}
-              detail={holiday.appliesTo}
-              colors={colors}
-            />
+            <View key={holiday.id} style={styles.item}>
+              <HolidayChip
+                name={holiday.name}
+                categoryLabel={holiday.categoryLabel}
+                detail={holiday.appliesTo}
+                colors={colors}
+              />
+              {holiday.onToggleReminder ? (
+                <ReminderSwitch
+                  label={props.reminderUi.switchLabel}
+                  value={holiday.reminderOn}
+                  onChange={holiday.onToggleReminder}
+                />
+              ) : null}
+            </View>
           ))}
         </View>
       ) : null}
@@ -72,8 +96,39 @@ export function DayBody(props: DayBodyProps) {
             {props.commemorationsTitle}
           </Text>
           {props.commemorations.map((item) => (
-            <CommemorationCard key={item.id} {...item} colors={colors} />
+            <View key={item.id} style={styles.item}>
+              <CommemorationCard
+                name={item.name}
+                kindLabel={item.kindLabel}
+                description={item.description}
+                designations={item.designations}
+                colors={colors}
+              />
+              <ReminderSwitch
+                label={props.reminderUi.switchLabel}
+                value={item.reminderOn}
+                onChange={item.onToggleReminder}
+              />
+            </View>
           ))}
+        </View>
+      ) : null}
+      {props.reminderUi.message ? (
+        <View style={[styles.notice, { backgroundColor: colors.warningSoft }]}>
+          <Text style={[Typography.body, { color: colors.warning }]}>
+            {props.reminderUi.message}
+          </Text>
+          {props.reminderUi.openSettingsLabel ? (
+            <Pressable
+              onPress={props.reminderUi.onOpenSettings}
+              accessibilityRole="button"
+              style={styles.noticeAction}
+            >
+              <Text style={[Typography.button, { color: colors.primary }]}>
+                {props.reminderUi.openSettingsLabel}
+              </Text>
+            </Pressable>
+          ) : null}
         </View>
       ) : null}
       {props.eclipses.map((eclipse) => (
@@ -95,6 +150,9 @@ export function DayBody(props: DayBodyProps) {
 const styles = StyleSheet.create({
   stack: { gap: Spacing.lg },
   block: { gap: Spacing.sm },
+  item: { gap: Spacing.xs },
+  notice: { borderRadius: Radius.banner, padding: Spacing.lg, gap: Spacing.sm },
+  noticeAction: { minHeight: Layout.minTouchTarget, justifyContent: 'center' },
   fallback: { gap: Spacing.xs, paddingVertical: Spacing.lg },
   eclipse: {
     borderRadius: Radius.banner,

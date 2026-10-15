@@ -109,5 +109,12 @@
     "licenseKural": "Thirukkural text: public domain. English translation: G.U. Pope and others, 1886 (public domain). E-text: Project Madurai.",
     "reportTitle": "Report a problem",
     "reportAction": "Report a problem on GitHub"
+  },
+  "reminder": {
+    "remindMe": "Remind me",
+    "channel": "Reminders",
+    "denied": "Notifications are turned off. Allow them in system settings to get reminders.",
+    "openSettings": "Open settings",
+    "past": "This date has passed"
   }
 }

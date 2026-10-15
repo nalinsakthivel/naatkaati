@@ -17,7 +17,9 @@ import type { MoonItem, SkyItem } from '@/components/SkyRow';
 import { AppConstants } from '@/constants/AppConstants';
 import { getBundledData } from '@/services/bundledData';
 import { ApiConstants } from '@/services/constants/ApiConstants';
+import { commemorationReminderKey, holidayReminderKey } from '@/calendar/reminders';
 import { useAppColors, useAppSelector } from '@/stores/hooks';
+import { useReminders } from './useReminders';
 
 const NO_VALUE = '—';
 const NOON_HOUR = 12;
@@ -38,6 +40,7 @@ export function useDayView(isoDate: string, moonAt?: Date) {
   const location = AppConstants.defaultLocation;
   const { timeZone } = location;
 
+  const reminders = useReminders();
   const digits = (value: number) =>
     tamilNumerals && isTamil ? toTamilNumerals(value) : String(value);
   const timeOf = (instant: Date | null) =>
@@ -67,6 +70,8 @@ export function useDayView(isoDate: string, moonAt?: Date) {
             name: t('day.tamilNewYear'),
             categoryLabel: t('today.holidayCategory.cultural'),
             appliesTo: '',
+            reminderOn: false,
+            onToggleReminder: undefined,
           },
         ]
       : [];
@@ -79,6 +84,22 @@ export function useDayView(isoDate: string, moonAt?: Date) {
         name: isTamil ? holiday.name_ta : holiday.name_en,
         categoryLabel: t(`today.holidayCategory.${holiday.category}`),
         appliesTo: holiday.applies_to.map((a) => t(`day.appliesTo.${a}`)).join(', '),
+        reminderOn: reminders.isOn(holidayReminderKey(holiday.id)),
+        onToggleReminder: (enabled: boolean) =>
+          reminders.toggle(
+            {
+              spec: {
+                key: holidayReminderKey(holiday.id),
+                kind: 'once',
+                year: date.getFullYear(),
+                month: date.getMonth() + 1,
+                day: date.getDate(),
+              },
+              title: isTamil ? holiday.name_ta : holiday.name_en,
+              body: t(`today.holidayCategory.${holiday.category}`),
+            },
+            enabled,
+          ),
       }),
     ),
   ].filter((holiday, index, all) => all.findIndex((h) => h.name === holiday.name) === index);
@@ -89,6 +110,21 @@ export function useDayView(isoDate: string, moonAt?: Date) {
     kindLabel: t(`day.commemorationKind.${item.kind}`),
     description: isTamil ? item.description_ta : item.description_en,
     designations: (item.designations ?? []).map((d) => (isTamil ? d.name_ta : d.name_en)),
+    reminderOn: reminders.isOn(commemorationReminderKey(item.id)),
+    onToggleReminder: (enabled: boolean) =>
+      reminders.toggle(
+        {
+          spec: {
+            key: commemorationReminderKey(item.id),
+            kind: 'yearly',
+            month: item.month,
+            day: item.day,
+          },
+          title: isTamil ? item.name_ta : item.name_en,
+          body: t(`day.commemorationKind.${item.kind}`),
+        },
+        enabled,
+      ),
   }));
 
   const year = date.getFullYear();
@@ -170,5 +206,11 @@ export function useDayView(isoDate: string, moonAt?: Date) {
     moon: moonItem,
     kural: kuralView,
     onReportKural,
+    reminderUi: {
+      switchLabel: reminders.switchLabel,
+      message: reminders.message,
+      openSettingsLabel: reminders.openSettingsLabel,
+      onOpenSettings: reminders.onOpenSettings,
+    },
   };
 }
