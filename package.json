@@ -1,6 +1,6 @@
 {
   "name": "naatkaati",
-  "main": "expo-router/entry",
+  "main": "index.ts",
   "version": "1.0.0",
   "dependencies": {
     "@date-fns/tz": "^1.5.0",

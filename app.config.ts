@@ -48,6 +48,25 @@ const config: ExpoConfig = {
     'expo-localization',
     'expo-notifications',
     'expo-background-task',
+    [
+      'react-native-android-widget',
+      {
+        widgets: [
+          {
+            name: 'NaatkaatiWidget',
+            label: 'Naatkaati',
+            description: "Today's Tamil date, any holiday, and the kural of the day",
+            minWidth: '250dp',
+            minHeight: '110dp',
+            targetCellWidth: 4,
+            targetCellHeight: 2,
+            resizeMode: 'horizontal|vertical',
+            // Android's minimum is 30 minutes; the date-change receiver covers midnight.
+            updatePeriodMillis: 1800000,
+          },
+        ],
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,

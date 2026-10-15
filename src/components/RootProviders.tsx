@@ -12,6 +12,7 @@ import {
 } from '@expo-google-fonts/noto-sans-tamil';
 import { i18n } from '@/i18n';
 import { maybeSync } from '@/services/syncTrigger';
+import { refreshWidgets } from '@/services/widgetRefresh';
 import { store } from '@/stores';
 import { useAppSelector, useResolvedScheme } from '@/stores/hooks';
 
@@ -34,8 +35,12 @@ function ThemedStatusBar() {
 function DataSync() {
   useEffect(() => {
     maybeSync();
+    refreshWidgets();
     const subscription = AppState.addEventListener('change', (state) => {
-      if (state === 'active') maybeSync();
+      if (state === 'active') {
+        maybeSync();
+        refreshWidgets();
+      }
     });
     return () => subscription.remove();
   }, []);
