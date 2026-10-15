@@ -1,0 +1,38 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:1:1-14:12
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:1:1-14:12
+	package
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:2:3-13:17
+receiver#expo.modules.widgetrefresh.DateChangedReceiver
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:4:5-12:16
+	android:exported
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:6:7-31
+	android:name
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:5:7-68
+intent-filter#action:name:android.intent.action.DATE_CHANGED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:7:7-11:23
+action#android.intent.action.DATE_CHANGED
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:8:9-69
+	android:name
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:8:17-66
+action#android.intent.action.TIME_SET
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:9:9-65
+	android:name
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:9:17-62
+action#android.intent.action.TIMEZONE_CHANGED
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:10:9-73
+	android:name
+		ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:10:17-70
+uses-sdk
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml

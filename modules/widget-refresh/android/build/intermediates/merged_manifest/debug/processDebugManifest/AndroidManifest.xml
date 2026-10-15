@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="expo.modules.widgetrefresh" >
+
+    <uses-sdk android:minSdkVersion="24" />
+
+    <application>
+
+        <!-- Date, time and timezone changes are exempt from the implicit-broadcast limits. -->
+        <receiver
+            android:name="expo.modules.widgetrefresh.DateChangedReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

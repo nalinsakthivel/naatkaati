@@ -18,6 +18,138 @@
     "language": "Language",
     "display": "Display",
     "tamilNumerals": "Tamil numerals",
-    "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only"
+    "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only",
+    "holidays": "Holidays",
+    "categoryState": "Tamil Nadu government",
+    "categoryCentral": "Central government",
+    "categoryBanks": "Banks",
+    "newYear": "Tamil New Year",
+    "newYearThai": "Thai 1",
+    "newYearChithirai": "Chithirai 1",
+    "about": "About",
+    "aboutSection": "App"
+  },
+  "today": {
+    "yearLabel": "Thiruvalluvar year {{year}}",
+    "location": "Chennai",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "moon": "Moon",
+    "noSun": "—",
+    "moonPhase": {
+      "new_moon": "New moon",
+      "waxing_crescent": "Waxing crescent",
+      "first_quarter": "First quarter",
+      "waxing_gibbous": "Waxing gibbous",
+      "full_moon": "Full moon",
+      "waning_gibbous": "Waning gibbous",
+      "last_quarter": "Last quarter",
+      "waning_crescent": "Waning crescent"
+    },
+    "holidayCategory": {
+      "cultural": "Cultural holiday",
+      "national": "National holiday",
+      "religious_holiday": "Religious holiday",
+      "other": "Holiday"
+    },
+    "kural": {
+      "title": "Thirukkural of the day",
+      "number": "Kural {{number}}",
+      "unverified": "This meaning has not been verified yet",
+      "textUnderReview": "The text of this kural is under review",
+      "report": "Report a mistake"
+    },
+    "upcoming": {
+      "title": "Coming up",
+      "nextHoliday": "Next holiday",
+      "nextCommemoration": "Next commemoration",
+      "inDays": "In {{count}} days",
+      "tomorrow": "Tomorrow"
+    },
+    "jumpToToday": "Go to today"
+  },
+  "calendar": {
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "holidaysTitle": "Holidays this month",
+    "noHolidays": "No holidays this month",
+    "today": "Today",
+    "holiday": "Holiday",
+    "tamilMonths": "{{first}} – {{second}}",
+    "commemorationsTitle": "Commemorations this month",
+    "commemoration": "Commemoration",
+    "jump": "Jump to month",
+    "month": "Month",
+    "year": "Year"
+  },
+  "day": {
+    "onThisDay": "On this day",
+    "appliesTo": {
+      "state_govt": "Tamil Nadu government",
+      "central_govt": "Central government",
+      "banks": "Banks"
+    },
+    "commemorationKind": {
+      "birth": "Birth anniversary",
+      "death": "Death anniversary",
+      "event": "Historical event"
+    },
+    "eclipse": {
+      "label": "{{kind}} {{type}}",
+      "solar": "solar eclipse",
+      "lunar": "lunar eclipse",
+      "total": "Total",
+      "partial": "Partial",
+      "annular": "Annular",
+      "penumbral": "Penumbral",
+      "note": "Visible somewhere on Earth"
+    },
+    "invalidDate": "This date is not valid",
+    "outOfRange": "No Tamil calendar data for this date",
+    "tamilNewYear": "Tamil New Year"
+  },
+  "about": {
+    "title": "About",
+    "version": "Version {{version}}",
+    "tagline": "An open-source, offline-first, rational and secular Tamil calendar.",
+    "methodTitle": "How dates are calculated",
+    "method": "Tamil month start dates come first from the official dates printed in the Tamil Nadu Government Gazette and government orders. For months without an official date, the moment the sun enters the next sign is calculated with the Lahiri ayanamsa and assigned to a day by the sunset rule at Chennai. These dates can differ by one day from the official Vakya-based calendar.",
+    "licensesTitle": "Licenses",
+    "licenseCode": "App code: GPL-3.0-or-later",
+    "licenseData": "Data: CC BY-SA 4.0",
+    "licenseKural": "Thirukkural text: public domain. English translation: G.U. Pope and others, 1886 (public domain). E-text: Project Madurai.",
+    "reportTitle": "Report a problem",
+    "reportAction": "Report a problem on GitHub"
+  },
+  "reminder": {
+    "remindMe": "Remind me",
+    "channel": "Reminders",
+    "denied": "Notifications are turned off. Allow them in system settings to get reminders.",
+    "openSettings": "Open settings",
+    "past": "This date has passed"
+  },
+  "timeBanner": {
+    "autoTimeOff": "Automatic date and time is turned off. The dates shown may be wrong.",
+    "timezoneDiffers": "Your device is in a different timezone. The date shown is for {{place}}.",
+    "openSettings": "Open date settings"
+  },
+  "onboarding": {
+    "languageTitle": "மொழி / Language",
+    "languageHint": "Choose your language",
+    "appearanceTitle": "Appearance",
+    "appearanceHint": "Light, dark, or follow the device",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "step": "Step {{current}} of {{total}}"
+  },
+  "data": {
+    "section": "Data",
+    "wifiOnly": "Update on Wi-Fi only",
+    "updateNow": "Update data now",
+    "idle": "",
+    "syncing": "Updating…",
+    "ok": "Up to date",
+    "failed": "Could not update"
   }
 }

@@ -2,6 +2,10 @@ import {
   initialSettingsState,
   isAppearance,
   isLanguage,
+  parseHolidayCategories,
+  setHolidayCategory,
+  setNewYearLabel,
+  setOnboardingDone,
   setLanguage,
   setTamilNumerals,
   setAppearance,
@@ -39,5 +43,46 @@ describe('settingsSlice language and numerals', () => {
   it('validates stored language values', () => {
     expect(isLanguage('ta')).toBe(true);
     expect(isLanguage('fr')).toBe(false);
+  });
+});
+
+describe('settingsSlice holiday categories and new year label', () => {
+  it('shows every category by default', () => {
+    expect(initialSettingsState.holidayCategories).toEqual(['state_govt', 'central_govt', 'banks']);
+    expect(initialSettingsState.newYearLabel).toBe('thai');
+  });
+
+  it('turns a category off and back on, keeping a stable order', () => {
+    const off = settingsReducer(
+      initialSettingsState,
+      setHolidayCategory({ category: 'central_govt', enabled: false }),
+    );
+    expect(off.holidayCategories).toEqual(['state_govt', 'banks']);
+    const on = settingsReducer(
+      off,
+      setHolidayCategory({ category: 'central_govt', enabled: true }),
+    );
+    expect(on.holidayCategories).toEqual(['state_govt', 'central_govt', 'banks']);
+  });
+
+  it('sets the new year label', () => {
+    expect(settingsReducer(initialSettingsState, setNewYearLabel('chithirai')).newYearLabel).toBe(
+      'chithirai',
+    );
+  });
+
+  it('parses stored categories, dropping unknown values', () => {
+    expect(parseHolidayCategories(undefined)).toEqual(['state_govt', 'central_govt', 'banks']);
+    expect(parseHolidayCategories('banks,bogus')).toEqual(['banks']);
+    expect(parseHolidayCategories('')).toEqual([]);
+  });
+});
+
+describe('settingsSlice onboarding', () => {
+  it('starts not done and can be completed', () => {
+    expect(initialSettingsState.onboardingDone).toBe(false);
+    expect(settingsReducer(initialSettingsState, setOnboardingDone(true)).onboardingDone).toBe(
+      true,
+    );
   });
 });
