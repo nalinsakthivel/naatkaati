@@ -1,4 +1,5 @@
-import { Switch } from '@expo/ui';
+import { ListItem, Switch } from '@expo/ui';
+import { useAppColors } from '@/stores/hooks';
 
 interface SettingsSwitchRowProps {
   label: string;
@@ -7,5 +8,13 @@ interface SettingsSwitchRowProps {
 }
 
 export function SettingsSwitchRow({ label, value, onChange }: SettingsSwitchRowProps) {
-  return <Switch label={label} value={value} onValueChange={onChange} />;
+  const colors = useAppColors();
+  return (
+    <ListItem
+      colors={{ containerColor: colors.surface, contentColor: colors.text }}
+      trailing={<Switch value={value} onValueChange={onChange} />}
+    >
+      {label}
+    </ListItem>
+  );
 }

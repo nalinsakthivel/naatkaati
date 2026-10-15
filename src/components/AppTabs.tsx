@@ -1,24 +1,31 @@
-import { Tabs } from 'expo-router';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@/themes/Theme';
 import { useAppColors } from '@/stores/hooks';
+import { FontFamily } from '@/themes/Theme';
 
+/** OS-native bottom tabs: Material 3 navigation bar on Android, UITabBar on iOS. */
 export function AppTabs() {
   const { t } = useTranslation();
   const colors = useAppColors();
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textMuted,
-        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
-        tabBarLabelStyle: Typography.caption,
-      }}
+    <NativeTabs
+      tintColor={colors.primary}
+      backgroundColor={colors.surface}
+      indicatorColor={colors.commemorationSoft}
+      labelStyle={{ color: colors.text, fontFamily: FontFamily.bodyRegular }}
     >
-      <Tabs.Screen name="index" options={{ title: t('tabs.today') }} />
-      <Tabs.Screen name="calendar" options={{ title: t('tabs.calendar') }} />
-      <Tabs.Screen name="settings" options={{ title: t('tabs.settings') }} />
-    </Tabs>
+      <NativeTabs.Trigger name="index">
+        <NativeTabs.Trigger.Label>{t('tabs.today')}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="sun.max" md="today" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="calendar">
+        <NativeTabs.Trigger.Label>{t('tabs.calendar')}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="calendar" md="calendar_month" />
+      </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="settings">
+        <NativeTabs.Trigger.Label>{t('tabs.settings')}</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="gearshape" md="settings" />
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }

@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { PickerOption } from '@/components/native/SettingsPickerRow';
 import { useAppColors, useAppDispatch, useAppSelector } from '@/stores/hooks';
 import {
@@ -9,6 +7,8 @@ import {
   type Appearance,
   type Language,
 } from '@/stores/slices/settingsSlice';
+import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function useSettingsScreen() {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export function useSettingsScreen() {
     { value: 'light', label: t('settings.appearanceLight') },
     { value: 'dark', label: t('settings.appearanceDark') },
   ];
-  // Language names are shown in their own language, never translated.
+
   const languageOptions: PickerOption<Language>[] = [
     { value: 'ta', label: 'தமிழ்' },
     { value: 'en', label: 'English' },

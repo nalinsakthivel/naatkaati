@@ -1,17 +1,24 @@
 import type { ReactNode } from 'react';
-import { FieldGroup } from '@expo/ui';
+import { Column, Text } from '@expo/ui';
+import { useAppColors } from '@/stores/hooks';
+import { Spacing, Typography } from '@/themes/Theme';
 
 interface SettingsSectionProps {
   title: string;
-  footer?: string;
   children: ReactNode;
 }
 
-export function SettingsSection({ title, footer, children }: SettingsSectionProps) {
+export function SettingsSection({ title, children }: SettingsSectionProps) {
+  const colors = useAppColors();
   return (
-    <FieldGroup.Section title={title}>
+    <Column style={{ paddingTop: Spacing.md }}>
+      <Text
+        style={{ paddingHorizontal: Spacing.lg }}
+        textStyle={{ fontSize: Typography.heading.fontSize, color: colors.primary }}
+      >
+        {title}
+      </Text>
       {children}
-      {footer ? <FieldGroup.SectionFooter>{footer}</FieldGroup.SectionFooter> : null}
-    </FieldGroup.Section>
+    </Column>
   );
 }

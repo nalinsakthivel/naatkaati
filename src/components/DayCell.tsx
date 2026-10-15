@@ -1,0 +1,94 @@
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import type { ColorTokens } from '@/themes/Colors';
+import { FontFamily, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+
+export interface DayCellProps {
+  day: string;
+  /** Small Tamil date, or the Tamil month name on the first day of a Tamil month */
+  tamilLabel: string;
+  inMonth: boolean;
+  isToday: boolean;
+  isSunday: boolean;
+  isTamilMonthStart: boolean;
+  isHoliday: boolean;
+  accessibilityLabel: string;
+  onPress: () => void;
+  colors: ColorTokens;
+}
+
+export function DayCell({
+  day,
+  tamilLabel,
+  inMonth,
+  isToday,
+  isSunday,
+  isTamilMonthStart,
+  isHoliday,
+  accessibilityLabel,
+  onPress,
+  colors,
+}: DayCellProps) {
+  const numberColor = !inMonth
+    ? colors.otherMonthText
+    : isToday
+      ? colors.textOnToday
+      : isHoliday || isSunday
+        ? colors.holiday
+        : colors.text;
+  const monthStartColor = isTamilMonthStart && inMonth && !isToday;
+  const subColor = monthStartColor
+    ? colors.primary
+    : !inMonth
+      ? colors.otherMonthText
+      : isToday
+        ? colors.textOnToday
+        : colors.textMuted;
+
+  return (
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      style={[
+        styles.cell,
+        isToday && { backgroundColor: colors.today },
+        isHoliday && inMonth && !isToday && { backgroundColor: colors.holidaySoft },
+      ]}
+    >
+      <Text style={[Typography.gridDay, { color: numberColor }]}>{day}</Text>
+      <Text
+        style={[
+          Typography.gridTamilDay,
+          monthStartColor && { fontFamily: FontFamily.bodySemiBold },
+          { color: subColor },
+        ]}
+        numberOfLines={1}
+        adjustsFontSizeToFit
+      >
+        {tamilLabel}
+      </Text>
+      {/* Shape marker so holidays are never shown by colour alone */}
+      <View
+        style={[
+          styles.marker,
+          isHoliday &&
+            inMonth && { backgroundColor: isToday ? colors.textOnToday : colors.holiday },
+        ]}
+      />
+    </Pressable>
+  );
+}
+
+const MARKER_SIZE = Spacing.xs + Spacing.xxs;
+
+const styles = StyleSheet.create({
+  cell: {
+    flex: 1,
+    minHeight: Layout.minTouchTarget + Spacing.lg,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: Radius.cell,
+    paddingHorizontal: Spacing.xxs,
+  },
+  marker: { width: MARKER_SIZE, height: MARKER_SIZE, borderRadius: MARKER_SIZE / 2 },
+});

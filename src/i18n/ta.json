@@ -19,5 +19,45 @@
     "display": "காட்சி",
     "tamilNumerals": "தமிழ் எண்கள்",
     "tamilNumeralsHint": "தமிழ் தேதியில் மட்டும் ௧ ௨ ௩ எண்களைப் பயன்படுத்தும்"
+  },
+  "today": {
+    "yearLabel": "திருவள்ளுவர் ஆண்டு {{year}}",
+    "location": "சென்னை",
+    "sunrise": "சூரிய உதயம்",
+    "sunset": "சூரிய அஸ்தமனம்",
+    "moon": "நிலவு",
+    "noSun": "—",
+    "moonPhase": {
+      "new_moon": "அமாவாசை",
+      "waxing_crescent": "இளம் வளர்பிறை",
+      "first_quarter": "முதல் காற்பகுதி",
+      "waxing_gibbous": "வளர்பிறை",
+      "full_moon": "முழு நிலவு",
+      "waning_gibbous": "தேய்பிறை",
+      "last_quarter": "கடைசி காற்பகுதி",
+      "waning_crescent": "இளம் தேய்பிறை"
+    },
+    "holidayCategory": {
+      "cultural": "பண்பாட்டு விடுமுறை",
+      "national": "தேசிய விடுமுறை",
+      "religious_holiday": "சமய விடுமுறை",
+      "other": "விடுமுறை"
+    },
+    "kural": {
+      "title": "இன்றைய திருக்குறள்",
+      "number": "குறள் {{number}}",
+      "unverified": "இந்த விளக்கம் இன்னும் சரிபார்க்கப்படவில்லை",
+      "textUnderReview": "இந்தக் குறளின் உரை சரிபார்ப்பில் உள்ளது",
+      "report": "பிழையைத் தெரிவி"
+    }
+  },
+  "calendar": {
+    "prevMonth": "முந்தைய மாதம்",
+    "nextMonth": "அடுத்த மாதம்",
+    "holidaysTitle": "இந்த மாதத்தின் விடுமுறைகள்",
+    "noHolidays": "இந்த மாதம் விடுமுறைகள் இல்லை",
+    "today": "இன்று",
+    "holiday": "விடுமுறை",
+    "tamilMonths": "{{first}} – {{second}}"
   }
 }

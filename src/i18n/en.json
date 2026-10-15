@@ -19,5 +19,45 @@
     "display": "Display",
     "tamilNumerals": "Tamil numerals",
     "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only"
+  },
+  "today": {
+    "yearLabel": "Thiruvalluvar year {{year}}",
+    "location": "Chennai",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "moon": "Moon",
+    "noSun": "—",
+    "moonPhase": {
+      "new_moon": "New moon",
+      "waxing_crescent": "Waxing crescent",
+      "first_quarter": "First quarter",
+      "waxing_gibbous": "Waxing gibbous",
+      "full_moon": "Full moon",
+      "waning_gibbous": "Waning gibbous",
+      "last_quarter": "Last quarter",
+      "waning_crescent": "Waning crescent"
+    },
+    "holidayCategory": {
+      "cultural": "Cultural holiday",
+      "national": "National holiday",
+      "religious_holiday": "Religious holiday",
+      "other": "Holiday"
+    },
+    "kural": {
+      "title": "Thirukkural of the day",
+      "number": "Kural {{number}}",
+      "unverified": "This meaning has not been verified yet",
+      "textUnderReview": "The text of this kural is under review",
+      "report": "Report a mistake"
+    }
+  },
+  "calendar": {
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "holidaysTitle": "Holidays this month",
+    "noHolidays": "No holidays this month",
+    "today": "Today",
+    "holiday": "Holiday",
+    "tamilMonths": "{{first}} – {{second}}"
   }
 }
