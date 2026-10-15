@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { LocalStore } from '@/storage/LocalStore';
 import { StorageKeys } from '@/storage/StorageKeys';
+import { dataApi } from '@/services/dataApi';
+import { dataReducer } from './slices/dataSlice';
 import { parseReminderKeys, remindersReducer } from './slices/remindersSlice';
 import {
   initialSettingsState,
@@ -25,11 +27,18 @@ function loadSettings(): SettingsState {
     holidayCategories: parseHolidayCategories(LocalStore.getString(StorageKeys.holidayCategories)),
     newYearLabel: isNewYearLabel(newYearLabel) ? newYearLabel : initialSettingsState.newYearLabel,
     onboardingDone: LocalStore.getString(StorageKeys.onboardingDone) === 'true',
+    dataSaver: LocalStore.getString(StorageKeys.dataSaver) === 'true',
   };
 }
 
 export const store = configureStore({
-  reducer: { settings: settingsReducer, reminders: remindersReducer },
+  reducer: {
+    settings: settingsReducer,
+    reminders: remindersReducer,
+    data: dataReducer,
+    [dataApi.reducerPath]: dataApi.reducer,
+  },
+  middleware: (getDefault) => getDefault().concat(dataApi.middleware),
   preloadedState: {
     settings: loadSettings(),
     reminders: { keys: parseReminderKeys(LocalStore.getString(StorageKeys.reminders)) },
@@ -37,14 +46,22 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, onboardingDone } =
-    store.getState().settings;
+  const {
+    appearance,
+    language,
+    tamilNumerals,
+    holidayCategories,
+    newYearLabel,
+    onboardingDone,
+    dataSaver,
+  } = store.getState().settings;
   LocalStore.setString(StorageKeys.appearance, appearance);
   LocalStore.setString(StorageKeys.language, language);
   LocalStore.setString(StorageKeys.tamilNumerals, String(tamilNumerals));
   LocalStore.setString(StorageKeys.holidayCategories, holidayCategories.join(','));
   LocalStore.setString(StorageKeys.newYearLabel, newYearLabel);
   LocalStore.setString(StorageKeys.onboardingDone, String(onboardingDone));
+  LocalStore.setString(StorageKeys.dataSaver, String(dataSaver));
   LocalStore.setString(StorageKeys.reminders, store.getState().reminders.keys.join(','));
 });
 

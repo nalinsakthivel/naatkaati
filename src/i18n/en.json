@@ -131,5 +131,14 @@
     "skip": "Skip",
     "done": "Done",
     "step": "Step {{current}} of {{total}}"
+  },
+  "data": {
+    "section": "Data",
+    "wifiOnly": "Update on Wi-Fi only",
+    "updateNow": "Update data now",
+    "idle": "",
+    "syncing": "Updating…",
+    "ok": "Up to date",
+    "failed": "Could not update"
   }
 }

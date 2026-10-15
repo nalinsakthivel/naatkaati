@@ -13,9 +13,8 @@ import { getTodayIso } from '@/calendar/today';
 import type { MonthGridCell } from '@/components/MonthGrid';
 import { AppConstants } from '@/constants/AppConstants';
 import { RouteEnum } from '@/enums/RouteEnum';
-import { getBundledData } from '@/services/bundledData';
 import { useTimeBanner } from '@/features/today/useTimeBanner';
-import { useAppColors, useAppSelector } from '@/stores/hooks';
+import { useActiveData, useAppColors, useAppSelector } from '@/stores/hooks';
 
 const FIRST_SUNDAY = '2023-01-01';
 const MIN_YEAR = 1901;
@@ -33,7 +32,7 @@ export function useCalendarScreen() {
   const isTamil = language === 'ta';
   const locale = isTamil ? ta : enIN;
 
-  const data = useMemo(() => getBundledData(), []);
+  const data = useActiveData();
   const todayIso = getTodayIso(new Date(), AppConstants.defaultLocation.timeZone);
   const [visible, setVisible] = useState(() => parseISO(todayIso));
 

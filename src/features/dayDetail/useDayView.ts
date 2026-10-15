@@ -15,10 +15,9 @@ import { getTamilDate } from '@/calendar/tamilDate';
 import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import type { MoonItem, SkyItem } from '@/components/SkyRow';
 import { AppConstants } from '@/constants/AppConstants';
-import { getBundledData } from '@/services/bundledData';
 import { ApiConstants } from '@/services/constants/ApiConstants';
 import { commemorationReminderKey, holidayReminderKey } from '@/calendar/reminders';
-import { useAppColors, useAppSelector } from '@/stores/hooks';
+import { useActiveData, useAppColors, useAppSelector } from '@/stores/hooks';
 import { useReminders } from './useReminders';
 
 const NO_VALUE = '—';
@@ -36,7 +35,7 @@ export function useDayView(isoDate: string, moonAt?: Date) {
   );
   const isTamil = language === 'ta';
   const locale = isTamil ? ta : enIN;
-  const data = useMemo(() => getBundledData(), []);
+  const data = useActiveData();
   const location = AppConstants.defaultLocation;
   const { timeZone } = location;
 

@@ -57,6 +57,18 @@ export function SettingsScreen() {
               onChange={s.onNewYearChange}
             />
           </SettingsSection>
+          <SettingsSection title={s.labels.data}>
+            <SettingsSwitchRow
+              label={s.labels.wifiOnly}
+              value={s.dataSaver}
+              onChange={s.onDataSaverChange}
+            />
+            <SettingsLinkRow
+              label={s.labels.updateNow}
+              trailing={s.syncStatusLabel}
+              onPress={s.onUpdateNow}
+            />
+          </SettingsSection>
           <SettingsSection title={s.labels.aboutSection}>
             <SettingsLinkRow label={s.labels.about} onPress={s.onOpenAbout} />
           </SettingsSection>

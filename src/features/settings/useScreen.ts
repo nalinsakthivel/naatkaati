@@ -5,9 +5,11 @@ import type { AppliesTo } from '@/calendar/holidays';
 import type { NewYearLabel } from '@/calendar/tamilNewYear';
 import type { PickerOption } from '@/components/native/SettingsPickerRow';
 import { RouteEnum } from '@/enums/RouteEnum';
+import { maybeSync } from '@/services/syncTrigger';
 import { useAppColors, useAppDispatch, useAppSelector } from '@/stores/hooks';
 import {
   setAppearance,
+  setDataSaver,
   setHolidayCategory,
   setLanguage,
   setNewYearLabel,
@@ -28,9 +30,9 @@ export function useSettingsScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { appearance, language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
-    (state) => state.settings,
-  );
+  const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, dataSaver } =
+    useAppSelector((state) => state.settings);
+  const syncStatus = useAppSelector((state) => state.data.syncStatus);
 
   const appearanceOptions: PickerOption<Appearance>[] = [
     { value: 'system', label: t('settings.appearanceSystem') },
@@ -63,6 +65,9 @@ export function useSettingsScreen() {
       tamilNumerals: t('settings.tamilNumerals'),
       holidays: t('settings.holidays'),
       newYear: t('settings.newYear'),
+      data: t('data.section'),
+      wifiOnly: t('data.wifiOnly'),
+      updateNow: t('data.updateNow'),
       aboutSection: t('settings.aboutSection'),
       about: t('settings.about'),
     },
@@ -74,6 +79,12 @@ export function useSettingsScreen() {
     languageOptions,
     newYearOptions,
     categoryRows,
+    dataSaver,
+    syncStatusLabel: t(`data.${syncStatus}`),
+    onDataSaverChange: (value: boolean) => dispatch(setDataSaver(value)),
+    onUpdateNow: () => {
+      maybeSync(true);
+    },
     onAppearanceChange: (value: Appearance) => dispatch(setAppearance(value)),
     onLanguageChange: (value: Language) => dispatch(setLanguage(value)),
     onTamilNumeralsChange: (value: boolean) => dispatch(setTamilNumerals(value)),

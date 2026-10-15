@@ -4,6 +4,7 @@ import { tamilMonthsFileSchema, type TamilMonthRecord } from '@/schemas/tamilMon
 import { thirukkuralFileSchema, type Adhikaram, type Kural } from '@/schemas/thirukkural';
 import commemorationsRaw from '../../data/commemorations.json';
 import holidays2026Raw from '../../data/holidays/2026.json';
+import manifestRaw from '../../data/manifest.json';
 import tamilMonthsRaw from '../../data/tamil-months.json';
 import thirukkuralRaw from '../../data/thirukkural.json';
 
@@ -13,6 +14,10 @@ export interface BundledData {
   kurals: Kural[];
   adhikarams: Adhikaram[];
   commemorations: Commemoration[];
+}
+
+export function bundledVersion(name: string): number {
+  return manifestRaw.datasets.find((dataset) => dataset.name === name)?.version ?? 0;
 }
 
 let cache: BundledData | null = null;

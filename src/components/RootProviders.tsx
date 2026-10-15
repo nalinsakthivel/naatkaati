@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
+import { AppState } from 'react-native';
 import { Provider } from 'react-redux';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -10,6 +11,7 @@ import {
   NotoSansTamil_600SemiBold,
 } from '@expo-google-fonts/noto-sans-tamil';
 import { i18n } from '@/i18n';
+import { maybeSync } from '@/services/syncTrigger';
 import { store } from '@/stores';
 import { useAppSelector, useResolvedScheme } from '@/stores/hooks';
 
@@ -26,6 +28,18 @@ function LanguageSync() {
 function ThemedStatusBar() {
   // Light icons on the dark night-sky theme, dark icons on the light theme.
   return <StatusBar style={useResolvedScheme() === 'dark' ? 'light' : 'dark'} />;
+}
+
+/** Checks for data updates at launch and whenever the app returns to the foreground. */
+function DataSync() {
+  useEffect(() => {
+    maybeSync();
+    const subscription = AppState.addEventListener('change', (state) => {
+      if (state === 'active') maybeSync();
+    });
+    return () => subscription.remove();
+  }, []);
+  return null;
 }
 
 export function RootProviders({ children }: { children: ReactNode }) {
@@ -47,6 +61,7 @@ export function RootProviders({ children }: { children: ReactNode }) {
     <Provider store={store}>
       <LanguageSync />
       <ThemedStatusBar />
+      <DataSync />
       {children}
     </Provider>
   );

@@ -6,6 +6,13 @@ export const StorageKeys = {
   newYearLabel: 'settings.newYearLabel',
   reminders: 'reminders.keys',
   onboardingDone: 'settings.onboardingDone',
+  dataSaver: 'settings.dataSaver',
+  lastSyncAt: 'sync.lastSyncAt',
+  datasetIndex: 'datasets.index',
 } as const;
 
-export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];
+/** Downloaded datasets live under one key each, built here so every key stays in this file. */
+export const datasetKey = (name: string) => `dataset.${name}` as const;
+
+export type StorageKey =
+  (typeof StorageKeys)[keyof typeof StorageKeys] | ReturnType<typeof datasetKey>;

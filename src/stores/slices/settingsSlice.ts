@@ -17,6 +17,8 @@ export interface SettingsState {
   newYearLabel: NewYearLabel;
   /** First-launch onboarding has been completed or skipped. */
   onboardingDone: boolean;
+  /** Download data updates on Wi-Fi only. */
+  dataSaver: boolean;
 }
 
 export const initialSettingsState: SettingsState = {
@@ -26,6 +28,7 @@ export const initialSettingsState: SettingsState = {
   holidayCategories: [...HOLIDAY_CATEGORIES],
   newYearLabel: 'thai',
   onboardingDone: false,
+  dataSaver: false,
 };
 
 export function isAppearance(value: string | undefined): value is Appearance {
@@ -66,6 +69,9 @@ const settingsSlice = createSlice({
         ? HOLIDAY_CATEGORIES.filter((c) => c === category || without.includes(c))
         : without;
     },
+    setDataSaver(state, action: PayloadAction<boolean>) {
+      state.dataSaver = action.payload;
+    },
     setOnboardingDone(state, action: PayloadAction<boolean>) {
       state.onboardingDone = action.payload;
     },
@@ -82,5 +88,6 @@ export const {
   setHolidayCategory,
   setNewYearLabel,
   setOnboardingDone,
+  setDataSaver,
 } = settingsSlice.actions;
 export const settingsReducer = settingsSlice.reducer;
