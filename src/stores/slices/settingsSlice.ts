@@ -15,6 +15,8 @@ export interface SettingsState {
   /** Holiday categories shown in the app. */
   holidayCategories: AppliesTo[];
   newYearLabel: NewYearLabel;
+  /** First-launch onboarding has been completed or skipped. */
+  onboardingDone: boolean;
 }
 
 export const initialSettingsState: SettingsState = {
@@ -23,6 +25,7 @@ export const initialSettingsState: SettingsState = {
   tamilNumerals: false,
   holidayCategories: [...HOLIDAY_CATEGORIES],
   newYearLabel: 'thai',
+  onboardingDone: false,
 };
 
 export function isAppearance(value: string | undefined): value is Appearance {
@@ -63,12 +66,21 @@ const settingsSlice = createSlice({
         ? HOLIDAY_CATEGORIES.filter((c) => c === category || without.includes(c))
         : without;
     },
+    setOnboardingDone(state, action: PayloadAction<boolean>) {
+      state.onboardingDone = action.payload;
+    },
     setNewYearLabel(state, action: PayloadAction<NewYearLabel>) {
       state.newYearLabel = action.payload;
     },
   },
 });
 
-export const { setAppearance, setLanguage, setTamilNumerals, setHolidayCategory, setNewYearLabel } =
-  settingsSlice.actions;
+export const {
+  setAppearance,
+  setLanguage,
+  setTamilNumerals,
+  setHolidayCategory,
+  setNewYearLabel,
+  setOnboardingDone,
+} = settingsSlice.actions;
 export const settingsReducer = settingsSlice.reducer;

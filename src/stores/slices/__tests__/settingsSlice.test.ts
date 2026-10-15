@@ -5,6 +5,7 @@ import {
   parseHolidayCategories,
   setHolidayCategory,
   setNewYearLabel,
+  setOnboardingDone,
   setLanguage,
   setTamilNumerals,
   setAppearance,
@@ -74,5 +75,14 @@ describe('settingsSlice holiday categories and new year label', () => {
     expect(parseHolidayCategories(undefined)).toEqual(['state_govt', 'central_govt', 'banks']);
     expect(parseHolidayCategories('banks,bogus')).toEqual(['banks']);
     expect(parseHolidayCategories('')).toEqual([]);
+  });
+});
+
+describe('settingsSlice onboarding', () => {
+  it('starts not done and can be completed', () => {
+    expect(initialSettingsState.onboardingDone).toBe(false);
+    expect(settingsReducer(initialSettingsState, setOnboardingDone(true)).onboardingDone).toBe(
+      true,
+    );
   });
 });

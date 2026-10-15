@@ -121,5 +121,15 @@
     "autoTimeOff": "Automatic date and time is turned off. The dates shown may be wrong.",
     "timezoneDiffers": "Your device is in a different timezone. The date shown is for {{place}}.",
     "openSettings": "Open date settings"
+  },
+  "onboarding": {
+    "languageTitle": "மொழி / Language",
+    "languageHint": "Choose your language",
+    "appearanceTitle": "Appearance",
+    "appearanceHint": "Light, dark, or follow the device",
+    "next": "Next",
+    "skip": "Skip",
+    "done": "Done",
+    "step": "Step {{current}} of {{total}}"
   }
 }

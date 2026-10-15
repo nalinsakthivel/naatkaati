@@ -24,6 +24,7 @@ function loadSettings(): SettingsState {
       tamilNumerals === undefined ? initialSettingsState.tamilNumerals : tamilNumerals === 'true',
     holidayCategories: parseHolidayCategories(LocalStore.getString(StorageKeys.holidayCategories)),
     newYearLabel: isNewYearLabel(newYearLabel) ? newYearLabel : initialSettingsState.newYearLabel,
+    onboardingDone: LocalStore.getString(StorageKeys.onboardingDone) === 'true',
   };
 }
 
@@ -36,13 +37,14 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  const { appearance, language, tamilNumerals, holidayCategories, newYearLabel } =
+  const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, onboardingDone } =
     store.getState().settings;
   LocalStore.setString(StorageKeys.appearance, appearance);
   LocalStore.setString(StorageKeys.language, language);
   LocalStore.setString(StorageKeys.tamilNumerals, String(tamilNumerals));
   LocalStore.setString(StorageKeys.holidayCategories, holidayCategories.join(','));
   LocalStore.setString(StorageKeys.newYearLabel, newYearLabel);
+  LocalStore.setString(StorageKeys.onboardingDone, String(onboardingDone));
   LocalStore.setString(StorageKeys.reminders, store.getState().reminders.keys.join(','));
 });
 

@@ -3,6 +3,7 @@ export enum RouteEnum {
   Calendar = '/calendar',
   Settings = '/settings',
   About = '/about',
+  Onboarding = '/onboarding',
   DayDetail = '/day',
   DayDetailPattern = '/day/[date]',
 }

@@ -5,6 +5,7 @@ export const StorageKeys = {
   holidayCategories: 'settings.holidayCategories',
   newYearLabel: 'settings.newYearLabel',
   reminders: 'reminders.keys',
+  onboardingDone: 'settings.onboardingDone',
 } as const;
 
 export type StorageKey = (typeof StorageKeys)[keyof typeof StorageKeys];
