@@ -1,7 +1,8 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ChoiceSheet } from '@/components/native/ChoiceSheet';
+import { SettingsChoiceRow } from '@/components/native/SettingsChoiceRow';
 import { SettingsHost } from '@/components/native/SettingsHost';
 import { SettingsLinkRow } from '@/components/native/SettingsLinkRow';
-import { SettingsPickerRow } from '@/components/native/SettingsPickerRow';
 import { SettingsSection } from '@/components/native/SettingsSection';
 import { SettingsSwitchRow } from '@/components/native/SettingsSwitchRow';
 import { SheetBand } from '@/components/SheetBand';
@@ -23,17 +24,15 @@ export function SettingsScreen() {
         </SheetBand>
         <SettingsHost>
           <SettingsSection title={s.labels.display}>
-            <SettingsPickerRow
+            <SettingsChoiceRow
               label={s.labels.appearance}
-              value={s.appearance}
-              options={s.appearanceOptions}
-              onChange={s.onAppearanceChange}
+              valueLabel={s.appearanceValueLabel}
+              onPress={s.openPicker('appearance')}
             />
-            <SettingsPickerRow
+            <SettingsChoiceRow
               label={s.labels.language}
-              value={s.language}
-              options={s.languageOptions}
-              onChange={s.onLanguageChange}
+              valueLabel={s.languageValueLabel}
+              onPress={s.openPicker('language')}
             />
             <SettingsSwitchRow
               label={s.labels.tamilNumerals}
@@ -50,11 +49,10 @@ export function SettingsScreen() {
                 onChange={(enabled) => s.onCategoryChange(row.category, enabled)}
               />
             ))}
-            <SettingsPickerRow
+            <SettingsChoiceRow
               label={s.labels.newYear}
-              value={s.newYearLabel}
-              options={s.newYearOptions}
-              onChange={s.onNewYearChange}
+              valueLabel={s.newYearValueLabel}
+              onPress={s.openPicker('newYear')}
             />
           </SettingsSection>
           <SettingsSection title={s.labels.data}>
@@ -66,6 +64,7 @@ export function SettingsScreen() {
             <SettingsLinkRow
               label={s.labels.updateNow}
               trailing={s.syncStatusLabel}
+              tone="action"
               onPress={s.onUpdateNow}
             />
           </SettingsSection>
@@ -74,6 +73,34 @@ export function SettingsScreen() {
           </SettingsSection>
         </SettingsHost>
       </View>
+      <Text style={[Typography.caption, styles.version, { color: s.colors.textMuted }]}>
+        {s.versionLabel}
+      </Text>
+
+      <ChoiceSheet
+        isPresented={s.picker === 'appearance'}
+        onDismiss={s.closePicker}
+        title={s.labels.appearance}
+        options={s.appearanceOptions}
+        value={s.appearance}
+        onSelect={s.onAppearanceChange}
+      />
+      <ChoiceSheet
+        isPresented={s.picker === 'language'}
+        onDismiss={s.closePicker}
+        title={s.labels.language}
+        options={s.languageOptions}
+        value={s.language}
+        onSelect={s.onLanguageChange}
+      />
+      <ChoiceSheet
+        isPresented={s.picker === 'newYear'}
+        onDismiss={s.closePicker}
+        title={s.labels.newYear}
+        options={s.newYearOptions}
+        value={s.newYearLabel}
+        onSelect={s.onNewYearChange}
+      />
     </ScrollView>
   );
 }
@@ -82,9 +109,11 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: Layout.screenPaddingH,
     paddingBottom: Spacing.xxxl,
+    gap: Spacing.lg,
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
   },
   sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
+  version: { textAlign: 'center' },
 });

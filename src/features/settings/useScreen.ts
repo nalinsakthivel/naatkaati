@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppliesTo } from '@/calendar/holidays';
 import type { NewYearLabel } from '@/calendar/tamilNewYear';
-import type { PickerOption } from '@/components/native/SettingsPickerRow';
+import type { ChoiceOption } from '@/components/native/ChoiceSheet';
 import { RouteEnum } from '@/enums/RouteEnum';
 import { maybeSync } from '@/services/syncTrigger';
 import { useAppColors, useAppDispatch, useAppSelector } from '@/stores/hooks';
@@ -24,6 +26,8 @@ const CATEGORY_LABEL_KEYS = [
   ['banks', 'settings.categoryBanks'],
 ] as const satisfies readonly (readonly [AppliesTo, string])[];
 
+type PickerKind = 'appearance' | 'language' | 'newYear';
+
 export function useSettingsScreen() {
   const { t } = useTranslation();
   const colors = useAppColors();
@@ -33,18 +37,19 @@ export function useSettingsScreen() {
   const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, dataSaver } =
     useAppSelector((state) => state.settings);
   const syncStatus = useAppSelector((state) => state.data.syncStatus);
+  const [picker, setPicker] = useState<PickerKind | null>(null);
 
-  const appearanceOptions: PickerOption<Appearance>[] = [
+  const appearanceOptions: ChoiceOption<Appearance>[] = [
     { value: 'system', label: t('settings.appearanceSystem') },
     { value: 'light', label: t('settings.appearanceLight') },
     { value: 'dark', label: t('settings.appearanceDark') },
   ];
   // Language names are shown in their own language, never translated.
-  const languageOptions: PickerOption<Language>[] = [
+  const languageOptions: ChoiceOption<Language>[] = [
     { value: 'ta', label: 'தமிழ்' },
     { value: 'en', label: 'English' },
   ];
-  const newYearOptions: PickerOption<NewYearLabel>[] = [
+  const newYearOptions: ChoiceOption<NewYearLabel>[] = [
     { value: 'thai', label: t('settings.newYearThai') },
     { value: 'chithirai', label: t('settings.newYearChithirai') },
   ];
@@ -54,8 +59,18 @@ export function useSettingsScreen() {
     enabled: holidayCategories.includes(category),
   }));
 
+  const labelOf = <T extends string>(options: readonly ChoiceOption<T>[], value: T) =>
+    options.find((option) => option.value === value)?.label ?? '';
+
   return {
     title: t('screens.settings'),
+    versionLabel: t('about.version', { version: Constants.expoConfig?.version ?? '' }),
+    appearanceValueLabel: labelOf(appearanceOptions, appearance),
+    languageValueLabel: labelOf(languageOptions, language),
+    newYearValueLabel: labelOf(newYearOptions, newYearLabel),
+    picker,
+    openPicker: (kind: PickerKind) => () => setPicker(kind),
+    closePicker: () => setPicker(null),
     colors,
     topInset: insets.top,
     labels: {

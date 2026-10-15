@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import type { PickerOption } from '@/components/native/SettingsPickerRow';
+import type { ChoiceOption } from '@/components/native/ChoiceSheet';
 import { RouteEnum } from '@/enums/RouteEnum';
 import { useAppColors, useAppDispatch, useAppSelector } from '@/stores/hooks';
 import {
@@ -30,11 +30,11 @@ export function useOnboardingScreen() {
     router.replace({ pathname: RouteEnum.Today });
   };
 
-  const languageOptions: PickerOption<Language>[] = [
+  const languageOptions: ChoiceOption<Language>[] = [
     { value: 'ta', label: 'தமிழ்' },
     { value: 'en', label: 'English' },
   ];
-  const appearanceOptions: PickerOption<Appearance>[] = [
+  const appearanceOptions: ChoiceOption<Appearance>[] = [
     { value: 'system', label: t('settings.appearanceSystem') },
     { value: 'light', label: t('settings.appearanceLight') },
     { value: 'dark', label: t('settings.appearanceDark') },

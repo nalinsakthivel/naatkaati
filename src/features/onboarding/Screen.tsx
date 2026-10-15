@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SettingsHost } from '@/components/native/SettingsHost';
-import { SettingsPickerRow } from '@/components/native/SettingsPickerRow';
+import { OptionList } from '@/components/native/OptionList';
 import { SheetBand } from '@/components/SheetBand';
 import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useOnboardingScreen } from './useScreen';
@@ -29,18 +29,16 @@ export function OnboardingScreen() {
           <Text style={[Typography.body, { color: s.colors.textMuted }]}>{s.hint}</Text>
           <SettingsHost>
             {s.step === 0 ? (
-              <SettingsPickerRow
-                label={s.title}
-                value={s.language}
+              <OptionList
                 options={s.languageOptions}
-                onChange={s.onLanguageChange}
+                value={s.language}
+                onSelect={s.onLanguageChange}
               />
             ) : (
-              <SettingsPickerRow
-                label={s.title}
-                value={s.appearance}
+              <OptionList
                 options={s.appearanceOptions}
-                onChange={s.onAppearanceChange}
+                value={s.appearance}
+                onSelect={s.onAppearanceChange}
               />
             )}
           </SettingsHost>

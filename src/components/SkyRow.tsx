@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MoonDisc } from '@/components/MoonDisc';
 import type { ColorTokens } from '@/themes/Colors';
@@ -22,54 +23,62 @@ interface SkyRowProps {
 
 const MOON_SIZE = Spacing.xl + Spacing.xs;
 
-/** Sunrise, sunset and moon phase as three columns at the foot of the date sheet. */
+/**
+ * Sunrise, sunset and moon phase as three columns at the foot of the date sheet. Each column puts
+ * its main value in a slot of the same height, with the label underneath, so values line up even
+ * when a Tamil label wraps to two lines.
+ */
 export function SkyRow({ sunrise, sunset, moon, colors }: SkyRowProps) {
   const divider = [styles.divider, { backgroundColor: colors.border }];
   return (
     <View style={styles.row}>
-      <Column item={sunrise} colors={colors} />
+      <Column label={sunrise.label} colors={colors}>
+        <Text style={[Typography.heading, { color: colors.text }]}>{sunrise.value}</Text>
+      </Column>
       <View style={divider} />
-      <Column item={sunset} colors={colors} />
+      <Column label={sunset.label} colors={colors}>
+        <Text style={[Typography.heading, { color: colors.text }]}>{sunset.value}</Text>
+      </Column>
       <View style={divider} />
       <Column
-        item={moon}
+        label={moon.value}
         colors={colors}
-        leading={
-          <MoonDisc
-            angle={moon.angle}
-            illumination={moon.illumination}
-            size={MOON_SIZE}
-            colors={colors}
-          />
-        }
-      />
+        accessibilityLabel={`${moon.label}: ${moon.value}`}
+      >
+        <MoonDisc
+          angle={moon.angle}
+          illumination={moon.illumination}
+          size={MOON_SIZE}
+          colors={colors}
+        />
+      </Column>
     </View>
   );
 }
 
 function Column({
-  item,
+  label,
   colors,
-  leading,
+  accessibilityLabel,
+  children,
 }: {
-  item: SkyItem;
+  label: string;
   colors: ColorTokens;
-  leading?: React.ReactNode;
+  accessibilityLabel?: string;
+  children: ReactNode;
 }) {
   return (
-    <View style={styles.column}>
-      {leading}
-      <Text style={[Typography.caption, { color: colors.textMuted }]}>{item.label}</Text>
-      <Text style={[Typography.bodyStrong, styles.value, { color: colors.text }]}>
-        {item.value}
-      </Text>
+    <View style={styles.column} accessible accessibilityLabel={accessibilityLabel}>
+      <View style={styles.slot}>{children}</View>
+      <Text style={[Typography.caption, styles.label, { color: colors.textMuted }]}>{label}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'stretch', padding: Spacing.lg },
-  column: { flex: 1, alignItems: 'center', gap: Spacing.xxs },
-  value: { textAlign: 'center' },
-  divider: { width: 1, marginVertical: Spacing.xs, minHeight: Layout.minTouchTarget },
+  row: { flexDirection: 'row', alignItems: 'flex-start', padding: Spacing.lg },
+  column: { flex: 1, alignItems: 'center', gap: Spacing.xs },
+  slot: { height: MOON_SIZE, justifyContent: 'center', alignItems: 'center' },
+  label: { textAlign: 'center' },
+  divider: { width: 1, alignSelf: 'stretch', minHeight: Layout.minTouchTarget },
 });
