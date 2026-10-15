@@ -13,7 +13,7 @@ export function SettingsScreen() {
   return (
     <ScrollView
       style={{ backgroundColor: s.colors.background }}
-      contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
+      contentContainerStyle={styles.content}
     >
       <Text style={[Typography.title, styles.title, { color: s.colors.text }]}>{s.title}</Text>
       <View style={[styles.sheet, { backgroundColor: s.colors.surface }]}>

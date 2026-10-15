@@ -18,7 +18,6 @@ import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CATEGORY_LABEL_KEYS = [
   ['state_govt', 'settings.categoryState'],
@@ -31,7 +30,6 @@ type PickerKind = 'appearance' | 'language' | 'newYear';
 export function useSettingsScreen() {
   const { t } = useTranslation();
   const colors = useAppColors();
-  const insets = useSafeAreaInsets();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { appearance, language, tamilNumerals, holidayCategories, newYearLabel, dataSaver } =
@@ -72,7 +70,6 @@ export function useSettingsScreen() {
     openPicker: (kind: PickerKind) => () => setPicker(kind),
     closePicker: () => setPicker(null),
     colors,
-    topInset: insets.top,
     labels: {
       display: t('settings.display'),
       appearance: t('settings.appearance'),

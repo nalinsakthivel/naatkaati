@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { DayBody } from '@/components/DayBody';
 import { SwipeView } from '@/components/SwipeView';
 import { TimeBanner } from '@/components/TimeBanner';
@@ -14,6 +14,10 @@ export function TodayScreen() {
     upcoming,
     isToday,
     jumpLabel,
+    calendarLabel,
+    settingsLabel,
+    onOpenCalendar,
+    onOpenSettings,
     onNextDay,
     onPreviousDay,
     onJumpToToday,
@@ -25,6 +29,23 @@ export function TodayScreen() {
         style={{ backgroundColor: day.colors.background }}
         contentContainerStyle={[styles.content, { paddingTop: topInset + Spacing.lg }]}
       >
+        <View style={styles.bar}>
+          {[
+            { label: calendarLabel, onPress: onOpenCalendar },
+            { label: settingsLabel, onPress: onOpenSettings },
+          ].map((item) => (
+            <Pressable
+              key={item.label}
+              onPress={item.onPress}
+              accessibilityRole="button"
+              style={[styles.barButton, { backgroundColor: day.colors.surface }]}
+            >
+              <Text style={[Typography.bodyStrong, { color: day.colors.primary }]}>
+                {item.label}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
         {timeBanner ? <TimeBanner {...timeBanner} colors={day.colors} /> : null}
         {isToday ? null : (
           <Pressable
@@ -57,6 +78,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   location: { textAlign: 'center' },
+  bar: { flexDirection: 'row', justifyContent: 'flex-end', gap: Spacing.sm },
+  barButton: {
+    minHeight: Layout.minTouchTarget,
+    justifyContent: 'center',
+    paddingHorizontal: Spacing.lg,
+    borderRadius: Radius.chip,
+  },
   jump: {
     alignSelf: 'center',
     minHeight: Layout.minTouchTarget,

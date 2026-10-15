@@ -14,7 +14,7 @@ export function CalendarScreen() {
     <SwipeView onSwipeLeft={s.onNext} onSwipeRight={s.onPrev}>
       <ScrollView
         style={{ backgroundColor: s.colors.background }}
-        contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
+        contentContainerStyle={styles.content}
       >
         {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
         <MonthHeader

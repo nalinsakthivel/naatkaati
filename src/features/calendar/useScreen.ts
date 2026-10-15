@@ -4,7 +4,6 @@ import { addDays, addMonths, format, parseISO } from 'date-fns';
 import { enIN } from 'date-fns/locale/en-IN';
 import { ta } from 'date-fns/locale/ta';
 import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { filterHolidaysByCategory } from '@/calendar/holidays';
 import { buildMonthGrid } from '@/calendar/monthGrid';
 import { isTamilNewYear } from '@/calendar/tamilNewYear';
@@ -23,7 +22,6 @@ const MAX_YEAR = 2099;
 export function useCalendarScreen() {
   const { t } = useTranslation();
   const colors = useAppColors();
-  const insets = useSafeAreaInsets();
   const router = useRouter();
   const timeBanner = useTimeBanner();
   const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
@@ -140,7 +138,6 @@ export function useCalendarScreen() {
   return {
     colors,
     timeBanner,
-    topInset: insets.top,
     title: format(visible, 'MMMM yyyy', { locale }),
     subtitle:
       monthTamilNames.length > 1
