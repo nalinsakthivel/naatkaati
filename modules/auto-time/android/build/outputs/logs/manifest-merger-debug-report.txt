@@ -1,0 +1,14 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml:1:1-2:12
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml:1:1-2:12
+	package
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml
+INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/xenovex/Documents/RN_Projects/naatkaati/modules/auto-time/android/src/main/AndroidManifest.xml

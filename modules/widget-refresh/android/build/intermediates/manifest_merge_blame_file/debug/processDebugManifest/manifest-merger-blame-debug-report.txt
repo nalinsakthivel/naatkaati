@@ -1,0 +1,32 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="expo.modules.widgetrefresh" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <application>
+7-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:2:3-13:17
+8
+9        <!-- Date, time and timezone changes are exempt from the implicit-broadcast limits. -->
+10        <receiver
+10-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:4:5-12:16
+11            android:name="expo.modules.widgetrefresh.DateChangedReceiver"
+11-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:5:7-68
+12            android:exported="false" >
+12-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:6:7-31
+13            <intent-filter>
+13-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:7:7-11:23
+14                <action android:name="android.intent.action.DATE_CHANGED" />
+14-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:8:9-69
+14-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:8:17-66
+15                <action android:name="android.intent.action.TIME_SET" />
+15-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:9:9-65
+15-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:9:17-62
+16                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+16-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:10:9-73
+16-->/Users/xenovex/Documents/RN_Projects/naatkaati/modules/widget-refresh/android/src/main/AndroidManifest.xml:10:17-70
+17            </intent-filter>
+18        </receiver>
+19    </application>
+20
+21</manifest>
