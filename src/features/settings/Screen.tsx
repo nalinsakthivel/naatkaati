@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SettingsHost } from '@/components/native/SettingsHost';
+import { SettingsLinkRow } from '@/components/native/SettingsLinkRow';
 import { SettingsPickerRow } from '@/components/native/SettingsPickerRow';
 import { SettingsSection } from '@/components/native/SettingsSection';
 import { SettingsSwitchRow } from '@/components/native/SettingsSwitchRow';
@@ -10,11 +11,9 @@ import { useSettingsScreen } from './useScreen';
 export function SettingsScreen() {
   const s = useSettingsScreen();
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: s.colors.background, paddingTop: s.topInset + Spacing.lg },
-      ]}
+    <ScrollView
+      style={{ backgroundColor: s.colors.background }}
+      contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
     >
       <View
         style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
@@ -42,18 +41,38 @@ export function SettingsScreen() {
               onChange={s.onTamilNumeralsChange}
             />
           </SettingsSection>
+          <SettingsSection title={s.labels.holidays}>
+            {s.categoryRows.map((row) => (
+              <SettingsSwitchRow
+                key={row.category}
+                label={row.label}
+                value={row.enabled}
+                onChange={(enabled) => s.onCategoryChange(row.category, enabled)}
+              />
+            ))}
+            <SettingsPickerRow
+              label={s.labels.newYear}
+              value={s.newYearLabel}
+              options={s.newYearOptions}
+              onChange={s.onNewYearChange}
+            />
+          </SettingsSection>
+          <SettingsSection title={s.labels.aboutSection}>
+            <SettingsLinkRow label={s.labels.about} onPress={s.onOpenAbout} />
+          </SettingsSection>
         </SettingsHost>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingHorizontal: Layout.screenPaddingH, paddingBottom: Spacing.lg },
-  sheet: {
-    borderRadius: Radius.card,
-    borderWidth: 1,
-    overflow: 'hidden',
-    ...Elevation.floating,
+  content: {
+    paddingHorizontal: Layout.screenPaddingH,
+    paddingBottom: Spacing.xxxl,
+    maxWidth: Layout.maxContentWidth,
+    width: '100%',
+    alignSelf: 'center',
   },
+  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
 });

@@ -5,7 +5,9 @@ import { enIN } from 'date-fns/locale/en-IN';
 import { ta } from 'date-fns/locale/ta';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { filterHolidaysByCategory } from '@/calendar/holidays';
 import { buildMonthGrid } from '@/calendar/monthGrid';
+import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import { toTamilNumerals } from '@/calendar/numerals';
 import { getTodayIso } from '@/calendar/today';
 import type { MonthGridCell } from '@/components/MonthGrid';
@@ -23,7 +25,9 @@ export function useCalendarScreen() {
   const colors = useAppColors();
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { language, tamilNumerals } = useAppSelector((state) => state.settings);
+  const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
+    (state) => state.settings,
+  );
   const isTamil = language === 'ta';
   const locale = isTamil ? ta : enIN;
 
@@ -36,9 +40,13 @@ export function useCalendarScreen() {
   const digits = (value: number) =>
     tamilNumerals && isTamil ? toTamilNumerals(value) : String(value);
 
+  const holidays = useMemo(
+    () => filterHolidaysByCategory(data.holidays, holidayCategories),
+    [data, holidayCategories],
+  );
   const weeks = useMemo(
-    () => buildMonthGrid(year, month, data.months, data.holidays, data.commemorations),
-    [year, month, data],
+    () => buildMonthGrid(year, month, data.months, holidays, data.commemorations),
+    [year, month, data, holidays],
   );
 
   const cellWeeks: MonthGridCell[][] = weeks.map((week) =>
@@ -70,7 +78,9 @@ export function useCalendarScreen() {
         isToday: cell.iso === todayIso,
         isSunday: cell.weekday === 0,
         isTamilMonthStart: cell.isTamilMonthStart,
-        isHoliday: cell.holidays.length > 0,
+        isHoliday:
+          cell.holidays.length > 0 ||
+          (cell.tamil !== null && isTamilNewYear(cell.tamil.month, cell.tamil.day, newYearLabel)),
         hasCommemoration: cell.commemorations.length > 0,
         accessibilityLabel: spoken.filter(Boolean).join(', '),
         onPress: () =>

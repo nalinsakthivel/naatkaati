@@ -18,7 +18,16 @@
     "language": "Language",
     "display": "Display",
     "tamilNumerals": "Tamil numerals",
-    "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only"
+    "tamilNumeralsHint": "Use ௧ ௨ ௩ in the Tamil date only",
+    "holidays": "Holidays",
+    "categoryState": "Tamil Nadu government",
+    "categoryCentral": "Central government",
+    "categoryBanks": "Banks",
+    "newYear": "Tamil New Year",
+    "newYearThai": "Thai 1",
+    "newYearChithirai": "Chithirai 1",
+    "about": "About",
+    "aboutSection": "App"
   },
   "today": {
     "yearLabel": "Thiruvalluvar year {{year}}",
@@ -85,6 +94,20 @@
       "note": "Visible somewhere on Earth"
     },
     "invalidDate": "This date is not valid",
-    "outOfRange": "No Tamil calendar data for this date"
+    "outOfRange": "No Tamil calendar data for this date",
+    "tamilNewYear": "Tamil New Year"
+  },
+  "about": {
+    "title": "About",
+    "version": "Version {{version}}",
+    "tagline": "An open-source, offline-first, rational and secular Tamil calendar.",
+    "methodTitle": "How dates are calculated",
+    "method": "Tamil month start dates come first from the official dates printed in the Tamil Nadu Government Gazette and government orders. For months without an official date, the moment the sun enters the next sign is calculated with the Lahiri ayanamsa and assigned to a day by the sunset rule at Chennai. These dates can differ by one day from the official Vakya-based calendar.",
+    "licensesTitle": "Licenses",
+    "licenseCode": "App code: GPL-3.0-or-later",
+    "licenseData": "Data: CC BY-SA 4.0",
+    "licenseKural": "Thirukkural text: public domain. English translation: G.U. Pope and others, 1886 (public domain). E-text: Project Madurai.",
+    "reportTitle": "Report a problem",
+    "reportAction": "Report a problem on GitHub"
   }
 }

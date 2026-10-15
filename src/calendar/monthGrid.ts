@@ -26,7 +26,7 @@ export interface GridCell<
   /** 0 = Sunday ... 6 = Saturday. Weeks start on Sunday. */
   weekday: number;
   inMonth: boolean;
-  tamil: { day: number; monthNameTa: string; monthNameEn: string } | null;
+  tamil: { month: number; day: number; monthNameTa: string; monthNameEn: string } | null;
   /** First day of a Tamil month */
   isTamilMonthStart: boolean;
   holidays: H[];
@@ -64,7 +64,12 @@ export function buildMonthGrid<H extends HolidayLike, C extends CommemorationEnt
         weekday: d,
         inMonth: date.getMonth() === month - 1,
         tamil: tamil
-          ? { day: tamil.day, monthNameTa: tamil.nameTa, monthNameEn: tamil.nameEn }
+          ? {
+              month: tamil.month,
+              day: tamil.day,
+              monthNameTa: tamil.nameTa,
+              monthNameEn: tamil.nameEn,
+            }
           : null,
         isTamilMonthStart: tamil?.day === 1,
         holidays: holidays.filter((holiday) => holiday.date === iso),

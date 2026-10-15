@@ -7,6 +7,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="day/[date]" options={{ headerShown: true, title: '' }} />
+        <Stack.Screen name="about" options={{ headerShown: true, title: '' }} />
       </Stack>
     </RootProviders>
   );

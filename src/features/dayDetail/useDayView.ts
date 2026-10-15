@@ -8,10 +8,11 @@ import { ta } from 'date-fns/locale/ta';
 import { useTranslation } from 'react-i18next';
 import { getEclipsesInYear, getMoonInfo, getSunTimes } from '@/calendar/astronomy';
 import { commemorationsOn } from '@/calendar/commemorations';
-import { holidaysOn } from '@/calendar/holidays';
+import { filterHolidaysByCategory, holidaysOn } from '@/calendar/holidays';
 import { kuralOfTheDay } from '@/calendar/kural';
 import { toTamilNumerals } from '@/calendar/numerals';
 import { getTamilDate } from '@/calendar/tamilDate';
+import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import type { MoonItem, SkyItem } from '@/components/SkyRow';
 import { AppConstants } from '@/constants/AppConstants';
 import { getBundledData } from '@/services/bundledData';
@@ -28,7 +29,9 @@ const NOON_HOUR = 12;
 export function useDayView(isoDate: string, moonAt?: Date) {
   const { t } = useTranslation();
   const colors = useAppColors();
-  const { language, tamilNumerals } = useAppSelector((state) => state.settings);
+  const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
+    (state) => state.settings,
+  );
   const isTamil = language === 'ta';
   const locale = isTamil ? ta : enIN;
   const data = useMemo(() => getBundledData(), []);
@@ -56,14 +59,29 @@ export function useDayView(isoDate: string, moonAt?: Date) {
   );
   const moon = getMoonInfo(moonAt ?? noon);
 
-  const holidays = holidaysOn(data.holidays, isoDate)
-    .map((holiday) => ({
-      id: holiday.id,
-      name: isTamil ? holiday.name_ta : holiday.name_en,
-      categoryLabel: t(`today.holidayCategory.${holiday.category}`),
-      appliesTo: holiday.applies_to.map((a) => t(`day.appliesTo.${a}`)).join(', '),
-    }))
-    .filter((holiday, index, all) => all.findIndex((h) => h.name === holiday.name) === index);
+  const newYear =
+    tamilDate && isTamilNewYear(tamilDate.month, tamilDate.day, newYearLabel)
+      ? [
+          {
+            id: 'tamil-new-year',
+            name: t('day.tamilNewYear'),
+            categoryLabel: t('today.holidayCategory.cultural'),
+            appliesTo: '',
+          },
+        ]
+      : [];
+
+  const holidays = [
+    ...newYear,
+    ...filterHolidaysByCategory(holidaysOn(data.holidays, isoDate), holidayCategories).map(
+      (holiday) => ({
+        id: holiday.id,
+        name: isTamil ? holiday.name_ta : holiday.name_en,
+        categoryLabel: t(`today.holidayCategory.${holiday.category}`),
+        appliesTo: holiday.applies_to.map((a) => t(`day.appliesTo.${a}`)).join(', '),
+      }),
+    ),
+  ].filter((holiday, index, all) => all.findIndex((h) => h.name === holiday.name) === index);
 
   const commemorations = commemorationsOn(data.commemorations, isoDate).map((item) => ({
     id: item.id,
