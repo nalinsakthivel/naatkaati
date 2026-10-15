@@ -297,7 +297,7 @@ In-app messages flow through the same validated pipeline, not through a third-pa
 | `expo`, `expo-dev-client` | Base framework and dev build |
 | `expo-router` | Navigation |
 | `@reduxjs/toolkit` + `react-redux` | State slices; RTK Query for `manifest.json` and dataset fetching |
-| `react-native-mmkv` | Settings, downloaded data, dismissed announcements |
+| `react-native-mmkv` + `react-native-nitro-modules` | Settings, downloaded data, dismissed announcements (nitro-modules is a required peer of MMKV v4) |
 | `zod` | Runtime validation of downloaded JSON; same schemas reused in CI |
 
 **Calendar and dates**
