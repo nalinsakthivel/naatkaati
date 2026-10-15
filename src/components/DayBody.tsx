@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CommemorationCard } from '@/components/CommemorationCard';
-import { HeroDate } from '@/components/HeroDate';
+import type { HeroDate } from '@/components/HeroDate';
+import { TearOffHero } from '@/components/TearOffHero';
 import { HolidayChip } from '@/components/HolidayChip';
 import { KuralCard } from '@/components/KuralCard';
 import { ReminderSwitch } from '@/components/native/ReminderSwitch';
@@ -12,6 +13,8 @@ type HeroProps = Parameters<typeof HeroDate>[0];
 type KuralProps = Parameters<typeof KuralCard>[0];
 
 interface DayBodyProps {
+  /** The civil date shown; a change tears the sheet off. */
+  dateKey: string;
   hero: Omit<HeroProps, 'colors' | 'children'> | null;
   outOfRangeLabel: string;
   gregorianOnly: string;
@@ -58,9 +61,9 @@ export function DayBody(props: DayBodyProps) {
   return (
     <View style={styles.stack}>
       {props.hero ? (
-        <HeroDate {...props.hero} colors={colors}>
+        <TearOffHero dateKey={props.dateKey} hero={props.hero} colors={colors}>
           {sky}
-        </HeroDate>
+        </TearOffHero>
       ) : (
         <View style={styles.fallback}>
           <Text style={[Typography.heading, { color: colors.text }]}>{props.gregorianOnly}</Text>

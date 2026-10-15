@@ -35,6 +35,7 @@ export function useCalendarScreen() {
   const data = useActiveData();
   const todayIso = getTodayIso(new Date(), AppConstants.defaultLocation.timeZone);
   const [visible, setVisible] = useState(() => parseISO(todayIso));
+  const [jumpOpen, setJumpOpen] = useState(false);
 
   const year = visible.getFullYear();
   const month = visible.getMonth() + 1;
@@ -122,6 +123,14 @@ export function useCalendarScreen() {
       })),
     );
 
+  const today = parseISO(todayIso);
+  const isCurrentMonth =
+    visible.getFullYear() === today.getFullYear() && visible.getMonth() === today.getMonth();
+  const monthNames = Array.from({ length: 12 }, (_, i) =>
+    format(new Date(2000, i, 1), 'MMMM', { locale }),
+  );
+  const years = Array.from({ length: MAX_YEAR - MIN_YEAR + 1 }, (_, i) => MIN_YEAR + i);
+
   const shiftMonth = (delta: number) =>
     setVisible((current) => {
       const next = addMonths(current, delta);
@@ -142,6 +151,23 @@ export function useCalendarScreen() {
         : (monthTamilNames[0] ?? ''),
     prevLabel: t('calendar.prevMonth'),
     nextLabel: t('calendar.nextMonth'),
+    jumpLabel: t('calendar.jump'),
+    todayLabel: isCurrentMonth ? undefined : t('calendar.today'),
+    onToday: () => setVisible(parseISO(todayIso)),
+    onOpenJump: () => setJumpOpen(true),
+    jump: {
+      isPresented: jumpOpen,
+      onDismiss: () => setJumpOpen(false),
+      title: t('calendar.jump'),
+      monthLabel: t('calendar.month'),
+      yearLabel: t('calendar.year'),
+      monthNames,
+      years,
+      month,
+      year,
+      onChange: (nextYear: number, nextMonth: number) =>
+        setVisible(new Date(nextYear, nextMonth - 1, 1)),
+    },
     onPrev: () => shiftMonth(-1),
     onNext: () => shiftMonth(1),
     weekdayLabels: Array.from({ length: 7 }, (_, i) =>

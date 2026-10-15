@@ -183,6 +183,7 @@ export function useDayView(isoDate: string, moonAt?: Date) {
 
   return {
     colors,
+    dateKey: isoDate,
     hero: tamilDate
       ? {
           day: digits(tamilDate.day),

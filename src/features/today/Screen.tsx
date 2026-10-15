@@ -1,22 +1,49 @@
-import { ScrollView, StyleSheet, Text } from 'react-native';
-import { TimeBanner } from '@/components/TimeBanner';
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 import { DayBody } from '@/components/DayBody';
-import { Layout, Spacing, Typography } from '@/themes/Theme';
+import { SwipeView } from '@/components/SwipeView';
+import { TimeBanner } from '@/components/TimeBanner';
+import { UpcomingList } from '@/components/UpcomingList';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useTodayScreen } from './useScreen';
 
 export function TodayScreen() {
-  const { topInset, locationLabel, timeBanner, ...day } = useTodayScreen();
+  const {
+    topInset,
+    locationLabel,
+    timeBanner,
+    upcoming,
+    isToday,
+    jumpLabel,
+    onNextDay,
+    onPreviousDay,
+    onJumpToToday,
+    ...day
+  } = useTodayScreen();
   return (
-    <ScrollView
-      style={{ backgroundColor: day.colors.background }}
-      contentContainerStyle={[styles.content, { paddingTop: topInset + Spacing.lg }]}
-    >
-      {timeBanner ? <TimeBanner {...timeBanner} colors={day.colors} /> : null}
-      <DayBody {...day} />
-      <Text style={[Typography.caption, styles.location, { color: day.colors.textMuted }]}>
-        {locationLabel}
-      </Text>
-    </ScrollView>
+    <SwipeView onSwipeLeft={onNextDay} onSwipeRight={onPreviousDay}>
+      <ScrollView
+        style={{ backgroundColor: day.colors.background }}
+        contentContainerStyle={[styles.content, { paddingTop: topInset + Spacing.lg }]}
+      >
+        {timeBanner ? <TimeBanner {...timeBanner} colors={day.colors} /> : null}
+        {isToday ? null : (
+          <Pressable
+            onPress={onJumpToToday}
+            accessibilityRole="button"
+            style={[styles.jump, { backgroundColor: day.colors.primary }]}
+          >
+            <Text style={[Typography.button, { color: day.colors.textOnPrimary }]}>
+              {jumpLabel}
+            </Text>
+          </Pressable>
+        )}
+        <DayBody {...day} />
+        <UpcomingList title={upcoming.title} rows={upcoming.rows} colors={day.colors} />
+        <Text style={[Typography.caption, styles.location, { color: day.colors.textMuted }]}>
+          {locationLabel}
+        </Text>
+      </ScrollView>
+    </SwipeView>
   );
 }
 
@@ -30,4 +57,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   location: { textAlign: 'center' },
+  jump: {
+    alignSelf: 'center',
+    minHeight: Layout.minTouchTarget,
+    justifyContent: 'center',
+    paddingHorizontal: Spacing.xl,
+    borderRadius: Radius.chip,
+  },
 });

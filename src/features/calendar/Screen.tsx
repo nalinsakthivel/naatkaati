@@ -1,6 +1,8 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { HolidayTicket } from '@/components/HolidayTicket';
 import { TimeBanner } from '@/components/TimeBanner';
+import { MonthJumpSheet } from '@/components/native/MonthJumpSheet';
+import { SwipeView } from '@/components/SwipeView';
 import { MonthGrid } from '@/components/MonthGrid';
 import { MonthHeader } from '@/components/MonthHeader';
 import { SheetBand } from '@/components/SheetBand';
@@ -10,61 +12,73 @@ import { useCalendarScreen } from './useScreen';
 export function CalendarScreen() {
   const s = useCalendarScreen();
   return (
-    <ScrollView
-      style={{ backgroundColor: s.colors.background }}
-      contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
-    >
-      {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
-      <View
-        style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
+    <SwipeView onSwipeLeft={s.onNext} onSwipeRight={s.onPrev}>
+      <ScrollView
+        style={{ backgroundColor: s.colors.background }}
+        contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
       >
-        <SheetBand colors={s.colors}>
-          <MonthHeader
-            title={s.title}
-            subtitle={s.subtitle}
-            prevLabel={s.prevLabel}
-            nextLabel={s.nextLabel}
-            onPrev={s.onPrev}
-            onNext={s.onNext}
-            colors={s.colors}
-          />
-        </SheetBand>
-        <View style={styles.grid}>
-          <MonthGrid weekdayLabels={s.weekdayLabels} weeks={s.weeks} colors={s.colors} />
-        </View>
-      </View>
-      <View style={styles.holidays}>
-        <Text style={[Typography.heading, { color: s.colors.text }]}>{s.holidaysTitle}</Text>
-        {s.monthHolidays.length === 0 ? (
-          <Text style={[Typography.body, { color: s.colors.textMuted }]}>{s.noHolidaysLabel}</Text>
-        ) : (
-          s.monthHolidays.map((holiday) => (
-            <HolidayTicket
-              key={holiday.id}
-              dateLabel={holiday.dateLabel}
-              name={holiday.name}
+        {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
+        <View
+          style={[
+            styles.sheet,
+            { backgroundColor: s.colors.surface, borderColor: s.colors.border },
+          ]}
+        >
+          <SheetBand colors={s.colors}>
+            <MonthHeader
+              title={s.title}
+              subtitle={s.subtitle}
+              prevLabel={s.prevLabel}
+              nextLabel={s.nextLabel}
+              jumpLabel={s.jumpLabel}
+              todayLabel={s.todayLabel}
+              onPrev={s.onPrev}
+              onNext={s.onNext}
+              onOpenJump={s.onOpenJump}
+              onToday={s.onToday}
               colors={s.colors}
             />
-          ))
-        )}
-      </View>
-      {s.monthCommemorations.length > 0 ? (
+          </SheetBand>
+          <View style={styles.grid}>
+            <MonthGrid weekdayLabels={s.weekdayLabels} weeks={s.weeks} colors={s.colors} />
+          </View>
+        </View>
         <View style={styles.holidays}>
-          <Text style={[Typography.heading, { color: s.colors.text }]}>
-            {s.commemorationsTitle}
-          </Text>
-          {s.monthCommemorations.map((item) => (
-            <HolidayTicket
-              key={item.id}
-              dateLabel={item.dateLabel}
-              name={item.name}
-              tone="commemoration"
-              colors={s.colors}
-            />
-          ))}
+          <Text style={[Typography.heading, { color: s.colors.text }]}>{s.holidaysTitle}</Text>
+          {s.monthHolidays.length === 0 ? (
+            <Text style={[Typography.body, { color: s.colors.textMuted }]}>
+              {s.noHolidaysLabel}
+            </Text>
+          ) : (
+            s.monthHolidays.map((holiday) => (
+              <HolidayTicket
+                key={holiday.id}
+                dateLabel={holiday.dateLabel}
+                name={holiday.name}
+                colors={s.colors}
+              />
+            ))
+          )}
         </View>
-      ) : null}
-    </ScrollView>
+        {s.monthCommemorations.length > 0 ? (
+          <View style={styles.holidays}>
+            <Text style={[Typography.heading, { color: s.colors.text }]}>
+              {s.commemorationsTitle}
+            </Text>
+            {s.monthCommemorations.map((item) => (
+              <HolidayTicket
+                key={item.id}
+                dateLabel={item.dateLabel}
+                name={item.name}
+                tone="commemoration"
+                colors={s.colors}
+              />
+            ))}
+          </View>
+        ) : null}
+      </ScrollView>
+      <MonthJumpSheet {...s.jump} />
+    </SwipeView>
   );
 }
 

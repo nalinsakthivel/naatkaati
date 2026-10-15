@@ -58,7 +58,15 @@
       "unverified": "This meaning has not been verified yet",
       "textUnderReview": "The text of this kural is under review",
       "report": "Report a mistake"
-    }
+    },
+    "upcoming": {
+      "title": "Coming up",
+      "nextHoliday": "Next holiday",
+      "nextCommemoration": "Next commemoration",
+      "inDays": "In {{count}} days",
+      "tomorrow": "Tomorrow"
+    },
+    "jumpToToday": "Go to today"
   },
   "calendar": {
     "prevMonth": "Previous month",
@@ -69,7 +77,10 @@
     "holiday": "Holiday",
     "tamilMonths": "{{first}} – {{second}}",
     "commemorationsTitle": "Commemorations this month",
-    "commemoration": "Commemoration"
+    "commemoration": "Commemoration",
+    "jump": "Jump to month",
+    "month": "Month",
+    "year": "Year"
   },
   "day": {
     "onThisDay": "On this day",

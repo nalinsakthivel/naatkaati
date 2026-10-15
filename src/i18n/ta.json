@@ -58,7 +58,15 @@
       "unverified": "இந்த விளக்கம் இன்னும் சரிபார்க்கப்படவில்லை",
       "textUnderReview": "இந்தக் குறளின் உரை சரிபார்ப்பில் உள்ளது",
       "report": "பிழையைத் தெரிவி"
-    }
+    },
+    "upcoming": {
+      "title": "வரவிருப்பவை",
+      "nextHoliday": "அடுத்த விடுமுறை",
+      "nextCommemoration": "அடுத்த நினைவு நாள்",
+      "inDays": "{{count}} நாட்களில்",
+      "tomorrow": "நாளை"
+    },
+    "jumpToToday": "இன்றுக்குச் செல்"
   },
   "calendar": {
     "prevMonth": "முந்தைய மாதம்",
@@ -69,7 +77,10 @@
     "holiday": "விடுமுறை",
     "tamilMonths": "{{first}} – {{second}}",
     "commemorationsTitle": "இந்த மாதத்தின் நினைவு நாட்கள்",
-    "commemoration": "நினைவு நாள்"
+    "commemoration": "நினைவு நாள்",
+    "jump": "மாதத்துக்குச் செல்",
+    "month": "மாதம்",
+    "year": "ஆண்டு"
   },
   "day": {
     "onThisDay": "இந்த நாளில்",

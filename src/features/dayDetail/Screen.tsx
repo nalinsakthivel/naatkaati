@@ -1,20 +1,35 @@
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
 import { DayBody } from '@/components/DayBody';
-import { Layout, Spacing, Typography } from '@/themes/Theme';
+import { SwipeView } from '@/components/SwipeView';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useDayDetailScreen } from './useScreen';
 
 export function DayDetailScreen() {
-  const { invalidDateLabel, ...day } = useDayDetailScreen();
+  const { invalidDateLabel, isToday, jumpLabel, onNextDay, onPreviousDay, onJumpToToday, ...day } =
+    useDayDetailScreen();
   return (
-    <ScrollView
-      style={{ backgroundColor: day.colors.background }}
-      contentContainerStyle={styles.content}
-    >
-      {invalidDateLabel ? (
-        <Text style={[Typography.body, { color: day.colors.holiday }]}>{invalidDateLabel}</Text>
-      ) : null}
-      <DayBody {...day} />
-    </ScrollView>
+    <SwipeView onSwipeLeft={onNextDay} onSwipeRight={onPreviousDay}>
+      <ScrollView
+        style={{ backgroundColor: day.colors.background }}
+        contentContainerStyle={styles.content}
+      >
+        {invalidDateLabel ? (
+          <Text style={[Typography.body, { color: day.colors.holiday }]}>{invalidDateLabel}</Text>
+        ) : null}
+        {isToday ? null : (
+          <Pressable
+            onPress={onJumpToToday}
+            accessibilityRole="button"
+            style={[styles.jump, { backgroundColor: day.colors.primary }]}
+          >
+            <Text style={[Typography.button, { color: day.colors.textOnPrimary }]}>
+              {jumpLabel}
+            </Text>
+          </Pressable>
+        )}
+        <DayBody {...day} />
+      </ScrollView>
+    </SwipeView>
   );
 }
 
@@ -26,5 +41,12 @@ const styles = StyleSheet.create({
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
+  },
+  jump: {
+    alignSelf: 'center',
+    minHeight: Layout.minTouchTarget,
+    justifyContent: 'center',
+    paddingHorizontal: Spacing.xl,
+    borderRadius: Radius.chip,
   },
 });
