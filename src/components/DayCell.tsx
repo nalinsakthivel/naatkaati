@@ -1,10 +1,9 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { FontFamily, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export interface DayCellProps {
   day: string;
-  /** Small Tamil date, or the Tamil month name on the first day of a Tamil month */
   tamilLabel: string;
   inMonth: boolean;
   isToday: boolean;
@@ -69,7 +68,6 @@ export function DayCell({
       >
         {tamilLabel}
       </Text>
-      {/* Shape markers (dot = holiday, square = commemoration) so meaning never relies on colour alone */}
       <View style={styles.markers}>
         {isHoliday && inMonth ? (
           <View
@@ -94,7 +92,7 @@ const MARKER_SIZE = Spacing.xs + Spacing.xxs;
 const styles = StyleSheet.create({
   cell: {
     flex: 1,
-    minHeight: Layout.minTouchTarget + Spacing.lg,
+    minHeight: Layout.minTouchTarget + Spacing.md,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: Radius.cell,

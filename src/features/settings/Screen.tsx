@@ -5,8 +5,7 @@ import { SettingsHost } from '@/components/native/SettingsHost';
 import { SettingsLinkRow } from '@/components/native/SettingsLinkRow';
 import { SettingsSection } from '@/components/native/SettingsSection';
 import { SettingsSwitchRow } from '@/components/native/SettingsSwitchRow';
-import { SheetBand } from '@/components/SheetBand';
-import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useSettingsScreen } from './useScreen';
 
 export function SettingsScreen() {
@@ -16,12 +15,8 @@ export function SettingsScreen() {
       style={{ backgroundColor: s.colors.background }}
       contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
     >
-      <View
-        style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
-      >
-        <SheetBand colors={s.colors}>
-          <Text style={[Typography.title, { color: s.colors.textOnPrimary }]}>{s.title}</Text>
-        </SheetBand>
+      <Text style={[Typography.title, styles.title, { color: s.colors.text }]}>{s.title}</Text>
+      <View style={[styles.sheet, { backgroundColor: s.colors.surface }]}>
         <SettingsHost>
           <SettingsSection title={s.labels.display}>
             <SettingsChoiceRow
@@ -114,6 +109,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
+  title: { paddingHorizontal: Spacing.xs },
+  sheet: { borderRadius: Radius.card, overflow: 'hidden' },
   version: { textAlign: 'center' },
 });

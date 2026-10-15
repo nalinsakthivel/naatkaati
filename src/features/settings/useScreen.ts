@@ -1,8 +1,3 @@
-import { useState } from 'react';
-import Constants from 'expo-constants';
-import { useRouter } from 'expo-router';
-import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppliesTo } from '@/calendar/holidays';
 import type { NewYearLabel } from '@/calendar/tamilNewYear';
 import type { ChoiceOption } from '@/components/native/ChoiceSheet';
@@ -19,6 +14,11 @@ import {
   type Appearance,
   type Language,
 } from '@/stores/slices/settingsSlice';
+import Constants from 'expo-constants';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const CATEGORY_LABEL_KEYS = [
   ['state_govt', 'settings.categoryState'],
@@ -44,7 +44,7 @@ export function useSettingsScreen() {
     { value: 'light', label: t('settings.appearanceLight') },
     { value: 'dark', label: t('settings.appearanceDark') },
   ];
-  // Language names are shown in their own language, never translated.
+
   const languageOptions: ChoiceOption<Language>[] = [
     { value: 'ta', label: 'தமிழ்' },
     { value: 'en', label: 'English' },

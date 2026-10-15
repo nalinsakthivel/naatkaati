@@ -40,7 +40,7 @@ export function MonthGrid({ weekdayLabels, weeks, colors }: MonthGridProps) {
 }
 
 const styles = StyleSheet.create({
-  grid: { gap: Spacing.xs },
-  row: { flexDirection: 'row', gap: Spacing.xs },
+  grid: { gap: Spacing.xxs },
+  row: { flexDirection: 'row', gap: Spacing.xxs },
   weekday: { flex: 1, textAlign: 'center', paddingVertical: Spacing.xs },
 });

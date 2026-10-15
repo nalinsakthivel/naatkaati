@@ -1,7 +1,6 @@
-import { Stack } from 'expo-router';
 import { useAppSelector } from '@/stores/hooks';
+import { Stack } from 'expo-router';
 
-/** Root navigator. Onboarding is shown until it is finished or skipped, then never again. */
 export function RootStack() {
   const onboardingDone = useAppSelector((state) => state.settings.onboardingDone);
   return (

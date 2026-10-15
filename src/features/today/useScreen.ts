@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import { AppState } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getTodayIso, shiftIsoDate } from '@/calendar/today';
 import { AppConstants } from '@/constants/AppConstants';
 import { useDayView } from '@/features/dayDetail/useDayView';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { AppState } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTimeBanner } from './useTimeBanner';
 import { useUpcoming } from './useUpcoming';
 
@@ -12,10 +12,8 @@ export function useTodayScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [now, setNow] = useState(() => new Date());
-  // Days away from today. Kept as an offset so the view stays correct across midnight.
   const [offset, setOffset] = useState(0);
 
-  // Re-read the clock when the app returns to the foreground so the date never goes stale.
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (state) => {
       if (state === 'active') setNow(new Date());

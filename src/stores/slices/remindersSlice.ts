@@ -1,13 +1,11 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface RemindersState {
-  /** Keys of the reminders the user has turned on */
   keys: string[];
 }
 
 export const initialRemindersState: RemindersState = { keys: [] };
 
-/** Parses the stored comma-separated key list, ignoring blanks. */
 export function parseReminderKeys(value: string | undefined): string[] {
   if (!value) return [];
   return value.split(',').filter((key) => key.length > 0);

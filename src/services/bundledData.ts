@@ -21,8 +21,6 @@ export function bundledVersion(name: string): number {
 }
 
 let cache: BundledData | null = null;
-
-/** Validates the bundled JSON with zod on first use, then reuses the result. Works fully offline. */
 export function getBundledData(): BundledData {
   if (cache) return cache;
   const thirukkural = thirukkuralFileSchema.parse(thirukkuralRaw);

@@ -1,13 +1,12 @@
-import { FlexWidget, TextWidget } from 'react-native-android-widget';
 import type { WidgetModel } from '@/calendar/widgetModel';
 import { LightColors } from '@/themes/Colors';
+import { FlexWidget, TextWidget } from 'react-native-android-widget';
 
 interface NaatkaatiWidgetProps {
   model: WidgetModel;
   yearLabel: string;
 }
 
-/** The widget library only accepts #-prefixed hex colours, so tokens are normalised to that type. */
 const hex = (value: string): `#${string}` => `#${value.replace('#', '')}`;
 
 const DATE_SIZE = 44;
@@ -17,7 +16,6 @@ const PAD = 12;
 const RADIUS = 16;
 const HOLIDAY_GAP = 4;
 
-/** Home-screen widget: today's Tamil date, any holiday, and the kural of the day. */
 export function NaatkaatiWidget({ model, yearLabel }: NaatkaatiWidgetProps) {
   return (
     <FlexWidget

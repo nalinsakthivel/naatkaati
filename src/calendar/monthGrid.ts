@@ -1,7 +1,7 @@
+import type { TamilMonthRecord } from '@/schemas/tamilMonths';
 import { addDays, format, getDay, getDaysInMonth } from 'date-fns';
 import { commemorationsOn, type CommemorationLike } from './commemorations';
 import { getTamilDate } from './tamilDate';
-import type { TamilMonthRecord } from '@/schemas/tamilMonths';
 
 export interface HolidayLike {
   id: string;
@@ -21,13 +21,10 @@ export interface GridCell<
   C extends CommemorationEntry = CommemorationEntry,
 > {
   iso: string;
-  /** Gregorian day of month */
   day: number;
-  /** 0 = Sunday ... 6 = Saturday. Weeks start on Sunday. */
   weekday: number;
   inMonth: boolean;
   tamil: { month: number; day: number; monthNameTa: string; monthNameEn: string } | null;
-  /** First day of a Tamil month */
   isTamilMonthStart: boolean;
   holidays: H[];
   commemorations: C[];
@@ -35,10 +32,6 @@ export interface GridCell<
 
 const toIso = (date: Date) => format(date, 'yyyy-MM-dd');
 
-/**
- * Weeks (Sunday first) covering a Gregorian month, including the leading and trailing days
- * of neighbouring months. `month` is 1-12. Only as many weeks as the month needs.
- */
 export function buildMonthGrid<H extends HolidayLike, C extends CommemorationEntry>(
   year: number,
   month: number,

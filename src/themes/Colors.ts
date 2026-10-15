@@ -45,6 +45,14 @@ export interface ColorTokens {
   commemorationSoft: string;
   otherMonthText: string; // dates outside the visible month
 
+  // Hero panel (the big date on Today / Day detail)
+  hero: string; // panel fill
+  onHero: string; // primary text on the panel
+  onHeroMuted: string; // secondary text on the panel
+  heroAccent: string; // sun disc and rule on the panel
+  heroHoliday: string; // numeral on Sundays and holidays, readable on the panel
+  heroSoft: string; // translucent chip fill on the panel
+
   // Feedback
   warning: string; // e.g. auto-time banner
   warningSoft: string;
@@ -79,6 +87,13 @@ export const LightColors: ColorTokens = {
   commemorationSoft: '#E8EBF7',
   otherMonthText: '#A7A9B2',
 
+  hero: '#24306B', // Iravu
+  onHero: '#FFFFFF',
+  onHeroMuted: '#C9D0F0',
+  heroAccent: '#F2B705', // Manjal
+  heroHoliday: '#FF9B8C',
+  heroSoft: 'rgba(255, 255, 255, 0.14)',
+
   warning: '#7A5200',
   warningSoft: '#FDF3D4',
   error: '#B42E24',
@@ -110,6 +125,13 @@ export const DarkColors: ColorTokens = {
   commemoration: '#A9B6F2',
   commemorationSoft: '#232D5E',
   otherMonthText: '#5C6488',
+
+  hero: '#202A5A',
+  onHero: '#EEF0F7',
+  onHeroMuted: '#A3A9C2',
+  heroAccent: '#F2B705',
+  heroHoliday: '#FF8A7A',
+  heroSoft: 'rgba(255, 255, 255, 0.1)',
 
   warning: '#F2B705',
   warningSoft: '#3A3320',

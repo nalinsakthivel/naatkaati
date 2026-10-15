@@ -1,13 +1,12 @@
-import type { ReactNode } from 'react';
-import { Column, Host } from '@expo/ui';
 import { useAppColors, useResolvedScheme } from '@/stores/hooks';
 import { Spacing } from '@/themes/Theme';
+import { Column, Host } from '@expo/ui';
+import type { ReactNode } from 'react';
 
 interface SettingsHostProps {
   children: ReactNode;
 }
 
-/** Native settings rows (Compose on Android, SwiftUI on iOS), sized to their content. */
 export function SettingsHost({ children }: SettingsHostProps) {
   const colors = useAppColors();
   const scheme = useResolvedScheme();

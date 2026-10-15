@@ -1,16 +1,13 @@
-import { ListItem } from '@expo/ui';
 import { useAppColors } from '@/stores/hooks';
+import { ListItem } from '@expo/ui';
 
 interface SettingsLinkRowProps {
   label: string;
   onPress: () => void;
-  /** Text shown on the right; defaults to a chevron. */
   trailing?: string;
-  /** `action` draws the label in the brand colour, as a button; `navigate` is a plain row. */
   tone?: 'navigate' | 'action';
 }
 
-/** A native list item that opens another screen. */
 export function SettingsLinkRow({
   label,
   onPress,

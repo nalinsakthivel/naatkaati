@@ -61,7 +61,6 @@ const config: ExpoConfig = {
             targetCellWidth: 4,
             targetCellHeight: 2,
             resizeMode: 'horizontal|vertical',
-            // Android's minimum is 30 minutes; the date-change receiver covers midnight.
             updatePeriodMillis: 1800000,
           },
         ],

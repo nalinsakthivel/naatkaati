@@ -11,7 +11,6 @@ const MIN_TRAVEL = 24;
 const COMMIT_DISTANCE = 64;
 const HORIZONTAL_BIAS = 1.5;
 
-/** Recognises a clear horizontal swipe, leaving vertical scrolling to the content inside. */
 export function SwipeView({ onSwipeLeft, onSwipeRight, children }: SwipeViewProps) {
   const callbacks = useRef({ onSwipeLeft, onSwipeRight });
   callbacks.current = { onSwipeLeft, onSwipeRight };

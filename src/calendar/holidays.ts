@@ -7,7 +7,6 @@ export function holidaysOn<T extends { date: string }>(
   return holidays.filter((holiday) => holiday.date === isoDate);
 }
 
-/** Keeps holidays that apply to at least one of the enabled categories. */
 export function filterHolidaysByCategory<T extends { applies_to: readonly AppliesTo[] }>(
   holidays: readonly T[],
   enabled: readonly AppliesTo[],

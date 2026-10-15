@@ -44,7 +44,6 @@ export function getActiveData(): BundledData {
   return cache;
 }
 
-/** Call after a sync writes new data so the next read reloads it. */
 export function resetActiveData(): void {
   cache = null;
 }

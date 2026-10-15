@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Linking } from 'react-native';
-import { useTranslation } from 'react-i18next';
 import type { ReminderSpec } from '@/calendar/reminders';
 import { cancelReminder, scheduleReminder } from '@/services/reminders';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { reminderAdded, reminderRemoved } from '@/stores/slices/remindersSlice';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Linking } from 'react-native';
 
 export interface ReminderRequest {
   spec: ReminderSpec;
@@ -12,7 +12,6 @@ export interface ReminderRequest {
   body: string;
 }
 
-/** Turns reminders on and off. Permission is asked only when the first reminder is switched on. */
 export function useReminders() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();

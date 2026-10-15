@@ -1,7 +1,7 @@
-import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
 import { planReminder, type ReminderSpec } from '@/calendar/reminders';
 import { AppConstants } from '@/constants/AppConstants';
+import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
 
 const CHANNEL_ID = 'reminders';
 
@@ -15,7 +15,6 @@ async function ensureChannel(channelName: string): Promise<void> {
   });
 }
 
-/** Asks for notification permission. Called only when the user sets their first reminder. */
 export async function ensureNotificationPermission(): Promise<boolean> {
   const current = await Notifications.getPermissionsAsync();
   if (current.granted) return true;
@@ -24,7 +23,6 @@ export async function ensureNotificationPermission(): Promise<boolean> {
   return requested.granted;
 }
 
-/** Schedules an inexact, day-level reminder. Never uses exact alarms. */
 export async function scheduleReminder(
   spec: ReminderSpec,
   content: { title: string; body: string; channelName: string },

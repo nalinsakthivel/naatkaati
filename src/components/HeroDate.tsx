@@ -1,9 +1,7 @@
+import type { ColorTokens } from '@/themes/Colors';
+import { Radius, Spacing, Typography } from '@/themes/Theme';
 import type { ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Perforation } from '@/components/Perforation';
-import { SheetBand } from '@/components/SheetBand';
-import type { ColorTokens } from '@/themes/Colors';
-import { Elevation, Radius, Spacing, Typography } from '@/themes/Theme';
 
 interface HeroDateProps {
   day: string;
@@ -11,16 +9,17 @@ interface HeroDateProps {
   monthName: string;
   yearLabel: string;
   gregorianLabel: string;
-  /** Sunday or holiday: the numeral is printed in red, as on a paper calendar. */
   isRedLetter: boolean;
   colors: ColorTokens;
-  /** Draw the pad of pages behind the sheet. Off for the sheet being torn away. */
-  showStack?: boolean;
-  /** Content below the tear line */
   children?: ReactNode;
 }
 
-/** Today's Tamil date as the top sheet of a tear-off wall calendar pad. */
+const SUN = 200;
+const SUN_OFFSET = -SUN / 3;
+const SUN_OPACITY = 0.16;
+const RULE_WIDTH = Spacing.xxl + Spacing.sm;
+const RULE_HEIGHT = Spacing.xs;
+
 export function HeroDate({
   day,
   weekdayLabel,
@@ -29,52 +28,52 @@ export function HeroDate({
   gregorianLabel,
   isRedLetter,
   colors,
-  showStack = true,
   children,
 }: HeroDateProps) {
-  const paper = { backgroundColor: colors.surface, borderColor: colors.border };
-  const numeralColor = isRedLetter ? colors.holiday : colors.text;
+  const numeralColor = isRedLetter ? colors.heroHoliday : colors.onHero;
   return (
-    <View style={showStack ? styles.stack : undefined}>
-      {showStack ? (
-        <>
-          <View style={[styles.page, styles.pageBack, paper]} />
-          <View style={[styles.page, styles.pageMiddle, paper]} />
-        </>
-      ) : null}
-      <View style={[styles.sheet, paper]}>
-        <SheetBand colors={colors}>
-          <View style={styles.bandRow}>
-            <Text style={[Typography.heroCaption, { color: colors.textOnPrimary }]}>
-              {monthName}
-            </Text>
-            <Text style={[Typography.body, { color: colors.textOnPrimary }]}>{yearLabel}</Text>
-          </View>
-        </SheetBand>
-        <View
-          style={styles.body}
-          accessible
-          accessibilityLabel={`${day} ${monthName}, ${weekdayLabel}, ${yearLabel}, ${gregorianLabel}`}
-        >
-          <Text style={[Typography.heroDate, { color: numeralColor }]}>{day}</Text>
-          <Text style={[Typography.title, { color: numeralColor }]}>{weekdayLabel}</Text>
-          <Text style={[Typography.body, { color: colors.textMuted }]}>{gregorianLabel}</Text>
+    <View style={[styles.panel, { backgroundColor: colors.hero }]}>
+      <View
+        importantForAccessibility="no-hide-descendants"
+        style={[styles.sun, { backgroundColor: colors.heroAccent, opacity: SUN_OPACITY }]}
+      />
+      <View style={styles.top}>
+        <Text style={[Typography.heroCaption, { color: colors.onHero }]}>{monthName}</Text>
+        <View style={[styles.pill, { backgroundColor: colors.heroSoft }]}>
+          <Text style={[Typography.caption, { color: colors.onHero }]}>{yearLabel}</Text>
         </View>
-        <Perforation colors={colors} />
-        {children}
       </View>
+      <View
+        style={styles.body}
+        accessible
+        accessibilityLabel={`${day} ${monthName}, ${weekdayLabel}, ${yearLabel}, ${gregorianLabel}`}
+      >
+        <Text style={[Typography.heroDate, { color: numeralColor }]}>{day}</Text>
+        <Text style={[Typography.title, { color: numeralColor }]}>{weekdayLabel}</Text>
+        <View style={[styles.rule, { backgroundColor: colors.heroAccent }]} />
+        <Text style={[Typography.body, { color: colors.onHeroMuted }]}>{gregorianLabel}</Text>
+      </View>
+      {children}
     </View>
   );
 }
 
-const PAGE_STEP = Spacing.xs + Spacing.xxs;
-
 const styles = StyleSheet.create({
-  stack: { paddingBottom: PAGE_STEP * 2 },
-  page: { position: 'absolute', top: Spacing.xl, borderRadius: Radius.card, borderWidth: 1 },
-  pageMiddle: { left: Spacing.sm, right: Spacing.sm, bottom: PAGE_STEP },
-  pageBack: { left: Spacing.lg, right: Spacing.lg, bottom: 0 },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
-  bandRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-  body: { alignItems: 'center', paddingVertical: Spacing.xl },
+  panel: { borderRadius: Radius.hero, overflow: 'hidden', padding: Spacing.xl, gap: Spacing.lg },
+  sun: {
+    position: 'absolute',
+    top: SUN_OFFSET,
+    right: SUN_OFFSET,
+    width: SUN,
+    height: SUN,
+    borderRadius: SUN / 2,
+  },
+  top: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  pill: {
+    borderRadius: Radius.chip,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.xxs,
+  },
+  body: { gap: Spacing.xs },
+  rule: { width: RULE_WIDTH, height: RULE_HEIGHT, borderRadius: RULE_HEIGHT / 2 },
 });

@@ -1,5 +1,5 @@
 import type { Manifest, ManifestDataset } from '@/schemas/manifest';
-import { schemaForDataset, parseDataset } from './datasets';
+import { parseDataset, schemaForDataset } from './datasets';
 import { compareVersions } from './version';
 
 export interface StoredDataset {

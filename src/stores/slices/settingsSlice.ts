@@ -1,6 +1,6 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { AppliesTo } from '@/calendar/holidays';
 import type { NewYearLabel } from '@/calendar/tamilNewYear';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export type Appearance = 'system' | 'light' | 'dark';
 export type Language = 'ta' | 'en';
@@ -10,14 +10,10 @@ export const HOLIDAY_CATEGORIES: readonly AppliesTo[] = ['state_govt', 'central_
 export interface SettingsState {
   appearance: Appearance;
   language: Language;
-  /** Tamil numerals apply to the Tamil date display only; Gregorian dates stay in Arabic numerals. */
   tamilNumerals: boolean;
-  /** Holiday categories shown in the app. */
   holidayCategories: AppliesTo[];
   newYearLabel: NewYearLabel;
-  /** First-launch onboarding has been completed or skipped. */
   onboardingDone: boolean;
-  /** Download data updates on Wi-Fi only. */
   dataSaver: boolean;
 }
 

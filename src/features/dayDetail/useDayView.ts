@@ -1,32 +1,28 @@
-import { useMemo } from 'react';
-import { Linking } from 'react-native';
-import Constants from 'expo-constants';
-import { TZDate } from '@date-fns/tz';
-import { format, getDay, parseISO } from 'date-fns';
-import { enIN } from 'date-fns/locale/en-IN';
-import { ta } from 'date-fns/locale/ta';
-import { useTranslation } from 'react-i18next';
 import { getEclipsesInYear, getMoonInfo, getSunTimes } from '@/calendar/astronomy';
 import { commemorationsOn } from '@/calendar/commemorations';
 import { filterHolidaysByCategory, holidaysOn } from '@/calendar/holidays';
 import { kuralOfTheDay } from '@/calendar/kural';
 import { toTamilNumerals } from '@/calendar/numerals';
+import { commemorationReminderKey, holidayReminderKey } from '@/calendar/reminders';
 import { getTamilDate } from '@/calendar/tamilDate';
 import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import type { MoonItem, SkyItem } from '@/components/SkyRow';
 import { AppConstants } from '@/constants/AppConstants';
 import { ApiConstants } from '@/services/constants/ApiConstants';
-import { commemorationReminderKey, holidayReminderKey } from '@/calendar/reminders';
 import { useActiveData, useAppColors, useAppSelector } from '@/stores/hooks';
+import { TZDate } from '@date-fns/tz';
+import { format, getDay, parseISO } from 'date-fns';
+import { enIN } from 'date-fns/locale/en-IN';
+import { ta } from 'date-fns/locale/ta';
+import Constants from 'expo-constants';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Linking } from 'react-native';
 import { useReminders } from './useReminders';
 
 const NO_VALUE = '—';
 const NOON_HOUR = 12;
 
-/**
- * Everything the Today and Day Detail screens show for one civil date (yyyy-MM-dd).
- * `moonAt` is the instant used for the moon phase; for a day other than today it is local noon.
- */
 export function useDayView(isoDate: string, moonAt?: Date) {
   const { t } = useTranslation();
   const colors = useAppColors();
@@ -163,7 +159,6 @@ export function useDayView(isoDate: string, moonAt?: Date) {
         lines: kural.lines_ta,
         meaning: isTamil ? kural.meaning_ta : kural.explanation_en,
         meaningNote: isTamil ? kural.meaning_ta_note : undefined,
-        // The unverified label and report action stay visible until a human reviewer signs off.
         unverifiedLabel: isTamil && !meaningReviewed ? t('today.kural.unverified') : undefined,
         textReviewLabel:
           kural.text_status === 'needs_review' ? t('today.kural.textUnderReview') : undefined,

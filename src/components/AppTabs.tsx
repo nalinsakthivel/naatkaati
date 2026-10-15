@@ -1,9 +1,8 @@
-import { NativeTabs } from 'expo-router/unstable-native-tabs';
-import { useTranslation } from 'react-i18next';
 import { useAppColors } from '@/stores/hooks';
 import { FontFamily } from '@/themes/Theme';
+import { NativeTabs } from 'expo-router/unstable-native-tabs';
+import { useTranslation } from 'react-i18next';
 
-/** OS-native bottom tabs: Material 3 navigation bar on Android, UITabBar on iOS. */
 export function AppTabs() {
   const { t } = useTranslation();
   const colors = useAppColors();

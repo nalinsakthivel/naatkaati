@@ -5,8 +5,7 @@ import { MonthJumpSheet } from '@/components/native/MonthJumpSheet';
 import { SwipeView } from '@/components/SwipeView';
 import { MonthGrid } from '@/components/MonthGrid';
 import { MonthHeader } from '@/components/MonthHeader';
-import { SheetBand } from '@/components/SheetBand';
-import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useCalendarScreen } from './useScreen';
 
 export function CalendarScreen() {
@@ -18,30 +17,21 @@ export function CalendarScreen() {
         contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
       >
         {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
-        <View
-          style={[
-            styles.sheet,
-            { backgroundColor: s.colors.surface, borderColor: s.colors.border },
-          ]}
-        >
-          <SheetBand colors={s.colors}>
-            <MonthHeader
-              title={s.title}
-              subtitle={s.subtitle}
-              prevLabel={s.prevLabel}
-              nextLabel={s.nextLabel}
-              jumpLabel={s.jumpLabel}
-              todayLabel={s.todayLabel}
-              onPrev={s.onPrev}
-              onNext={s.onNext}
-              onOpenJump={s.onOpenJump}
-              onToday={s.onToday}
-              colors={s.colors}
-            />
-          </SheetBand>
-          <View style={styles.grid}>
-            <MonthGrid weekdayLabels={s.weekdayLabels} weeks={s.weeks} colors={s.colors} />
-          </View>
+        <MonthHeader
+          title={s.title}
+          subtitle={s.subtitle}
+          prevLabel={s.prevLabel}
+          nextLabel={s.nextLabel}
+          jumpLabel={s.jumpLabel}
+          todayLabel={s.todayLabel}
+          onPrev={s.onPrev}
+          onNext={s.onNext}
+          onOpenJump={s.onOpenJump}
+          onToday={s.onToday}
+          colors={s.colors}
+        />
+        <View style={[styles.sheet, { backgroundColor: s.colors.surface }]}>
+          <MonthGrid weekdayLabels={s.weekdayLabels} weeks={s.weeks} colors={s.colors} />
         </View>
         <View style={styles.holidays}>
           <Text style={[Typography.heading, { color: s.colors.text }]}>{s.holidaysTitle}</Text>
@@ -50,14 +40,17 @@ export function CalendarScreen() {
               {s.noHolidaysLabel}
             </Text>
           ) : (
-            s.monthHolidays.map((holiday) => (
-              <HolidayTicket
-                key={holiday.id}
-                dateLabel={holiday.dateLabel}
-                name={holiday.name}
-                colors={s.colors}
-              />
-            ))
+            <View style={[styles.list, { backgroundColor: s.colors.surface }]}>
+              {s.monthHolidays.map((holiday, index) => (
+                <HolidayTicket
+                  key={holiday.id}
+                  divided={index > 0}
+                  dateLabel={holiday.dateLabel}
+                  name={holiday.name}
+                  colors={s.colors}
+                />
+              ))}
+            </View>
           )}
         </View>
         {s.monthCommemorations.length > 0 ? (
@@ -65,15 +58,18 @@ export function CalendarScreen() {
             <Text style={[Typography.heading, { color: s.colors.text }]}>
               {s.commemorationsTitle}
             </Text>
-            {s.monthCommemorations.map((item) => (
-              <HolidayTicket
-                key={item.id}
-                dateLabel={item.dateLabel}
-                name={item.name}
-                tone="commemoration"
-                colors={s.colors}
-              />
-            ))}
+            <View style={[styles.list, { backgroundColor: s.colors.surface }]}>
+              {s.monthCommemorations.map((item, index) => (
+                <HolidayTicket
+                  key={item.id}
+                  divided={index > 0}
+                  dateLabel={item.dateLabel}
+                  name={item.name}
+                  tone="commemoration"
+                  colors={s.colors}
+                />
+              ))}
+            </View>
           </View>
         ) : null}
       </ScrollView>
@@ -86,12 +82,12 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: Layout.screenPaddingH,
     paddingBottom: Spacing.xxxl,
-    gap: Spacing.xl,
+    gap: Spacing.lg,
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
   },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
-  grid: { padding: Spacing.sm },
+  sheet: { borderRadius: Radius.card, padding: Spacing.sm },
+  list: { borderRadius: Radius.card, paddingHorizontal: Spacing.lg },
   holidays: { gap: Spacing.md },
 });

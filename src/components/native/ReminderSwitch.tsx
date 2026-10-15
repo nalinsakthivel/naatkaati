@@ -1,5 +1,5 @@
-import { Host, Switch } from '@expo/ui';
 import { useAppColors, useResolvedScheme } from '@/stores/hooks';
+import { Host, Switch } from '@expo/ui';
 
 interface ReminderSwitchProps {
   label: string;
@@ -7,7 +7,6 @@ interface ReminderSwitchProps {
   onChange: (value: boolean) => void;
 }
 
-/** A native switch that sits inside our own brand cards. */
 export function ReminderSwitch({ label, value, onChange }: ReminderSwitchProps) {
   const colors = useAppColors();
   const scheme = useResolvedScheme();

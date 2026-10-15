@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface MonthHeaderProps {
   title: string;
@@ -8,7 +8,6 @@ interface MonthHeaderProps {
   prevLabel: string;
   nextLabel: string;
   jumpLabel: string;
-  /** Shown only when another month than the current one is visible */
   todayLabel?: string;
   onPrev: () => void;
   onNext: () => void;
@@ -17,7 +16,9 @@ interface MonthHeaderProps {
   colors: ColorTokens;
 }
 
-/** Month title, arrows and shortcuts, drawn inside the indigo SheetBand. */
+const CHEVRON = Spacing.md;
+const CHEVRON_STROKE = 2;
+
 export function MonthHeader({
   title,
   subtitle,
@@ -31,17 +32,8 @@ export function MonthHeader({
   onToday,
   colors,
 }: MonthHeaderProps) {
-  const arrowStyle = [styles.arrow, { borderColor: colors.textOnPrimary }];
   return (
     <View style={styles.header}>
-      <Pressable
-        onPress={onPrev}
-        accessibilityRole="button"
-        accessibilityLabel={prevLabel}
-        style={arrowStyle}
-      >
-        <Text style={[Typography.title, styles.glyph, { color: colors.textOnPrimary }]}>‹</Text>
-      </Pressable>
       <View style={styles.titles}>
         <Pressable
           onPress={onOpenJump}
@@ -49,26 +41,35 @@ export function MonthHeader({
           accessibilityLabel={`${title}. ${jumpLabel}`}
           style={styles.titleButton}
         >
-          <Text style={[Typography.title, { color: colors.textOnPrimary }]}>{title} ▾</Text>
+          <Text style={[Typography.title, { color: colors.text }]}>{title}</Text>
+          <View style={[styles.caret, { borderTopColor: colors.primary }]} />
         </Pressable>
-        <Text style={[Typography.caption, { color: colors.textOnPrimary }]}>{subtitle}</Text>
-        {todayLabel && onToday ? (
-          <Pressable
-            onPress={onToday}
-            accessibilityRole="button"
-            style={[styles.today, { borderColor: colors.today }]}
-          >
-            <Text style={[Typography.caption, { color: colors.today }]}>{todayLabel}</Text>
-          </Pressable>
-        ) : null}
+        <Text style={[Typography.caption, { color: colors.textMuted }]}>{subtitle}</Text>
       </View>
+      {todayLabel && onToday ? (
+        <Pressable
+          onPress={onToday}
+          accessibilityRole="button"
+          style={[styles.today, { backgroundColor: colors.today }]}
+        >
+          <Text style={[Typography.caption, { color: colors.textOnToday }]}>{todayLabel}</Text>
+        </Pressable>
+      ) : null}
+      <Pressable
+        onPress={onPrev}
+        accessibilityRole="button"
+        accessibilityLabel={prevLabel}
+        style={[styles.arrow, { backgroundColor: colors.surface }]}
+      >
+        <View style={[styles.chevron, styles.left, { borderColor: colors.primary }]} />
+      </Pressable>
       <Pressable
         onPress={onNext}
         accessibilityRole="button"
         accessibilityLabel={nextLabel}
-        style={arrowStyle}
+        style={[styles.arrow, { backgroundColor: colors.surface }]}
       >
-        <Text style={[Typography.title, styles.glyph, { color: colors.textOnPrimary }]}>›</Text>
+        <View style={[styles.chevron, styles.right, { borderColor: colors.primary }]} />
       </Pressable>
     </View>
   );
@@ -76,21 +77,40 @@ export function MonthHeader({
 
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
-  titles: { flex: 1, alignItems: 'center', gap: Spacing.xxs },
-  titleButton: { minHeight: Layout.minTouchTarget, justifyContent: 'center' },
+  titles: { flex: 1 },
+  titleButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    minHeight: Layout.minTouchTarget,
+  },
+  caret: {
+    borderLeftWidth: Spacing.xs,
+    borderRightWidth: Spacing.xs,
+    borderTopWidth: Spacing.xs,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+  },
   today: {
-    borderWidth: 1,
     borderRadius: Radius.chip,
     paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xxs,
+    paddingVertical: Spacing.xs,
   },
   arrow: {
     width: Layout.minTouchTarget,
     height: Layout.minTouchTarget,
     borderRadius: Layout.minTouchTarget / 2,
-    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  glyph: { lineHeight: Layout.minTouchTarget - Spacing.sm, textAlign: 'center' },
+  // A square with two visible edges, rotated into a chevron
+  chevron: { width: CHEVRON, height: CHEVRON, borderTopWidth: CHEVRON_STROKE },
+  left: {
+    borderLeftWidth: CHEVRON_STROKE,
+    transform: [{ rotate: '-45deg' }, { translateX: Spacing.xxs }, { translateY: Spacing.xxs }],
+  },
+  right: {
+    borderRightWidth: CHEVRON_STROKE,
+    transform: [{ rotate: '45deg' }, { translateX: -Spacing.xxs }, { translateY: Spacing.xxs }],
+  },
 });

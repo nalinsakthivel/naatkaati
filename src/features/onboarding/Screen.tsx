@@ -1,8 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SettingsHost } from '@/components/native/SettingsHost';
 import { OptionList } from '@/components/native/OptionList';
-import { SheetBand } from '@/components/SheetBand';
-import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useOnboardingScreen } from './useScreen';
 
 export function OnboardingScreen() {
@@ -18,13 +17,11 @@ export function OnboardingScreen() {
         },
       ]}
     >
-      <View
-        style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
-      >
-        <SheetBand colors={s.colors}>
-          <Text style={[Typography.caption, { color: s.colors.textOnPrimary }]}>{s.stepLabel}</Text>
-          <Text style={[Typography.title, { color: s.colors.textOnPrimary }]}>{s.title}</Text>
-        </SheetBand>
+      <View style={[styles.sheet, { backgroundColor: s.colors.surface }]}>
+        <View style={[styles.band, { backgroundColor: s.colors.hero }]}>
+          <Text style={[Typography.caption, { color: s.colors.heroAccent }]}>{s.stepLabel}</Text>
+          <Text style={[Typography.title, { color: s.colors.onHero }]}>{s.title}</Text>
+        </View>
         <View style={styles.body}>
           <Text style={[Typography.body, { color: s.colors.textMuted }]}>{s.hint}</Text>
           <SettingsHost>
@@ -71,7 +68,8 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
+  sheet: { borderRadius: Radius.hero, overflow: 'hidden' },
+  band: { padding: Spacing.xl, gap: Spacing.xs },
   body: { padding: Spacing.lg, gap: Spacing.md },
   actions: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   skip: {

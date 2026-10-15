@@ -2,13 +2,10 @@ import { addYears, differenceInCalendarDays, format, parseISO } from 'date-fns';
 
 export interface UpcomingItem {
   id: string;
-  /** Civil date of the occurrence, yyyy-MM-dd */
   iso: string;
-  /** Whole days from the reference date; 0 is the same day */
   daysAway: number;
 }
 
-/** Soonest holiday strictly after `fromIso`, or null if none is known. */
 export function nextHoliday<T extends { id: string; date: string }>(
   holidays: readonly T[],
   fromIso: string,
@@ -26,7 +23,6 @@ export function nextHoliday<T extends { id: string; date: string }>(
   };
 }
 
-/** Soonest yearly commemoration strictly after `fromIso`, rolling to next year when needed. */
 export function nextCommemoration<T extends { id: string; month: number; day: number }>(
   commemorations: readonly T[],
   fromIso: string,

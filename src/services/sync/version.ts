@@ -1,4 +1,3 @@
-/** Compares dotted numeric versions: negative if a < b, 0 if equal, positive if a > b. */
 export function compareVersions(a: string, b: string): number {
   const left = a.split('.').map(Number);
   const right = b.split('.').map(Number);

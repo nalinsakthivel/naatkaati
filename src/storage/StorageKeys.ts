@@ -11,7 +11,6 @@ export const StorageKeys = {
   datasetIndex: 'datasets.index',
 } as const;
 
-/** Downloaded datasets live under one key each, built here so every key stays in this file. */
 export const datasetKey = (name: string) => `dataset.${name}` as const;
 
 export type StorageKey =

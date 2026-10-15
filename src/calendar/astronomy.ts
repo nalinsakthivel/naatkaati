@@ -1,5 +1,4 @@
 import { TZDate } from '@date-fns/tz';
-import { format } from 'date-fns';
 import {
   Body,
   Illumination,
@@ -11,16 +10,15 @@ import {
   SearchLunarEclipse,
   SearchRiseSet,
 } from 'astronomy-engine';
+import { format } from 'date-fns';
 
 export interface GeoLocation {
   latitude: number;
   longitude: number;
-  /** IANA timezone, e.g. "Asia/Kolkata" */
   timeZone: string;
 }
 
 export interface SunTimes {
-  /** null when the sun does not rise/set that day (polar regions) */
   sunrise: Date | null;
   sunset: Date | null;
 }
@@ -36,9 +34,7 @@ export type MoonPhaseName =
   | 'waning_crescent';
 
 export interface MoonInfo {
-  /** Ecliptic elongation from the sun, 0-360 degrees (0 = new, 180 = full) */
   angle: number;
-  /** Illuminated fraction, 0-1 */
   illumination: number;
   phase: MoonPhaseName;
 }
@@ -47,10 +43,8 @@ export type EclipseType = 'solar' | 'lunar';
 
 export interface Eclipse {
   type: EclipseType;
-  /** penumbral | partial | total | annular */
   kind: string;
   peak: Date;
-  /** Civil date of the peak in the requested timezone, yyyy-MM-dd */
   date: string;
 }
 
@@ -96,7 +90,6 @@ function localDate(instant: Date, timeZone: string): string {
   return format(new TZDate(instant, timeZone), 'yyyy-MM-dd');
 }
 
-/** Global eclipses (visible somewhere on Earth, not necessarily at the user's location) in a calendar year. */
 export function getEclipsesInYear(year: number, timeZone: string): Eclipse[] {
   const rangeStart = `${year}-01-01`;
   const rangeEnd = `${year}-12-31`;

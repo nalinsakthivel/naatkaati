@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { Radius, Spacing, Typography } from '@/themes/Theme';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface CommemorationCardProps {
   name: string;
@@ -10,9 +10,8 @@ interface CommemorationCardProps {
   colors: ColorTokens;
 }
 
-const BAR = Spacing.xs + Spacing.xxs;
+const MARKER = Spacing.lg;
 
-/** A commemoration day. The square bar mirrors the square marker used in the month grid. */
 export function CommemorationCard({
   name,
   kindLabel,
@@ -22,23 +21,23 @@ export function CommemorationCard({
 }: CommemorationCardProps) {
   return (
     <View style={[styles.card, { backgroundColor: colors.commemorationSoft }]}>
-      <View style={[styles.bar, { backgroundColor: colors.commemoration }]} />
-      <View style={styles.text}>
-        <Text style={[Typography.heading, { color: colors.text }]}>{name}</Text>
+      <View style={styles.header}>
+        <View style={[styles.marker, { backgroundColor: colors.commemoration }]} />
         <Text style={[Typography.caption, { color: colors.commemoration }]}>{kindLabel}</Text>
-        <Text style={[Typography.body, { color: colors.text }]}>{description}</Text>
-        {designations.map((designation) => (
-          <Text key={designation} style={[Typography.caption, { color: colors.textMuted }]}>
-            {designation}
-          </Text>
-        ))}
       </View>
+      <Text style={[Typography.heading, { color: colors.text }]}>{name}</Text>
+      <Text style={[Typography.body, { color: colors.text }]}>{description}</Text>
+      {designations.map((designation) => (
+        <Text key={designation} style={[Typography.caption, { color: colors.textMuted }]}>
+          {designation}
+        </Text>
+      ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: { flexDirection: 'row', borderRadius: Radius.banner, overflow: 'hidden' },
-  bar: { width: BAR },
-  text: { flex: 1, padding: Spacing.lg, gap: Spacing.xs },
+  card: { borderRadius: Radius.card, padding: Spacing.lg, gap: Spacing.xs },
+  header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
+  marker: { width: MARKER / 2, height: MARKER / 2 },
 });

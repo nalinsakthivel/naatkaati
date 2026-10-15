@@ -1,6 +1,6 @@
-import { ListItem } from '@expo/ui';
 import type { ChoiceOption } from '@/components/native/ChoiceSheet';
 import { useAppColors } from '@/stores/hooks';
+import { ListItem } from '@expo/ui';
 
 interface OptionListProps<T extends string> {
   options: readonly ChoiceOption<T>[];
@@ -10,7 +10,6 @@ interface OptionListProps<T extends string> {
 
 const CHECK = '✓';
 
-/** Every option visible at once, with a check on the current one. For short choices. */
 export function OptionList<T extends string>({ options, value, onSelect }: OptionListProps<T>) {
   const colors = useAppColors();
   return (

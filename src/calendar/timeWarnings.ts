@@ -6,13 +6,10 @@ export interface TimeStatus {
 }
 
 export interface TimeWarnings {
-  /** Automatic date/time or timezone is off, so the device clock may be wrong */
   autoTimeOff: boolean;
-  /** The device timezone differs from the selected location's, so the shown date is the location's */
   timezoneDiffers: boolean;
 }
 
-/** Compares UTC offsets at `now`, so aliases like Asia/Kolkata and Asia/Calcutta never count as different. */
 export function getTimeWarnings(
   status: TimeStatus,
   deviceTimeZone: string | null,

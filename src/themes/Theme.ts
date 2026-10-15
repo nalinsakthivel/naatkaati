@@ -26,7 +26,12 @@ type TypeToken = Pick<TextStyle, 'fontFamily' | 'fontSize' | 'lineHeight' | 'let
 
 export const Typography = {
   /** The Tamil date numeral on the Today screen — the hero of the app */
-  heroDate: { fontFamily: FontFamily.displayBold, fontSize: 88, lineHeight: 96, letterSpacing: -1 },
+  heroDate: {
+    fontFamily: FontFamily.displayBold,
+    fontSize: 120,
+    lineHeight: 128,
+    letterSpacing: -2,
+  },
   /** Tamil month + year under the hero date, e.g. "ஐப்பசி 28, திருவள்ளுவர் ஆண்டு 2057" */
   heroCaption: { fontFamily: FontFamily.displaySemiBold, fontSize: 20, lineHeight: 30 },
   title: { fontFamily: FontFamily.displayBold, fontSize: 24, lineHeight: 36 },
@@ -58,11 +63,12 @@ export const Spacing = {
 
 /** Radius varies by hierarchy — not one value for everything */
 export const Radius = {
-  cell: 10, // month grid day cell
+  cell: 16, // month grid day cell
   chip: 999, // category chips (holiday / cultural / commemoration)
-  card: 16, // occasion cards, kural card
+  card: 24, // occasion cards, kural card, month grid
+  hero: 32, // the big date panel
   sheet: 24, // bottom sheets
-  banner: 12, // timezone / announcement banners
+  banner: 16, // timezone / announcement banners
 } as const;
 
 /** Flat by default; elevation only for things that float above content */

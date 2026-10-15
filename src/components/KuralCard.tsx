@@ -1,17 +1,15 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface KuralCardProps {
   title: string;
-  /** Plain kural number, e.g. "475", shown in the badge */
   numberText: string;
   numberLabel: string;
   adhikaramName: string;
   lines: readonly string[];
   meaning: string;
   meaningNote?: string;
-  /** Shown directly beneath the meaning whenever the meaning is not human-reviewed. */
   unverifiedLabel?: string;
   textReviewLabel?: string;
   reportLabel: string;
@@ -19,8 +17,7 @@ interface KuralCardProps {
   colors: ColorTokens;
 }
 
-const BADGE = Layout.minTouchTarget + Spacing.sm;
-const RULE = Spacing.xs;
+const BADGE = Layout.minTouchTarget - Spacing.sm;
 
 export function KuralCard({
   title,
@@ -37,20 +34,19 @@ export function KuralCard({
   colors,
 }: KuralCardProps) {
   return (
-    <View style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]}>
-      <View style={[styles.rule, { backgroundColor: colors.today }]} />
+    <View style={[styles.card, { backgroundColor: colors.surface }]}>
       <View style={styles.content}>
         <View style={styles.header}>
-          <View
-            style={[styles.badge, { borderColor: colors.primary }]}
-            accessible
-            accessibilityLabel={numberLabel}
-          >
-            <Text style={[Typography.heading, { color: colors.primary }]}>{numberText}</Text>
-          </View>
           <View style={styles.titles}>
             <Text style={[Typography.heading, { color: colors.primary }]}>{title}</Text>
             <Text style={[Typography.caption, { color: colors.textMuted }]}>{adhikaramName}</Text>
+          </View>
+          <View
+            style={[styles.badge, { backgroundColor: colors.today }]}
+            accessible
+            accessibilityLabel={numberLabel}
+          >
+            <Text style={[Typography.bodyStrong, { color: colors.textOnToday }]}>{numberText}</Text>
           </View>
         </View>
         <View style={styles.lines}>
@@ -88,21 +84,19 @@ export function KuralCard({
 }
 
 const styles = StyleSheet.create({
-  card: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden' },
-  rule: { height: RULE },
+  card: { borderRadius: Radius.card },
   content: { padding: Spacing.xl, gap: Spacing.sm },
   header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.md },
   badge: {
     minWidth: BADGE,
     height: BADGE,
     borderRadius: BADGE / 2,
-    borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: Spacing.xs,
   },
   titles: { flex: 1 },
-  lines: { paddingVertical: Spacing.sm },
+  lines: { paddingVertical: Spacing.md, gap: Spacing.xxs },
   unverified: {
     borderRadius: Radius.banner,
     paddingHorizontal: Spacing.md,

@@ -1,20 +1,20 @@
-import { useEffect, type ReactNode } from 'react';
-import { AppState } from 'react-native';
-import { Provider } from 'react-redux';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
+import { i18n } from '@/i18n';
+import { maybeSync } from '@/services/syncTrigger';
+import { refreshWidgets } from '@/services/widgetRefresh';
+import { store } from '@/stores';
+import { useAppSelector, useResolvedScheme } from '@/stores/hooks';
 import { Catamaran_600SemiBold, Catamaran_800ExtraBold } from '@expo-google-fonts/catamaran';
 import {
   NotoSansTamil_400Regular,
   NotoSansTamil_500Medium,
   NotoSansTamil_600SemiBold,
 } from '@expo-google-fonts/noto-sans-tamil';
-import { i18n } from '@/i18n';
-import { maybeSync } from '@/services/syncTrigger';
-import { refreshWidgets } from '@/services/widgetRefresh';
-import { store } from '@/stores';
-import { useAppSelector, useResolvedScheme } from '@/stores/hooks';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, type ReactNode } from 'react';
+import { AppState } from 'react-native';
+import { Provider } from 'react-redux';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,11 +27,9 @@ function LanguageSync() {
 }
 
 function ThemedStatusBar() {
-  // Light icons on the dark night-sky theme, dark icons on the light theme.
   return <StatusBar style={useResolvedScheme() === 'dark' ? 'light' : 'dark'} />;
 }
 
-/** Checks for data updates at launch and whenever the app returns to the foreground. */
 function DataSync() {
   useEffect(() => {
     maybeSync();

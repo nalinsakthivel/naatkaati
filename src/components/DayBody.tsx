@@ -1,19 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CommemorationCard } from '@/components/CommemorationCard';
 import type { HeroDate } from '@/components/HeroDate';
-import { TearOffHero } from '@/components/TearOffHero';
 import { HolidayChip } from '@/components/HolidayChip';
 import { KuralCard } from '@/components/KuralCard';
 import { ReminderSwitch } from '@/components/native/ReminderSwitch';
 import { SkyRow, type MoonItem, type SkyItem } from '@/components/SkyRow';
+import { TearOffHero } from '@/components/TearOffHero';
 import type { ColorTokens } from '@/themes/Colors';
 import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type HeroProps = Parameters<typeof HeroDate>[0];
 type KuralProps = Parameters<typeof KuralCard>[0];
 
 interface DayBodyProps {
-  /** The civil date shown; a change tears the sheet off. */
   dateKey: string;
   hero: Omit<HeroProps, 'colors' | 'children'> | null;
   outOfRangeLabel: string;
@@ -52,7 +51,6 @@ interface DayBodyProps {
   colors: ColorTokens;
 }
 
-/** The full set of day information, shared by the Today and Day Detail screens. */
 export function DayBody(props: DayBodyProps) {
   const { colors } = props;
   const sky = (

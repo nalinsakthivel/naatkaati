@@ -1,5 +1,5 @@
-import { buildWidgetModel } from '@/calendar/widgetModel';
 import { getTodayIso } from '@/calendar/today';
+import { buildWidgetModel } from '@/calendar/widgetModel';
 import { AppConstants } from '@/constants/AppConstants';
 import { i18n } from '@/i18n';
 import { LocalStore } from '@/storage/LocalStore';
@@ -10,10 +10,6 @@ import { getActiveData } from './activeData';
 
 export const WIDGET_NAME = 'NaatkaatiWidget';
 
-/**
- * Reads settings straight from storage (the widget can run before the app UI starts) and builds
- * what the widget shows for today in the default location's timezone.
- */
 export function loadWidgetSnapshot(): WidgetSnapshot | null {
   const storedLanguage = LocalStore.getString(StorageKeys.language);
   const language = isLanguage(storedLanguage) ? storedLanguage : AppConstants.defaultLanguage;

@@ -36,8 +36,14 @@ export function MonthJumpSheet({
       onDismiss={onDismiss}
       containerColor={colors.surface}
       contentColor={colors.text}
+      contentPadding={{ top: Spacing.sm, bottom: Spacing.xl, left: Spacing.lg, right: Spacing.lg }}
     >
-      <Host matchContents colorScheme={scheme} seedColor={colors.primary}>
+      <Host
+        matchContents={{ vertical: true }}
+        style={{ width: '100%' }}
+        colorScheme={scheme}
+        seedColor={colors.primary}
+      >
         <Column spacing={Spacing.md}>
           <Text textStyle={{ fontSize: Typography.heading.fontSize, color: colors.primary }}>
             {title}

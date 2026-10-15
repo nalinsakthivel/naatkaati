@@ -1,37 +1,44 @@
-import { StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
-import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Spacing, Typography } from '@/themes/Theme';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface HolidayTicketProps {
   dateLabel: string;
   name: string;
   tone?: 'holiday' | 'commemoration';
+  divided?: boolean;
   colors: ColorTokens;
 }
 
-/** One holiday in the month list: a red date stub beside the official name. */
-export function HolidayTicket({ dateLabel, name, tone = 'holiday', colors }: HolidayTicketProps) {
+export function HolidayTicket({
+  dateLabel,
+  name,
+  tone = 'holiday',
+  divided = false,
+  colors,
+}: HolidayTicketProps) {
   const accent = tone === 'holiday' ? colors.holiday : colors.commemoration;
-  const soft = tone === 'holiday' ? colors.holidaySoft : colors.commemorationSoft;
   return (
-    <View style={styles.row}>
-      <View style={[styles.stub, { backgroundColor: soft, borderColor: accent }]}>
-        <Text style={[Typography.bodyStrong, { color: accent }]}>{dateLabel}</Text>
-      </View>
+    <View
+      style={[
+        styles.row,
+        divided && { borderTopColor: colors.border, borderTopWidth: StyleSheet.hairlineWidth },
+      ]}
+    >
+      <Text style={[Typography.bodyStrong, styles.date, { color: accent }]}>{dateLabel}</Text>
       <Text style={[Typography.body, styles.name, { color: colors.text }]}>{name}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'center', gap: Spacing.md },
-  stub: {
-    minWidth: Layout.minTouchTarget + Spacing.lg,
+  row: {
+    flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: Radius.cell,
-    borderWidth: 1,
-    paddingVertical: Spacing.xs,
-    paddingHorizontal: Spacing.sm,
+    gap: Spacing.md,
+    minHeight: Layout.minTouchTarget,
+    paddingVertical: Spacing.sm,
   },
+  date: { width: Layout.minTouchTarget + Spacing.lg },
   name: { flex: 1 },
 });

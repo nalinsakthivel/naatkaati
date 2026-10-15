@@ -1,14 +1,13 @@
+import type { TamilMonthRecord } from '@/schemas/tamilMonths';
 import { filterHolidaysByCategory, holidaysOn, type AppliesTo } from './holidays';
 import { kuralOfTheDay } from './kural';
 import { toTamilNumerals } from './numerals';
 import { getTamilDate } from './tamilDate';
-import type { TamilMonthRecord } from '@/schemas/tamilMonths';
 
 export interface WidgetInput {
   months: readonly TamilMonthRecord[];
   holidays: readonly { date: string; name_ta: string; name_en: string; applies_to: AppliesTo[] }[];
   kurals: readonly { number: number; lines_ta: string[] }[];
-  /** Civil date, yyyy-MM-dd, in the selected location's timezone */
   iso: string;
   language: 'ta' | 'en';
   tamilNumerals: boolean;
@@ -24,7 +23,6 @@ export interface WidgetModel {
   kuralLines: string[];
 }
 
-/** Everything the home-screen widget shows for one date. Pure, so the app and widget agree. */
 export function buildWidgetModel(input: WidgetInput): WidgetModel | null {
   const tamil = getTamilDate(input.months, input.iso);
   if (!tamil) return null;

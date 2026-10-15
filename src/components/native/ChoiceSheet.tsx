@@ -1,6 +1,6 @@
-import { BottomSheet, Column, Host, ListItem, Text } from '@expo/ui';
 import { useAppColors, useResolvedScheme } from '@/stores/hooks';
 import { Spacing, Typography } from '@/themes/Theme';
+import { BottomSheet, Column, Host, ListItem, Text } from '@expo/ui';
 
 export interface ChoiceOption<T extends string> {
   label: string;
@@ -18,7 +18,6 @@ interface ChoiceSheetProps<T extends string> {
 
 const CHECK = '✓';
 
-/** Native bottom sheet listing every option at once, with a check on the current one. */
 export function ChoiceSheet<T extends string>({
   isPresented,
   onDismiss,
@@ -35,8 +34,14 @@ export function ChoiceSheet<T extends string>({
       onDismiss={onDismiss}
       containerColor={colors.surface}
       contentColor={colors.text}
+      contentPadding={{ top: Spacing.sm, bottom: Spacing.xl, left: Spacing.lg, right: Spacing.lg }}
     >
-      <Host matchContents colorScheme={scheme} seedColor={colors.primary}>
+      <Host
+        matchContents={{ vertical: true }}
+        style={{ width: '100%' }}
+        colorScheme={scheme}
+        seedColor={colors.primary}
+      >
         <Column spacing={Spacing.xs}>
           <Text textStyle={{ fontSize: Typography.heading.fontSize, color: colors.primary }}>
             {title}

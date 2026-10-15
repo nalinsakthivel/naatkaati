@@ -1,22 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
 import type { ColorTokens } from '@/themes/Colors';
 import { Radius, Spacing, Typography } from '@/themes/Theme';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface HolidayChipProps {
   name: string;
   categoryLabel: string;
-  /** Who the holiday applies to, e.g. state government, banks */
   detail?: string;
   colors: ColorTokens;
 }
 
-const BAR = Spacing.xs + Spacing.xxs;
+const MARKER = Spacing.xl;
 
-/** Holiday ribbon. The bar is a shape, and the category is written out, so it never relies on colour alone. */
 export function HolidayChip({ name, categoryLabel, detail, colors }: HolidayChipProps) {
   return (
     <View style={[styles.chip, { backgroundColor: colors.holidaySoft }]}>
-      <View style={[styles.bar, { backgroundColor: colors.holiday }]} />
+      <View style={[styles.marker, { backgroundColor: colors.holiday }]} />
       <View style={styles.text}>
         <Text style={[Typography.heading, { color: colors.text }]}>{name}</Text>
         <Text style={[Typography.caption, { color: colors.holiday }]}>{categoryLabel}</Text>
@@ -29,7 +27,13 @@ export function HolidayChip({ name, categoryLabel, detail, colors }: HolidayChip
 }
 
 const styles = StyleSheet.create({
-  chip: { flexDirection: 'row', borderRadius: Radius.banner, overflow: 'hidden' },
-  bar: { width: BAR },
-  text: { flex: 1, paddingHorizontal: Spacing.lg, paddingVertical: Spacing.md },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.md,
+    borderRadius: Radius.card,
+    padding: Spacing.lg,
+  },
+  marker: { width: MARKER, height: MARKER, borderRadius: MARKER / 2 },
+  text: { flex: 1 },
 });

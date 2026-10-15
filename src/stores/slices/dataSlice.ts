@@ -3,7 +3,6 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 export type SyncStatus = 'idle' | 'syncing' | 'ok' | 'failed';
 
 export interface DataState {
-  /** Bumped whenever downloaded data replaces what screens are showing */
   revision: number;
   syncStatus: SyncStatus;
 }

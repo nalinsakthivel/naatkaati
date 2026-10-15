@@ -5,7 +5,6 @@ export interface CommemorationLike {
   day: number;
 }
 
-/** Commemorations are keyed by Gregorian month and day and recur every year. */
 export function commemorationsOn<T extends CommemorationLike>(
   commemorations: readonly T[],
   isoDate: string,
