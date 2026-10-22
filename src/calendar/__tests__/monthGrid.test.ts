@@ -72,6 +72,21 @@ describe('buildMonthGrid', () => {
     expect(cell?.tamil).toBeNull();
   });
 
+  it('pads the last supported month without extrapolating Tamil dates into 2101', () => {
+    const cells = buildMonthGrid(2100, 12, months, [], []).flat();
+    expect(cells.find((cell) => cell.iso === '2100-12-31')?.tamil).toMatchObject({
+      month: 9,
+      day: 15,
+    });
+    const beyond = cells.filter((cell) => cell.iso > '2100-12-31');
+    expect(beyond.length).toBeGreaterThan(0);
+    for (const cell of beyond) {
+      expect(cell.tamil).toBeNull();
+      expect(cell.isTamilMonthStart).toBe(false);
+      expect(cell.inMonth).toBe(false);
+    }
+  });
+
   it('attaches commemorations by Gregorian month and day (Periyar birth, 17 Sep)', () => {
     const cell = buildMonthGrid(2026, 9, months, holidays, commemorations)
       .flat()
