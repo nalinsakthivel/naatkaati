@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
   },
   stub: { alignSelf: 'stretch', width: STUB },
   text: { flex: 1, paddingVertical: Spacing.md },
-  when: { textAlign: 'right' },
+  when: { textAlign: 'right', flexShrink: 1, maxWidth: '50%' },
 });
