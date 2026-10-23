@@ -5,8 +5,8 @@ import { MonthJumpSheet } from '@/components/native/MonthJumpSheet';
 import { SwipeView } from '@/components/SwipeView';
 import { MonthGrid } from '@/components/MonthGrid';
 import { MonthHeader } from '@/components/MonthHeader';
-import { SheetBand } from '@/components/SheetBand';
-import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { ScreenHeader } from '@/components/ScreenHeader';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useCalendarScreen } from './useScreen';
 
 export function CalendarScreen() {
@@ -17,6 +17,7 @@ export function CalendarScreen() {
         style={{ backgroundColor: s.colors.background }}
         contentContainerStyle={[styles.content, { paddingTop: s.topInset + Spacing.lg }]}
       >
+        <ScreenHeader title={s.screenTitle} subtitle={s.screenSubtitle} colors={s.colors} />
         {s.timeBanner ? <TimeBanner {...s.timeBanner} colors={s.colors} /> : null}
         <View
           style={[
@@ -24,23 +25,31 @@ export function CalendarScreen() {
             { backgroundColor: s.colors.surface, borderColor: s.colors.border },
           ]}
         >
-          <SheetBand colors={s.colors}>
-            <MonthHeader
-              title={s.title}
-              subtitle={s.subtitle}
-              prevLabel={s.prevLabel}
-              nextLabel={s.nextLabel}
-              jumpLabel={s.jumpLabel}
-              todayLabel={s.todayLabel}
-              onPrev={s.onPrev}
-              onNext={s.onNext}
-              onOpenJump={s.onOpenJump}
-              onToday={s.onToday}
-              colors={s.colors}
-            />
-          </SheetBand>
+          <MonthHeader
+            title={s.title}
+            subtitle={s.subtitle}
+            prevLabel={s.prevLabel}
+            nextLabel={s.nextLabel}
+            jumpLabel={s.jumpLabel}
+            todayLabel={s.todayLabel}
+            canGoPrev={s.canGoPrev}
+            canGoNext={s.canGoNext}
+            onPrev={s.onPrev}
+            onNext={s.onNext}
+            onOpenJump={s.onOpenJump}
+            onToday={s.onToday}
+            colors={s.colors}
+          />
+
           <View style={styles.grid}>
             <MonthGrid weekdayLabels={s.weekdayLabels} weeks={s.weeks} colors={s.colors} />
+            <View style={styles.legend}>
+              {s.legend.map((label, i) => (
+                <Text key={label} style={[Typography.caption, { color: s.colors.textMuted }]}>
+                  {i === 0 ? '●' : '■'} {label}
+                </Text>
+              ))}
+            </View>
           </View>
         </View>
         <View style={styles.holidays}>
@@ -55,6 +64,7 @@ export function CalendarScreen() {
                 key={holiday.id}
                 dateLabel={holiday.dateLabel}
                 name={holiday.name}
+                onPress={holiday.onPress}
                 colors={s.colors}
               />
             ))
@@ -70,6 +80,7 @@ export function CalendarScreen() {
                 key={item.id}
                 dateLabel={item.dateLabel}
                 name={item.name}
+                onPress={item.onPress}
                 tone="commemoration"
                 colors={s.colors}
               />
@@ -91,7 +102,14 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
   },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
-  grid: { padding: Spacing.sm },
+  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden' },
+  grid: { paddingHorizontal: Spacing.xs, paddingBottom: Spacing.lg },
+  legend: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.lg,
+    paddingHorizontal: Spacing.sm,
+    paddingTop: Spacing.md,
+  },
   holidays: { gap: Spacing.md },
 });

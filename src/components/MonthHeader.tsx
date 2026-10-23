@@ -8,16 +8,15 @@ interface MonthHeaderProps {
   prevLabel: string;
   nextLabel: string;
   jumpLabel: string;
-  /** Shown only when another month than the current one is visible */
   todayLabel?: string;
   onPrev: () => void;
   onNext: () => void;
   onOpenJump: () => void;
   onToday?: () => void;
+  canGoPrev?: boolean;
+  canGoNext?: boolean;
   colors: ColorTokens;
 }
-
-/** Month title, arrows and shortcuts, drawn inside the indigo SheetBand. */
 export function MonthHeader({
   title,
   subtitle,
@@ -29,68 +28,80 @@ export function MonthHeader({
   onNext,
   onOpenJump,
   onToday,
+  canGoPrev = true,
+  canGoNext = true,
   colors,
 }: MonthHeaderProps) {
-  const arrowStyle = [styles.arrow, { borderColor: colors.textOnPrimary }];
+  const arrow = [styles.arrow, { backgroundColor: colors.background }];
   return (
     <View style={styles.header}>
-      <Pressable
-        onPress={onPrev}
-        accessibilityRole="button"
-        accessibilityLabel={prevLabel}
-        style={arrowStyle}
-      >
-        <Text style={[Typography.title, styles.glyph, { color: colors.textOnPrimary }]}>‹</Text>
-      </Pressable>
-      <View style={styles.titles}>
+      <View style={styles.row}>
         <Pressable
-          onPress={onOpenJump}
           accessibilityRole="button"
           accessibilityLabel={`${title}. ${jumpLabel}`}
-          style={styles.titleButton}
+          onPress={onOpenJump}
+          style={styles.title}
         >
-          <Text style={[Typography.title, { color: colors.textOnPrimary }]}>{title} ▾</Text>
+          <Text style={[Typography.title, { color: colors.text }]}>{title} ▾</Text>
         </Pressable>
-        <Text style={[Typography.caption, { color: colors.textOnPrimary }]}>{subtitle}</Text>
         {todayLabel && onToday ? (
           <Pressable
-            onPress={onToday}
             accessibilityRole="button"
-            style={[styles.today, { borderColor: colors.today }]}
+            onPress={onToday}
+            style={[styles.today, { backgroundColor: colors.today }]}
           >
-            <Text style={[Typography.caption, { color: colors.today }]}>{todayLabel}</Text>
+            <Text style={[Typography.button, { color: colors.textOnToday }]}>{todayLabel}</Text>
           </Pressable>
         ) : null}
       </View>
-      <Pressable
-        onPress={onNext}
-        accessibilityRole="button"
-        accessibilityLabel={nextLabel}
-        style={arrowStyle}
-      >
-        <Text style={[Typography.title, styles.glyph, { color: colors.textOnPrimary }]}>›</Text>
-      </Pressable>
+      <View style={styles.row}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={prevLabel}
+          accessibilityState={{ disabled: !canGoPrev }}
+          disabled={!canGoPrev}
+          onPress={onPrev}
+          style={[arrow, !canGoPrev && styles.disabled]}
+        >
+          <Text style={[Typography.title, { color: colors.primary }]}>‹</Text>
+        </Pressable>
+        <Text style={[Typography.body, styles.subtitle, { color: colors.textMuted }]}>
+          {subtitle}
+        </Text>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={nextLabel}
+          accessibilityState={{ disabled: !canGoNext }}
+          disabled={!canGoNext}
+          onPress={onNext}
+          style={[arrow, !canGoNext && styles.disabled]}
+        >
+          <Text style={[Typography.title, { color: colors.primary }]}>›</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.sm },
-  titles: { flex: 1, alignItems: 'center', gap: Spacing.xxs },
-  titleButton: { minHeight: Layout.minTouchTarget, justifyContent: 'center' },
+  header: { padding: Spacing.lg, gap: Spacing.sm },
+  row: { flexDirection: 'row', gap: Spacing.sm, alignItems: 'center' },
+  title: { flex: 1, minHeight: Layout.minTouchTarget, justifyContent: 'center' },
+  subtitle: { flex: 1, textAlign: 'center' },
   today: {
-    borderWidth: 1,
-    borderRadius: Radius.chip,
+    minHeight: Layout.minTouchTarget,
+    minWidth: Layout.minTouchTarget,
     paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xxs,
+    borderRadius: Radius.cell,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexShrink: 1,
   },
   arrow: {
     width: Layout.minTouchTarget,
-    height: Layout.minTouchTarget,
-    borderRadius: Layout.minTouchTarget / 2,
-    borderWidth: 1,
+    minHeight: Layout.minTouchTarget,
+    borderRadius: Radius.cell,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  glyph: { lineHeight: Layout.minTouchTarget - Spacing.sm, textAlign: 'center' },
+  disabled: { opacity: 0.4 },
 });

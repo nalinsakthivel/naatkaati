@@ -27,7 +27,9 @@
     "newYearThai": "Thai 1",
     "newYearChithirai": "Chithirai 1",
     "about": "About",
-    "aboutSection": "App"
+    "aboutSection": "App",
+    "subtitle": "Make the calendar work for you",
+    "newYearHint": "Changes the cultural label only. Official holiday dates stay the same."
   },
   "today": {
     "yearLabel": "Thiruvalluvar year {{year}}",
@@ -72,7 +74,7 @@
     "prevMonth": "Previous month",
     "nextMonth": "Next month",
     "holidaysTitle": "Holidays this month",
-    "noHolidays": "No holidays this month",
+    "noHolidays": "No holidays listed for this month",
     "today": "Today",
     "holiday": "Holiday",
     "tamilMonths": "{{first}} – {{second}}",
@@ -80,7 +82,8 @@
     "commemoration": "Commemoration",
     "jump": "Jump to month",
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "subtitle": "Browse dates, holidays and days that matter"
   },
   "day": {
     "onThisDay": "On this day",
@@ -106,7 +109,12 @@
     },
     "invalidDate": "This date is not valid",
     "outOfRange": "No Tamil calendar data for this date",
-    "tamilNewYear": "Tamil New Year"
+    "tamilNewYear": "Tamil New Year",
+    "previous": "Previous day",
+    "next": "Next day",
+    "occasions": "On this day",
+    "noOccasions": "No occasions listed for this date.",
+    "skyTitle": "Sun & moon"
   },
   "about": {
     "title": "About",
@@ -126,7 +134,8 @@
     "channel": "Reminders",
     "denied": "Notifications are turned off. Allow them in system settings to get reminders.",
     "openSettings": "Open settings",
-    "past": "This date has passed"
+    "past": "This date has passed",
+    "failed": "Could not update this reminder. Please try again."
   },
   "timeBanner": {
     "autoTimeOff": "Automatic date and time is turned off. The dates shown may be wrong.",
@@ -141,7 +150,9 @@
     "next": "Next",
     "skip": "Skip",
     "done": "Done",
-    "step": "Step {{current}} of {{total}}"
+    "step": "Step {{current}} of {{total}}",
+    "intro": "Your Tamil date, holidays and daily kural. Works offline.",
+    "back": "Back"
   },
   "data": {
     "section": "Data",
@@ -150,6 +161,13 @@
     "idle": "",
     "syncing": "Updating…",
     "ok": "Up to date",
-    "failed": "Could not update"
+    "failed": "Could not update",
+    "wifiHint": "Automatic updates wait for Wi-Fi. You can still update manually."
+  },
+  "app": {
+    "name": "Naatkaati"
+  },
+  "common": {
+    "openLinkFailed": "Could not open the link. Please try again."
   }
 }

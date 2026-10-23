@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Linking } from 'react-native';
 import Constants from 'expo-constants';
 import { TZDate } from '@date-fns/tz';
@@ -29,6 +29,7 @@ const NOON_HOUR = 12;
  */
 export function useDayView(isoDate: string, moonAt?: Date) {
   const { t } = useTranslation();
+  const [reportError, setReportError] = useState<string | null>(null);
   const colors = useAppColors();
   const { language, tamilNumerals, holidayCategories, newYearLabel } = useAppSelector(
     (state) => state.settings,
@@ -171,18 +172,26 @@ export function useDayView(isoDate: string, moonAt?: Date) {
       }
     : null;
 
-  const onReportKural = () => {
+  const onReportKural = async () => {
+    setReportError(null);
     if (!kural) return;
     const params = new URLSearchParams({
       template: ApiConstants.kuralCorrectionTemplate,
       title: `Kural ${kural.number}`,
       body: `Kural: ${kural.number}\nApp version: ${Constants.expoConfig?.version ?? 'unknown'}`,
     });
-    Linking.openURL(`${ApiConstants.repoUrl}/issues/new?${params.toString()}`);
+    try {
+      await Linking.openURL(`${ApiConstants.repoUrl}/issues/new?${params.toString()}`);
+    } catch {
+      setReportError(t('common.openLinkFailed'));
+    }
   };
 
   return {
     colors,
+    occasionsTitle: t('day.occasions'),
+    noOccasionsLabel: t('day.noOccasions'),
+    skyTitle: t('day.skyTitle'),
     dateKey: isoDate,
     hero: tamilDate
       ? {
@@ -206,6 +215,7 @@ export function useDayView(isoDate: string, moonAt?: Date) {
     moon: moonItem,
     kural: kuralView,
     onReportKural,
+    reportError,
     reminderUi: {
       switchLabel: reminders.switchLabel,
       message: reminders.message,
