@@ -21,6 +21,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python3 tools/validate-data/validate.py
+      - name: Test data validator
+        run: python3 -m unittest discover -s tools/validate-data -p 'test_*.py'
 
   quality:
     runs-on: ubuntu-latest
