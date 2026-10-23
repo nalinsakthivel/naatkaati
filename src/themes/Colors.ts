@@ -77,7 +77,7 @@ export const LightColors: ColorTokens = {
   culturalSoft: '#E6F2EA',
   commemoration: '#24306B',
   commemorationSoft: '#E8EBF7',
-  otherMonthText: '#A7A9B2',
+  otherMonthText: '#686C7B',
 
   warning: '#7A5200',
   warningSoft: '#FDF3D4',
@@ -109,7 +109,7 @@ export const DarkColors: ColorTokens = {
   culturalSoft: '#1B3436',
   commemoration: '#A9B6F2',
   commemorationSoft: '#232D5E',
-  otherMonthText: '#5C6488',
+  otherMonthText: '#919ABA',
 
   warning: '#F2B705',
   warningSoft: '#3A3320',

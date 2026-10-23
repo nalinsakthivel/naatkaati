@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { AppState } from 'react-native';
+import { useClock } from '@/hooks/useClock';
 import { useTranslation } from 'react-i18next';
 import { getTimeWarnings } from '@/calendar/timeWarnings';
 import { AppConstants } from '@/constants/AppConstants';
@@ -8,15 +7,7 @@ import { getAutoTimeStatus, getDeviceTimeZone, openDateSettings } from '@/servic
 /** Banner content for a wrong or mismatched device clock, or null when everything is fine. */
 export function useTimeBanner() {
   const { t } = useTranslation();
-  const [now, setNow] = useState(() => new Date());
-
-  // Re-check when the user comes back from the system settings.
-  useEffect(() => {
-    const subscription = AppState.addEventListener('change', (state) => {
-      if (state === 'active') setNow(new Date());
-    });
-    return () => subscription.remove();
-  }, []);
+  const now = useClock();
 
   const warnings = getTimeWarnings(
     getAutoTimeStatus(),

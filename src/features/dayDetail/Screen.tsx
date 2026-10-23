@@ -1,38 +1,31 @@
-import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import { DayBody } from '@/components/DayBody';
+import { DateNavigator } from '@/components/DateNavigator';
+import { ScreenHeader } from '@/components/ScreenHeader';
 import { SwipeView } from '@/components/SwipeView';
-import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { Layout, Spacing, Typography } from '@/themes/Theme';
 import { useDayDetailScreen } from './useScreen';
 
 export function DayDetailScreen() {
-  const { invalidDateLabel, isToday, jumpLabel, onNextDay, onPreviousDay, onJumpToToday, ...day } =
-    useDayDetailScreen();
+  const s = useDayDetailScreen();
   return (
-    <SwipeView onSwipeLeft={onNextDay} onSwipeRight={onPreviousDay}>
+    <SwipeView onSwipeLeft={s.onNextDay} onSwipeRight={s.onPreviousDay}>
       <ScrollView
-        style={{ backgroundColor: day.colors.background }}
+        style={{ backgroundColor: s.colors.background }}
         contentContainerStyle={styles.content}
       >
-        {invalidDateLabel ? (
-          <Text style={[Typography.body, { color: day.colors.holiday }]}>{invalidDateLabel}</Text>
+        <ScreenHeader title={s.title} colors={s.colors} />
+        <DateNavigator {...s.navigation} colors={s.colors} />
+        {s.invalidDateLabel ? (
+          <Text accessibilityRole="alert" style={[Typography.body, { color: s.colors.warning }]}>
+            {s.invalidDateLabel}
+          </Text>
         ) : null}
-        {isToday ? null : (
-          <Pressable
-            onPress={onJumpToToday}
-            accessibilityRole="button"
-            style={[styles.jump, { backgroundColor: day.colors.primary }]}
-          >
-            <Text style={[Typography.button, { color: day.colors.textOnPrimary }]}>
-              {jumpLabel}
-            </Text>
-          </Pressable>
-        )}
-        <DayBody {...day} />
+        <DayBody {...s} />
       </ScrollView>
     </SwipeView>
   );
 }
-
 const styles = StyleSheet.create({
   content: {
     padding: Layout.screenPaddingH,
@@ -41,12 +34,5 @@ const styles = StyleSheet.create({
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
-  },
-  jump: {
-    alignSelf: 'center',
-    minHeight: Layout.minTouchTarget,
-    justifyContent: 'center',
-    paddingHorizontal: Spacing.xl,
-    borderRadius: Radius.chip,
   },
 });

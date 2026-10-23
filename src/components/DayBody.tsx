@@ -1,7 +1,7 @@
+import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { CommemorationCard } from '@/components/CommemorationCard';
-import type { HeroDate } from '@/components/HeroDate';
-import { TearOffHero } from '@/components/TearOffHero';
+import { HeroDate } from '@/components/HeroDate';
 import { HolidayChip } from '@/components/HolidayChip';
 import { KuralCard } from '@/components/KuralCard';
 import { ReminderSwitch } from '@/components/native/ReminderSwitch';
@@ -13,7 +13,7 @@ type HeroProps = Parameters<typeof HeroDate>[0];
 type KuralProps = Parameters<typeof KuralCard>[0];
 
 interface DayBodyProps {
-  /** The civil date shown; a change tears the sheet off. */
+  /** The civil date shown. */
   dateKey: string;
   hero: Omit<HeroProps, 'colors' | 'children'> | null;
   outOfRangeLabel: string;
@@ -43,6 +43,7 @@ interface DayBodyProps {
   eclipseNote: string;
   kural: Omit<KuralProps, 'colors' | 'onReport'> | null;
   onReportKural: () => void;
+  reportError?: string | null;
   reminderUi: {
     switchLabel: string;
     message: string | null;
@@ -50,6 +51,10 @@ interface DayBodyProps {
     onOpenSettings: () => void;
   };
   colors: ColorTokens;
+  beforeDetails?: ReactNode;
+  occasionsTitle: string;
+  noOccasionsLabel: string;
+  skyTitle: string;
 }
 
 /** The full set of day information, shared by the Today and Day Detail screens. */
@@ -61,9 +66,7 @@ export function DayBody(props: DayBodyProps) {
   return (
     <View style={styles.stack}>
       {props.hero ? (
-        <TearOffHero dateKey={props.dateKey} hero={props.hero} colors={colors}>
-          {sky}
-        </TearOffHero>
+        <HeroDate {...props.hero} colors={colors} />
       ) : (
         <View style={styles.fallback}>
           <Text style={[Typography.heading, { color: colors.text }]}>{props.gregorianOnly}</Text>
@@ -72,6 +75,12 @@ export function DayBody(props: DayBodyProps) {
           </Text>
         </View>
       )}
+      <Text accessibilityRole="header" style={[Typography.heading, { color: colors.text }]}>
+        {props.occasionsTitle}
+      </Text>
+      {props.holidays.length === 0 && props.commemorations.length === 0 ? (
+        <Text style={[Typography.body, { color: colors.textMuted }]}>{props.noOccasionsLabel}</Text>
+      ) : null}
       {props.holidays.length > 0 ? (
         <View style={styles.block}>
           {props.holidays.map((holiday) => (
@@ -95,9 +104,6 @@ export function DayBody(props: DayBodyProps) {
       ) : null}
       {props.commemorations.length > 0 ? (
         <View style={styles.block}>
-          <Text style={[Typography.heading, { color: colors.text }]}>
-            {props.commemorationsTitle}
-          </Text>
           {props.commemorations.map((item) => (
             <View key={item.id} style={styles.item}>
               <CommemorationCard
@@ -117,7 +123,11 @@ export function DayBody(props: DayBodyProps) {
         </View>
       ) : null}
       {props.reminderUi.message ? (
-        <View style={[styles.notice, { backgroundColor: colors.warningSoft }]}>
+        <View
+          accessibilityRole="alert"
+          accessibilityLiveRegion="polite"
+          style={[styles.notice, { backgroundColor: colors.warningSoft }]}
+        >
           <Text style={[Typography.body, { color: colors.warning }]}>
             {props.reminderUi.message}
           </Text>
@@ -134,6 +144,16 @@ export function DayBody(props: DayBodyProps) {
           ) : null}
         </View>
       ) : null}
+      {props.beforeDetails}
+      <View style={[styles.sky, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+        <Text
+          accessibilityRole="header"
+          style={[Typography.heading, styles.skyTitle, { color: colors.text }]}
+        >
+          {props.skyTitle}
+        </Text>
+        {sky}
+      </View>
       {props.eclipses.map((eclipse) => (
         <View
           key={eclipse.id}
@@ -144,13 +164,20 @@ export function DayBody(props: DayBodyProps) {
         </View>
       ))}
       {props.kural ? (
-        <KuralCard {...props.kural} onReport={props.onReportKural} colors={colors} />
+        <KuralCard
+          {...props.kural}
+          onReport={props.onReportKural}
+          reportError={props.reportError}
+          colors={colors}
+        />
       ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  sky: { borderWidth: 1, borderRadius: Radius.card },
+  skyTitle: { paddingHorizontal: Spacing.lg, paddingTop: Spacing.lg },
   stack: { gap: Spacing.lg },
   block: { gap: Spacing.sm },
   item: { gap: Spacing.xs },

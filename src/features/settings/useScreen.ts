@@ -64,6 +64,7 @@ export function useSettingsScreen() {
 
   return {
     title: t('screens.settings'),
+    subtitle: t('settings.subtitle'),
     versionLabel: t('about.version', { version: Constants.expoConfig?.version ?? '' }),
     appearanceValueLabel: labelOf(appearanceOptions, appearance),
     languageValueLabel: labelOf(languageOptions, language),
@@ -78,6 +79,9 @@ export function useSettingsScreen() {
       appearance: t('settings.appearance'),
       language: t('settings.language'),
       tamilNumerals: t('settings.tamilNumerals'),
+      tamilNumeralsHint: t('settings.tamilNumeralsHint'),
+      newYearHint: t('settings.newYearHint'),
+      wifiHint: t('data.wifiHint'),
       holidays: t('settings.holidays'),
       newYear: t('settings.newYear'),
       data: t('data.section'),

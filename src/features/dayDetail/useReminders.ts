@@ -17,33 +17,42 @@ export function useReminders() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const keys = useAppSelector((state) => state.reminders.keys);
-  const [message, setMessage] = useState<'denied' | 'past' | null>(null);
+  const [message, setMessage] = useState<'denied' | 'past' | 'failed' | null>(null);
 
   const isOn = (key: string) => keys.includes(key);
 
   const toggle = async (request: ReminderRequest, enabled: boolean) => {
     setMessage(null);
-    if (!enabled) {
-      await cancelReminder(request.spec.key);
-      dispatch(reminderRemoved(request.spec.key));
-      return;
+    try {
+      if (!enabled) {
+        await cancelReminder(request.spec.key);
+        dispatch(reminderRemoved(request.spec.key));
+        return;
+      }
+      const result = await scheduleReminder(request.spec, {
+        title: request.title,
+        body: request.body,
+        channelName: t('reminder.channel'),
+      });
+      if (result === 'scheduled') dispatch(reminderAdded(request.spec.key));
+      else setMessage(result);
+    } catch {
+      setMessage('failed');
     }
-    const result = await scheduleReminder(request.spec, {
-      title: request.title,
-      body: request.body,
-      channelName: t('reminder.channel'),
-    });
-    if (result === 'scheduled') dispatch(reminderAdded(request.spec.key));
-    else setMessage(result);
   };
 
   return {
     isOn,
     toggle,
     switchLabel: t('reminder.remindMe'),
-    message:
-      message === 'denied' ? t('reminder.denied') : message === 'past' ? t('reminder.past') : null,
+    message: message ? t(`reminder.${message}`) : null,
     openSettingsLabel: message === 'denied' ? t('reminder.openSettings') : null,
-    onOpenSettings: () => Linking.openSettings(),
+    onOpenSettings: async () => {
+      try {
+        await Linking.openSettings();
+      } catch {
+        setMessage('failed');
+      }
+    },
   };
 }

@@ -11,6 +11,7 @@ import { isTamilNewYear } from '@/calendar/tamilNewYear';
 import { toTamilNumerals } from '@/calendar/numerals';
 import { getTodayIso } from '@/calendar/today';
 import type { MonthGridCell } from '@/components/MonthGrid';
+import { useClock } from '@/hooks/useClock';
 import { AppConstants } from '@/constants/AppConstants';
 import { RouteEnum } from '@/enums/RouteEnum';
 import { useTimeBanner } from '@/features/today/useTimeBanner';
@@ -33,7 +34,7 @@ export function useCalendarScreen() {
   const locale = isTamil ? ta : enIN;
 
   const data = useActiveData();
-  const todayIso = getTodayIso(new Date(), AppConstants.defaultLocation.timeZone);
+  const todayIso = getTodayIso(useClock(), AppConstants.defaultLocation.timeZone);
   const [visible, setVisible] = useState(() => parseISO(todayIso));
   const [jumpOpen, setJumpOpen] = useState(false);
 
@@ -41,6 +42,9 @@ export function useCalendarScreen() {
   const month = visible.getMonth() + 1;
   const digits = (value: number) =>
     tamilNumerals && isTamil ? toTamilNumerals(value) : String(value);
+
+  const openDate = (iso: string) => () =>
+    router.push({ pathname: RouteEnum.DayDetailPattern, params: { date: iso } });
 
   const holidays = useMemo(
     () => filterHolidaysByCategory(data.holidays, holidayCategories),
@@ -103,6 +107,7 @@ export function useCalendarScreen() {
     .flatMap((cell) =>
       cell.holidays.map((holiday) => ({
         id: holiday.id,
+        onPress: openDate(cell.iso),
         dateLabel: format(parseISO(cell.iso), 'd MMM', { locale }),
         name: isTamil ? holiday.name_ta : holiday.name_en,
       })),
@@ -118,6 +123,7 @@ export function useCalendarScreen() {
     .flatMap((cell) =>
       cell.commemorations.map((item) => ({
         id: `${item.id}-${cell.iso}`,
+        onPress: openDate(cell.iso),
         dateLabel: format(parseISO(cell.iso), 'd MMM', { locale }),
         name: isTamil ? item.name_ta : item.name_en,
       })),
@@ -139,6 +145,11 @@ export function useCalendarScreen() {
 
   return {
     colors,
+    screenTitle: t('screens.calendar'),
+    screenSubtitle: t('calendar.subtitle'),
+    legend: [t('calendar.holiday'), t('calendar.commemoration')],
+    canGoPrev: year > MIN_YEAR || month > 1,
+    canGoNext: year < MAX_YEAR || month < 12,
     timeBanner,
     topInset: insets.top,
     title: format(visible, 'MMMM yyyy', { locale }),
@@ -152,7 +163,8 @@ export function useCalendarScreen() {
     prevLabel: t('calendar.prevMonth'),
     nextLabel: t('calendar.nextMonth'),
     jumpLabel: t('calendar.jump'),
-    todayLabel: isCurrentMonth ? undefined : t('calendar.today'),
+    todayLabel: t('calendar.today'),
+    isCurrentMonth,
     onToday: () => setVisible(parseISO(todayIso)),
     onOpenJump: () => setJumpOpen(true),
     jump: {

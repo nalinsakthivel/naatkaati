@@ -1,8 +1,8 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SettingsHost } from '@/components/native/SettingsHost';
 import { OptionList } from '@/components/native/OptionList';
-import { SheetBand } from '@/components/SheetBand';
-import { Elevation, Layout, Radius, Spacing, Typography } from '@/themes/Theme';
+import { ScreenHeader } from '@/components/ScreenHeader';
+import { Layout, Radius, Spacing, Typography } from '@/themes/Theme';
 import { useOnboardingScreen } from './useScreen';
 
 export function OnboardingScreen() {
@@ -18,15 +18,23 @@ export function OnboardingScreen() {
         },
       ]}
     >
-      <View
-        style={[styles.sheet, { backgroundColor: s.colors.surface, borderColor: s.colors.border }]}
-      >
-        <SheetBand colors={s.colors}>
-          <Text style={[Typography.caption, { color: s.colors.textOnPrimary }]}>{s.stepLabel}</Text>
-          <Text style={[Typography.title, { color: s.colors.textOnPrimary }]}>{s.title}</Text>
-        </SheetBand>
-        <View style={styles.body}>
-          <Text style={[Typography.body, { color: s.colors.textMuted }]}>{s.hint}</Text>
+      <View style={styles.intro}>
+        <ScreenHeader title={s.welcomeTitle} subtitle={s.welcomeIntro} colors={s.colors} />
+        <View style={[styles.step, { backgroundColor: s.colors.commemorationSoft }]}>
+          <Text style={[Typography.caption, { color: s.colors.primary }]}>{s.stepLabel}</Text>
+        </View>
+        <View
+          style={[
+            styles.sheet,
+            { backgroundColor: s.colors.surface, borderColor: s.colors.border },
+          ]}
+        >
+          <View style={styles.heading}>
+            <Text accessibilityRole="header" style={[Typography.title, { color: s.colors.text }]}>
+              {s.title}
+            </Text>
+            <Text style={[Typography.body, { color: s.colors.textMuted }]}>{s.hint}</Text>
+          </View>
           <SettingsHost>
             {s.step === 0 ? (
               <OptionList
@@ -45,9 +53,15 @@ export function OnboardingScreen() {
         </View>
       </View>
       <View style={styles.actions}>
-        <Pressable onPress={s.onSkip} accessibilityRole="button" style={styles.skip}>
-          <Text style={[Typography.button, { color: s.colors.textMuted }]}>{s.skipLabel}</Text>
-        </Pressable>
+        {s.step > 0 ? (
+          <Pressable onPress={s.onBack} accessibilityRole="button" style={styles.secondary}>
+            <Text style={[Typography.button, { color: s.colors.primary }]}>{s.backLabel}</Text>
+          </Pressable>
+        ) : (
+          <Pressable onPress={s.onSkip} accessibilityRole="button" style={styles.secondary}>
+            <Text style={[Typography.button, { color: s.colors.textMuted }]}>{s.skipLabel}</Text>
+          </Pressable>
+        )}
         <Pressable
           onPress={s.onPrimary}
           accessibilityRole="button"
@@ -61,7 +75,6 @@ export function OnboardingScreen() {
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -72,18 +85,33 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     gap: Spacing.lg,
   },
-  sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
-  body: { padding: Spacing.lg, gap: Spacing.md },
-  actions: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  skip: {
+  intro: { gap: Spacing.xl },
+  step: {
+    alignSelf: 'flex-start',
+    borderRadius: Radius.chip,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.xs,
+  },
+  sheet: {
+    borderRadius: Radius.card,
+    borderWidth: 1,
+    overflow: 'hidden',
+    paddingBottom: Spacing.lg,
+  },
+  heading: { padding: Spacing.lg, gap: Spacing.sm },
+  actions: { flexDirection: 'row', gap: Spacing.md, alignItems: 'center', flexWrap: 'wrap' },
+  secondary: {
     minHeight: Layout.minTouchTarget,
     justifyContent: 'center',
     paddingHorizontal: Spacing.lg,
   },
   primary: {
+    flexGrow: 1,
     minHeight: Layout.minTouchTarget,
     justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: Spacing.xl,
-    borderRadius: Radius.chip,
+    paddingVertical: Spacing.sm,
+    borderRadius: Radius.banner,
   },
 });

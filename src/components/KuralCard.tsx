@@ -15,11 +15,12 @@ interface KuralCardProps {
   unverifiedLabel?: string;
   textReviewLabel?: string;
   reportLabel: string;
+  reportError?: string | null;
   onReport: () => void;
   colors: ColorTokens;
 }
 
-const BADGE = Layout.minTouchTarget + Spacing.sm;
+const BADGE = Layout.minTouchTarget;
 const RULE = Spacing.xs;
 
 export function KuralCard({
@@ -33,6 +34,7 @@ export function KuralCard({
   unverifiedLabel,
   textReviewLabel,
   reportLabel,
+  reportError,
   onReport,
   colors,
 }: KuralCardProps) {
@@ -82,6 +84,11 @@ export function KuralCard({
             <Text style={[Typography.button, { color: colors.primary }]}>{reportLabel}</Text>
           </Pressable>
         ) : null}
+        {reportError ? (
+          <Text accessibilityRole="alert" style={[Typography.body, { color: colors.warning }]}>
+            {reportError}
+          </Text>
+        ) : null}
       </View>
     </View>
   );
@@ -90,7 +97,7 @@ export function KuralCard({
 const styles = StyleSheet.create({
   card: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden' },
   rule: { height: RULE },
-  content: { padding: Spacing.xl, gap: Spacing.sm },
+  content: { padding: Spacing.lg, gap: Spacing.sm },
   header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.md },
   badge: {
     minWidth: BADGE,

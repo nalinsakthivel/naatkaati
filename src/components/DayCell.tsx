@@ -30,20 +30,20 @@ export function DayCell({
   onPress,
   colors,
 }: DayCellProps) {
-  const numberColor = !inMonth
-    ? colors.otherMonthText
-    : isToday
-      ? colors.textOnToday
+  const numberColor = isToday
+    ? colors.textOnToday
+    : !inMonth
+      ? colors.otherMonthText
       : isHoliday || isSunday
         ? colors.holiday
         : colors.text;
   const monthStartColor = isTamilMonthStart && inMonth && !isToday;
   const subColor = monthStartColor
     ? colors.primary
-    : !inMonth
-      ? colors.otherMonthText
-      : isToday
-        ? colors.textOnToday
+    : isToday
+      ? colors.textOnToday
+      : !inMonth
+        ? colors.otherMonthText
         : colors.textMuted;
 
   return (
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: Radius.cell,
+    paddingVertical: Spacing.xs,
     paddingHorizontal: Spacing.xxs,
   },
   markers: { flexDirection: 'row', gap: Spacing.xxs, height: MARKER_SIZE },

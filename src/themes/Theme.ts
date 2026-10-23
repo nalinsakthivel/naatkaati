@@ -25,6 +25,8 @@ export const FontFamily = {
 type TypeToken = Pick<TextStyle, 'fontFamily' | 'fontSize' | 'lineHeight' | 'letterSpacing'>;
 
 export const Typography = {
+  screenTitle: { fontFamily: FontFamily.displayBold, fontSize: 30, lineHeight: 44 },
+  dateSummary: { fontFamily: FontFamily.displayBold, fontSize: 56, lineHeight: 72 },
   /** The Tamil date numeral on the Today screen — the hero of the app */
   heroDate: { fontFamily: FontFamily.displayBold, fontSize: 88, lineHeight: 96, letterSpacing: -1 },
   /** Tamil month + year under the hero date, e.g. "ஐப்பசி 28, திருவள்ளுவர் ஆண்டு 2057" */
@@ -39,7 +41,7 @@ export const Typography = {
   /** Month grid: English (Gregorian) day number */
   gridDay: { fontFamily: FontFamily.displaySemiBold, fontSize: 18, lineHeight: 24 },
   /** Month grid: small Tamil date under the English number */
-  gridTamilDay: { fontFamily: FontFamily.bodyRegular, fontSize: 11, lineHeight: 16 },
+  gridTamilDay: { fontFamily: FontFamily.bodyRegular, fontSize: 12, lineHeight: 18 },
   button: { fontFamily: FontFamily.bodySemiBold, fontSize: 16, lineHeight: 24 },
 } satisfies Record<string, TypeToken>;
 

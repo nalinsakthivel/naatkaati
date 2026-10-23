@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { BackHandler } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -23,6 +24,14 @@ export function useOnboardingScreen() {
   const dispatch = useAppDispatch();
   const { appearance, language } = useAppSelector((state) => state.settings);
   const [step, setStep] = useState(0);
+  useEffect(() => {
+    if (step === 0) return;
+    const listener = BackHandler.addEventListener('hardwareBackPress', () => {
+      setStep(0);
+      return true;
+    });
+    return () => listener.remove();
+  }, [step]);
   const isLast = step === STEP_COUNT - 1;
 
   const finish = () => {
@@ -42,6 +51,10 @@ export function useOnboardingScreen() {
 
   return {
     colors,
+    welcomeTitle: t('app.name'),
+    welcomeIntro: t('onboarding.intro'),
+    backLabel: t('onboarding.back'),
+    onBack: () => setStep((current) => Math.max(0, current - 1)),
     topInset: insets.top,
     bottomInset: insets.bottom,
     step,
