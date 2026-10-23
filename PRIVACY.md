@@ -8,19 +8,19 @@ Naatkaati is an open-source Tamil calendar. It is built so that it does not need
 **Nothing.** The app has no accounts, no ads, no analytics, and no tracking or crash-reporting SDKs. We do not collect, store, sell, or share personal data.
 
 ## What stays on your phone
-- **Your settings** (language, appearance, chosen city or district, reminders, Tamil New Year preference) are stored only on your device. Android may include them in your own device backup.
-- **Location:** if you choose "use my location", it is used once, on your device, to pick the nearest city for sunrise and sunset times. It is never sent anywhere.
+- **Your settings** (language, appearance, reminders, Tamil New Year preference) are stored only on your device. Android may include them in your own device backup.
+- **Location:** this version uses Chennai as its fixed reference location. It does not read your device's GPS location or offer city/district selection.
 - **Reminders** are scheduled locally by your phone.
 
 ## What the app downloads
 To keep holidays and other content up to date, the app downloads public data files (holiday lists, Tamil month tables, Thirukkural, images) from our public hosting. These requests contain no personal identifiers. Like any web request, the hosting provider may see your IP address in its server logs; we do not use those logs to identify or track anyone.
 
 ## Reporting a problem
-"Report a problem" and "Report a mistake" open a GitHub issue or an email in your own app, prefilled with the app version and Android version. Nothing is sent unless you choose to send it, and what you send is public on GitHub (or goes to the maintainer by email).
+"Report a problem" and "Report a mistake" open GitHub in your browser. Opening a kural correction link sends the prefilled kural number and app version to GitHub in the URL; the general report action opens a new issue. No issue is published unless you choose to submit it, and GitHub issues are public. You can also contact the maintainer manually at the email address below; an in-app email fallback is not currently implemented.
 
 ## Permissions
 - **Notifications:** only if you set a reminder.
-- **Location (optional):** only if you choose to detect your city.
+- **Location:** the bundled native location module declares location permissions, but this version does not request them or access GPS.
 - **Internet:** only to download public data files.
 
 ## Children
