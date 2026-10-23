@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SettingsHost } from '@/components/native/SettingsHost';
 import { OptionList } from '@/components/native/OptionList';
 import { SheetBand } from '@/components/SheetBand';
@@ -8,11 +8,11 @@ import { useOnboardingScreen } from './useScreen';
 export function OnboardingScreen() {
   const s = useOnboardingScreen();
   return (
-    <View
-      style={[
+    <ScrollView
+      style={{ backgroundColor: s.colors.background }}
+      contentContainerStyle={[
         styles.container,
         {
-          backgroundColor: s.colors.background,
           paddingTop: s.topInset + Spacing.lg,
           paddingBottom: s.bottomInset + Spacing.lg,
         },
@@ -58,18 +58,19 @@ export function OnboardingScreen() {
           </Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'space-between',
     paddingHorizontal: Layout.screenPaddingH,
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
+    gap: Spacing.lg,
   },
   sheet: { borderRadius: Radius.card, borderWidth: 1, overflow: 'hidden', ...Elevation.floating },
   body: { padding: Spacing.lg, gap: Spacing.md },

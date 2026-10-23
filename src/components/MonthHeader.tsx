@@ -79,6 +79,10 @@ const styles = StyleSheet.create({
   titles: { flex: 1, alignItems: 'center', gap: Spacing.xxs },
   titleButton: { minHeight: Layout.minTouchTarget, justifyContent: 'center' },
   today: {
+    minHeight: Layout.minTouchTarget,
+    minWidth: Layout.minTouchTarget,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 1,
     borderRadius: Radius.chip,
     paddingHorizontal: Spacing.md,
