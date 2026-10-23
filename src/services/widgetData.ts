@@ -7,6 +7,7 @@ import { StorageKeys } from '@/storage/StorageKeys';
 import { isLanguage, parseHolidayCategories } from '@/stores/slices/settingsSlice';
 import type { WidgetSnapshot } from '@/widget/widgetTaskHandler';
 import { getActiveData } from './activeData';
+import { scheduleWidgetMidnightRefresh } from '../../modules/widget-refresh';
 
 export const WIDGET_NAME = 'NaatkaatiWidget';
 
@@ -15,6 +16,7 @@ export const WIDGET_NAME = 'NaatkaatiWidget';
  * what the widget shows for today in the default location's timezone.
  */
 export function loadWidgetSnapshot(): WidgetSnapshot | null {
+  scheduleWidgetMidnightRefresh();
   const storedLanguage = LocalStore.getString(StorageKeys.language);
   const language = isLanguage(storedLanguage) ? storedLanguage : AppConstants.defaultLanguage;
   const data = getActiveData();

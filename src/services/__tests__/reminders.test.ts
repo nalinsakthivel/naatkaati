@@ -1,4 +1,5 @@
 import * as Notifications from 'expo-notifications';
+import { Platform } from 'react-native';
 import { cancelReminder, scheduleReminder } from '../reminders';
 
 jest.mock('expo-notifications', () => ({
@@ -18,6 +19,44 @@ const future = new Date().getFullYear() + 1;
 beforeEach(() => jest.clearAllMocks());
 
 describe('scheduleReminder', () => {
+  it('creates the Android channel before requesting notification permission', async () => {
+    const platform = jest.replaceProperty(Platform, 'OS', 'android');
+    mocked.getPermissionsAsync.mockResolvedValue({ granted: false, canAskAgain: true } as never);
+    mocked.requestPermissionsAsync.mockImplementation(async () => {
+      expect(mocked.setNotificationChannelAsync).toHaveBeenCalledWith(
+        'reminders',
+        expect.objectContaining({ name: 'Reminders' }),
+      );
+      return { granted: true } as never;
+    });
+    try {
+      await scheduleReminder(
+        { key: 'h:a', kind: 'once', year: future, month: 1, day: 15 },
+        content,
+      );
+    } finally {
+      platform.restore();
+    }
+  });
+
+  it('does not prompt or create a channel for an expired reminder', async () => {
+    mocked.getPermissionsAsync.mockResolvedValue({ granted: true } as never);
+    expect(
+      await scheduleReminder({ key: 'h:old', kind: 'once', year: 2000, month: 1, day: 1 }, content),
+    ).toBe('past');
+    expect(mocked.getPermissionsAsync).not.toHaveBeenCalled();
+    expect(mocked.setNotificationChannelAsync).not.toHaveBeenCalled();
+  });
+
+  it('uses the same OS identifier when scheduling the same reminder again', async () => {
+    mocked.getPermissionsAsync.mockResolvedValue({ granted: true } as never);
+    const spec = { key: 'c:b', kind: 'yearly' as const, month: 9, day: 17 };
+    await scheduleReminder(spec, content);
+    await scheduleReminder(spec, content);
+    expect(
+      mocked.scheduleNotificationAsync.mock.calls.map(([request]) => request.identifier),
+    ).toEqual(['c:b', 'c:b']);
+  });
   it('asks for permission, then schedules when granted', async () => {
     mocked.getPermissionsAsync.mockResolvedValue({ granted: false, canAskAgain: true } as never);
     mocked.requestPermissionsAsync.mockResolvedValue({ granted: true } as never);
