@@ -90,6 +90,10 @@ const styles = StyleSheet.create({
   today: {
     minHeight: Layout.minTouchTarget,
     minWidth: Layout.minTouchTarget,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: Radius.chip,
     paddingHorizontal: Spacing.md,
     borderRadius: Radius.cell,
     justifyContent: 'center',

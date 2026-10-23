@@ -12,7 +12,10 @@ export function OnboardingScreen() {
       style={{ backgroundColor: s.colors.background }}
       contentContainerStyle={[
         styles.container,
-        { paddingTop: s.topInset + Spacing.xl, paddingBottom: s.bottomInset + Spacing.lg },
+        {
+          paddingTop: s.topInset + Spacing.lg,
+          paddingBottom: s.bottomInset + Spacing.lg,
+        },
       ]}
     >
       <View style={styles.intro}>
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
     maxWidth: Layout.maxContentWidth,
     width: '100%',
     alignSelf: 'center',
-    gap: Spacing.xl,
+    gap: Spacing.lg,
   },
   intro: { gap: Spacing.xl },
   step: {

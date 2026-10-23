@@ -29,10 +29,11 @@ export async function scheduleReminder(
   spec: ReminderSpec,
   content: { title: string; body: string; channelName: string },
 ): Promise<ScheduleResult> {
-  if (!(await ensureNotificationPermission())) return 'denied';
   const plan = planReminder(spec, new Date(), AppConstants.reminderHour);
   if (!plan) return 'past';
+  // Android 13+ needs a channel before its notification permission prompt can appear.
   await ensureChannel(content.channelName);
+  if (!(await ensureNotificationPermission())) return 'denied';
   await Notifications.scheduleNotificationAsync({
     identifier: spec.key,
     content: { title: content.title, body: content.body },
